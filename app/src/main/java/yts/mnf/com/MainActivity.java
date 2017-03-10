@@ -36,6 +36,8 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import fr.castorflex.android.circularprogressbar.CircularProgressBar;
+import fr.castorflex.android.circularprogressbar.CircularProgressDrawable;
 import yts.mnf.com.Activity.DetailsActivity;
 import yts.mnf.com.Tools.Config;
 import yts.mnf.com.Tools.Url;
@@ -49,8 +51,11 @@ public class MainActivity extends AppCompatActivity
     Gson gson = new Gson();
     ListModel listMode;
 
+    @BindView(R.id.main_activty_loading)
+     CircularProgressBar progressBar;
+
     @BindView(R.id.recycler_view)
-     RecyclerView recyclerView;
+    RecyclerView recyclerView;
 
     private RecycleAdapter adapter;
     private List<Movie> mModels;
@@ -145,14 +150,21 @@ public class MainActivity extends AppCompatActivity
 
 
 
-
+public void startLoading(){
+    progressBar.setVisibility(View.VISIBLE);
+    ((CircularProgressDrawable)progressBar.getIndeterminateDrawable()).start();
+}
+    public void stopLoading(){
+        ((CircularProgressDrawable)progressBar.getIndeterminateDrawable()).progressiveStop();
+        progressBar.setVisibility(View.INVISIBLE);
+    }
 
 
 
     public void makeNetwoekRequest(String url){
         RequestQueue queue = Volley.newRequestQueue(this);
 
-
+        startLoading();
 
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET,
                 url, null,
@@ -161,6 +173,8 @@ public class MainActivity extends AppCompatActivity
                     @Override
                     public void onResponse(JSONObject response) {
                         Log.e("TAG", response.toString());
+                        stopLoading();
+
                         listMode = gson.fromJson(response.toString(),ListModel.class);
                         Log.e("tag","response "+listMode.getStatus());
                         loading = true;
@@ -174,6 +188,7 @@ public class MainActivity extends AppCompatActivity
                         }
                         Log.e("MainActivity","movieCount = "+movieCount+" movieLimit = "+movieLimit+" totalPage = "+totalPages);
                         adapter.addItems(mModels);
+                        recyclerView.setVisibility(View.VISIBLE);
 
 
                     }
@@ -184,6 +199,7 @@ public class MainActivity extends AppCompatActivity
                 VolleyLog.d("TAG", "Error: " + error.getMessage());
                 // hide the progress dialog
                 loading = true;
+                stopLoading();
 
             }
         });
