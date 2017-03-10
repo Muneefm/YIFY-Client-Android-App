@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:attribute="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@android:color/white"
+
+    android:id="@+id/act_details"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    tools:context="yts.mnf.com.Activity.ActDetails">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:id="@+id/fakeRl"
+
+        android:background="@android:color/white"
+        android:layout_height="320dp">
+
+    </RelativeLayout>
+    <developer.shivam.library.CrescentoImageView android:id="@+id/crescentoImageView"
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        android:elevation="5dp"
+        android:scaleType="centerCrop"
+        attribute:curvature="100dp"
+        android:src="@mipmap/cc"
+        attribute:tintMode="manual"
+        attribute:tintColor="#FFFFFF"
+        attribute:tintAlpha="50" />
+
+       <!-- <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+                    app:layout_anchor="@id/fakeRl"
+
+            android:src="@mipmap/cv"
+            /> -->
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/fab_margin"
+        android:layout_marginLeft="@dimen/fab_margin"
+        android:layout_marginRight="@dimen/fab_margin"
+        app:layout_anchor="@id/fakeRl"
+
+        android:layout_marginTop="@dimen/fab_margin"
+
+        app:layout_anchorGravity="bottom|right|end"
+        app:srcCompat="@android:drawable/ic_dialog_email" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_marginTop="370dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/black"
+            android:textSize="25dp"
+            android:text="The Movie"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorAccent"
+            android:textSize="15dp"
+            android:textStyle="bold"
+            android:layout_alignParentRight="true"
+            android:text="9.0"
+
+            />
+    </RelativeLayout>
+
+
+</android.support.design.widget.CoordinatorLayout>
