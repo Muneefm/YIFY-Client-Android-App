@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity
 
     private RecycleAdapter adapter;
     private List<Movie> mModels;
-     Context c;
+    Context c;
 
     int totalPages=1;
     int page =1;

@@ -6,5 +6,6 @@ package yts.mnf.com.Tools;
 
 public class Url {
     public static String ListUrl = "https://yts.ag/api/v2/list_movies.json";
+    public static String SuggestionUrl = "https://yts.ag/api/v2/movie_suggestions.json";
 
 }

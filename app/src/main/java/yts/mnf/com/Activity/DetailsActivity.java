@@ -1,6 +1,7 @@
 package yts.mnf.com.Activity;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -9,6 +10,9 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.util.Pair;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.transition.Explode;
 import android.transition.Fade;
@@ -22,18 +26,43 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.VolleyLog;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
 import com.robertlevonyan.views.chip.Chip;
 
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import yts.mnf.com.Adapter.RecycleAdapter;
+import yts.mnf.com.Adapter.SuggestionsAdapter;
+import yts.mnf.com.GridSpacingItemDecoration;
+import yts.mnf.com.Models.ListModel;
 import yts.mnf.com.Models.Movie;
 import yts.mnf.com.R;
 import yts.mnf.com.Tools.Config;
+import yts.mnf.com.Tools.Url;
 
 public class DetailsActivity extends AppCompatActivity {
 
     Chip chip;
+    private SuggestionsAdapter adapter;
+    private List<Movie> mModels;
+    Context c;
+    Gson gson = new Gson();
+    ListModel listMode;
+
+    @BindView(R.id.recycler_view_suggestion)
+    RecyclerView recyclerViewSuggestion;
 
     @BindView(R.id.title_movie)
     TextView tvMovie;
@@ -55,6 +84,10 @@ public class DetailsActivity extends AppCompatActivity {
 
     @BindView(R.id.gener_container)
     LinearLayout generContainer;
+
+    @BindView(R.id.sugg_head)
+    TextView suggestionTag;
+
     Movie movieModel;
     static String TAG = "DetailsActivity";
     @Override
@@ -67,6 +100,7 @@ public class DetailsActivity extends AppCompatActivity {
         getWindow().setExitTransition(new Slide());
         setContentView(R.layout.activity_details);
         ButterKnife.bind(this);
+        c =this;
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -91,7 +125,7 @@ public class DetailsActivity extends AppCompatActivity {
         Typeface faceTime=Typeface.createFromAsset(getAssets(), "fonts/QuattrocentoSans-Regular.ttf");
         tvTime.setTypeface(faceTime);
         tvDirected.setTypeface(faceTime);
-
+        suggestionTag.setTypeface(faceTime);
 
         Typeface faceDesc=Typeface.createFromAsset(getAssets(), "fonts/Abel-Regular.ttf");
         tvDesc.setTypeface(faceDesc);
@@ -136,11 +170,69 @@ public class DetailsActivity extends AppCompatActivity {
 
                 }
             });
+
+
+            mModels = new ArrayList<>();
+            final LinearLayoutManager mLayoutManager = new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false);
+            recyclerViewSuggestion.setLayoutManager(mLayoutManager);
+            recyclerViewSuggestion.addItemDecoration(new GridSpacingItemDecoration(1, Config.dpToPx(1,getApplicationContext()), true));
+            //recyclerView.addItemDecoration(new MarginDecoration(this));
+            recyclerViewSuggestion.setHasFixedSize(true);
+
+
+
+            adapter = new SuggestionsAdapter (c, mModels,getSupportFragmentManager());
+            recyclerViewSuggestion.setAdapter(adapter);
+
+            recyclerViewSuggestion.setNestedScrollingEnabled(false);
+            startSuggestionRequest(Url.SuggestionUrl+"?movie_id="+movieModel.getId());
+
         }
 
 
 
+
     }
+
+    public void startSuggestionRequest(String url){
+
+        RequestQueue queue = Volley.newRequestQueue(this);
+
+
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET,
+                url, null,
+                new Response.Listener<JSONObject>() {
+
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        Log.e("TAG", response.toString());
+
+                        listMode = gson.fromJson(response.toString(),ListModel.class);
+                        Log.e("tag","response suggestions "+listMode.getStatus());
+                        suggestionTag.setVisibility(View.VISIBLE);
+                        mModels = listMode.getData().getMovies();
+
+                      //  Log.e("MainActivity","movieCount = "+movieCount+" movieLimit = "+movieLimit+" totalPage = "+totalPages);
+                        adapter.addItems(mModels);
+                        recyclerViewSuggestion.setVisibility(View.VISIBLE);
+
+                    }
+                }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                VolleyLog.d("TAG", "Error: " + error.getMessage());
+                // hide the progress dialog
+
+            }
+        });
+        queue.add(jsonObjReq);
+
+
+    }
+
+
+
 
     @Override
     public void onBackPressed() {

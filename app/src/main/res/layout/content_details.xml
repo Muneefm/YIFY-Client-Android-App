@@ -8,9 +8,12 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="yts.mnf.com.Activity.DetailsActivity"
     tools:showIn="@layout/activity_details">
-
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <RelativeLayout
+        android:id="@+id/container_margin"
         android:layout_width="match_parent"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
@@ -104,6 +107,7 @@
 
 
         <RelativeLayout
+            android:id="@+id/desc_container"
             android:layout_width="match_parent"
             android:layout_below="@+id/gener_container"
             android:layout_marginTop="20dp"
@@ -123,8 +127,40 @@
         </RelativeLayout>
 
 
-    </RelativeLayout>
 
+    </RelativeLayout>
+    <TextView
+        android:layout_marginTop="30dp"
+        android:id="@+id/sugg_head"
+        android:layout_width="wrap_content"
+        android:textSize="15dp"
+        android:layout_height="wrap_content"
+        android:text="Similar Movies"
+        android:textStyle="bold"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:textColor="@color/colorAccent"
+        android:layout_below="@+id/container_margin"
+
+        />
+
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_view_suggestion"
+        android:visibility="visible"
+        android:layout_width="match_parent"
+        android:layout_below="@+id/sugg_head"
+        android:layout_height="wrap_content"
+        android:padding="0dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="50dp"
+        android:layout_centerHorizontal="true"
+        android:columnWidth="@dimen/column_width"
+        android:clipToPadding="false"
+        android:scrollbars="vertical" />
+
+
+</RelativeLayout>
 </android.support.v4.widget.NestedScrollView>
 
 
