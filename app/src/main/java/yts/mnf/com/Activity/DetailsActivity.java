@@ -96,11 +96,11 @@ public class DetailsActivity extends AppCompatActivity {
     TextView suggestionTag;
 
 
-    @BindView(R.id.tab_layout)
+   /* @BindView(R.id.tab_layout)
     SmartTabLayout tabLayout;
 
     @BindView(R.id.view_pager)
-    ViewPager viewPager;
+    ViewPager viewPager;*/
 
     Movie movieModel;
     static String TAG = "DetailsActivity";
@@ -202,8 +202,8 @@ public class DetailsActivity extends AppCompatActivity {
             startSuggestionRequest(Url.SuggestionUrl+"?movie_id="+movieModel.getId());
 
             SectionsPagerAdapter mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
-            viewPager.setAdapter(mSectionsPagerAdapter);
-            tabLayout.setViewPager(viewPager);
+           // viewPager.setAdapter(mSectionsPagerAdapter);
+         //   tabLayout.setViewPager(viewPager);
 
         }
 

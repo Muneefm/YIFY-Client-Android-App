@@ -27,7 +27,7 @@ dependencies {
     compile files('libs/gson-2.8.0.jar')
 
 
-
+    compile 'com.github.dimorinny:floating-text-button:0.0.2'
     compile 'com.ogaclejapan.smarttablayout:library:1.6.1@aar'
     compile 'com.android.support:appcompat-v7:25.2.0'
     compile 'com.android.support:design:25.2.0'

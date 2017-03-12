@@ -1,7 +1,9 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+    android:layout_height="250dp"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:background="@color/white"
     tools:context="yts.mnf.com.Fragment.QualityFragment">
@@ -19,77 +21,226 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:orientation="horizontal"
-            android:weightSum="5"
+            android:weightSum="4"
             android:layout_height="match_parent">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:orientation="vertical"
-                android:layout_weight="3"
-                android:background="@color/white"
+                android:layout_weight="2"
+                android:background="@color/blue_grey400"
                 android:layout_height="match_parent">
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/grey800"
+                    android:textColor="@color/white"
                     android:paddingTop="5dp"
+                    android:gravity="center"
+                    android:textSize="18dp"
                     android:paddingLeft="10dp"
 
                     android:textStyle="bold"
-                    android:text="Size " />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/grey800"
-                    android:textStyle="bold"
-                    android:paddingTop="5dp"
-                    android:paddingLeft="10dp"
+                    android:text="720p " />
 
-                    android:text="Seeds" />
-                <TextView
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingTop="10dp"
+                    android:paddingLeft="10dp"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@mipmap/folder"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="20dp"
+                        android:gravity="center"
+                        android:paddingLeft="5dp"
+
+                        android:textColor="@color/white"
+                        android:text="700.00 MB" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingTop="10dp"
+                    android:paddingLeft="10dp"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@mipmap/seed"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="20dp"
+                        android:gravity="center"
+                        android:paddingLeft="5dp"
+
+                        android:textColor="@color/white"
+                        android:text="4452 Seeds" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingTop="10dp"
+                    android:paddingLeft="10dp"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@mipmap/leech"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="20dp"
+                        android:gravity="center"
+                        android:textColor="@color/white"
+                        android:paddingLeft="5dp"
+
+                        android:text="2345 Leech" />
+                </LinearLayout>
+
+
+
+                <ru.dimorinny.floatingtextbutton.FloatingTextButton
+                    android:id="@+id/action_button_sev_down"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/grey800"
-                    android:textStyle="bold"
-                    android:paddingTop="5dp"
-                    android:paddingLeft="10dp"
-                    android:text="Leech" />
+                    android:layout_marginTop="15dp"
+                    android:layout_gravity="center"
+                    app:floating_background_color="@color/blue_grey700"
+                    app:floating_icon="@mipmap/download"
+                    app:floating_title="Download"
+                    app:floating_title_color="@android:color/white"
+                    />
+
+                <ru.dimorinny.floatingtextbutton.FloatingTextButton
+                    android:id="@+id/action_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="15dp"
+
+                    app:floating_background_color="@color/blue_grey700"
+                    app:floating_icon="@mipmap/magnet"
+
+                    app:floating_title="Copy magnet url"
+                    app:floating_title_color="@android:color/white"
+                    />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:orientation="vertical"
                 android:layout_weight="2"
-                android:background="@color/green_500"
+                android:background="@color/blue_grey500"
                 android:layout_height="match_parent">
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@color/white"
                     android:paddingTop="5dp"
-                    android:paddingLeft="30dp"
+                    android:gravity="center"
+                    android:textSize="18dp"
+                    android:paddingLeft="10dp"
 
                     android:textStyle="bold"
-                    android:text="700 MB" />
+                    android:text="1080p " />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingTop="10dp"
+                    android:paddingLeft="10dp"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@mipmap/folder"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="20dp"
+                        android:gravity="center"
+                        android:paddingLeft="5dp"
+
+                        android:textColor="@color/white"
+                        android:text="1.30 GB" />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingTop="10dp"
+                    android:paddingLeft="10dp"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@mipmap/seed"
+                        />
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="20dp"
+                    android:gravity="center"
+                    android:paddingLeft="5dp"
+
                     android:textColor="@color/white"
-                    android:paddingTop="5dp"
-                    android:paddingLeft="30dp"
-
-                    android:textStyle="bold"
-                    android:text="4453" />
-
+                    android:text="4452 Seeds" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingTop="10dp"
+                    android:paddingLeft="10dp"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@mipmap/leech"
+                        />
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="20dp"
+                    android:gravity="center"
                     android:textColor="@color/white"
-                    android:textStyle="bold"
-                    android:paddingTop="5dp"
-                    android:paddingLeft="30dp"
+                    android:paddingLeft="5dp"
 
-                    android:text="2879" />
+                    android:text="2345 Leech" />
+                    </LinearLayout>
+
+
+
+                <ru.dimorinny.floatingtextbutton.FloatingTextButton
+                    android:id="@+id/action_button_ten_down"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:layout_gravity="center"
+                    app:floating_background_color="@color/blue_grey700"
+                    app:floating_icon="@mipmap/download"
+                    app:floating_title="Download"
+                    app:floating_title_color="@android:color/white"
+                    />
+
+                <ru.dimorinny.floatingtextbutton.FloatingTextButton
+                    android:id="@+id/action_button_ten"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:layout_gravity="center"
+                    app:floating_background_color="@color/blue_grey700"
+                    app:floating_icon="@mipmap/magnet"
+                    app:floating_title="Copy magnet url"
+                    app:floating_title_color="@android:color/white"
+                    />
+
             </LinearLayout>
 
 
