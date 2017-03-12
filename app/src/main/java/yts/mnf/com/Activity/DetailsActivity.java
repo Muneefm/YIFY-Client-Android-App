@@ -8,7 +8,11 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityOptionsCompat;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.util.Pair;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -34,7 +38,9 @@ import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
+import com.ogaclejapan.smarttablayout.SmartTabLayout;
 import com.robertlevonyan.views.chip.Chip;
+import com.ruslankishai.unmaterialtab.tabs.RoundTabLayout;
 
 import org.json.JSONObject;
 
@@ -45,6 +51,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import yts.mnf.com.Adapter.RecycleAdapter;
 import yts.mnf.com.Adapter.SuggestionsAdapter;
+import yts.mnf.com.Fragment.QualityFragment;
 import yts.mnf.com.GridSpacingItemDecoration;
 import yts.mnf.com.Models.ListModel;
 import yts.mnf.com.Models.Movie;
@@ -87,6 +94,13 @@ public class DetailsActivity extends AppCompatActivity {
 
     @BindView(R.id.sugg_head)
     TextView suggestionTag;
+
+
+    @BindView(R.id.tab_layout)
+    SmartTabLayout tabLayout;
+
+    @BindView(R.id.view_pager)
+    ViewPager viewPager;
 
     Movie movieModel;
     static String TAG = "DetailsActivity";
@@ -187,6 +201,10 @@ public class DetailsActivity extends AppCompatActivity {
             recyclerViewSuggestion.setNestedScrollingEnabled(false);
             startSuggestionRequest(Url.SuggestionUrl+"?movie_id="+movieModel.getId());
 
+            SectionsPagerAdapter mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
+            viewPager.setAdapter(mSectionsPagerAdapter);
+            tabLayout.setViewPager(viewPager);
+
         }
 
 
@@ -229,6 +247,34 @@ public class DetailsActivity extends AppCompatActivity {
         queue.add(jsonObjReq);
 
 
+    }
+
+    public class SectionsPagerAdapter extends FragmentStatePagerAdapter {
+
+        private  final String[] TITLES = new String[]{"720p", "1080p"};
+
+        public SectionsPagerAdapter(FragmentManager fm) {
+            super(fm);
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            // getItem is called to instantiate the fragment for the given page.
+            // Return a PlaceholderFragment (defined as a static inner class below).
+            return QualityFragment.newInstance(position+"","");
+        }
+
+        @Override
+        public int getCount() {
+            // Show 3 total pages.
+            return TITLES.length;
+        }
+
+        @Override
+        public CharSequence getPageTitle(int position) {
+
+            return TITLES[position];
+        }
     }
 
 

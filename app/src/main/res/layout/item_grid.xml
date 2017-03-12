@@ -56,7 +56,7 @@
             android:id="@+id/movie_year"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="2017"
+            android:text=""
             android:textSize="10dp"
             android:layout_below="@+id/movie_title"
             android:textColor="@android:color/white"

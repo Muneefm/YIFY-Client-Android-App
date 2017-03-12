@@ -27,6 +27,12 @@
     <color name="grey900">#212121</color>
     <color name="greyDivi">#B6B6B6</color>
 
+    <color name="blue_grey500">#607D8B</color>
+    <color name="blue_grey600">#546E7A</color>
+    <color name="blue_grey700">#455A64</color>
+    <color name="blue_grey800">#37474F</color>
+    <color name="blue_grey900">#263238</color>
+
 
     <color name="blue500">#2196f3</color>
 
@@ -294,4 +300,9 @@
 
     <color name="yellow600">#FDD835</color>
     <color name="yellowA200">#FFFF00</color>
+
+
+    <color name="black_20">#33000000</color>
+
+
 </resources>
