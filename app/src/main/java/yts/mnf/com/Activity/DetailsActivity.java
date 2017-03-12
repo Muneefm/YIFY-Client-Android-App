@@ -1,10 +1,13 @@
 package yts.mnf.com.Activity;
 
 import android.app.Activity;
+import android.app.DownloadManager;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityOptionsCompat;
@@ -49,12 +52,14 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import ru.dimorinny.floatingtextbutton.FloatingTextButton;
 import yts.mnf.com.Adapter.RecycleAdapter;
 import yts.mnf.com.Adapter.SuggestionsAdapter;
 import yts.mnf.com.Fragment.QualityFragment;
 import yts.mnf.com.GridSpacingItemDecoration;
 import yts.mnf.com.Models.ListModel;
 import yts.mnf.com.Models.Movie;
+import yts.mnf.com.Models.Torrent;
 import yts.mnf.com.R;
 import yts.mnf.com.Tools.Config;
 import yts.mnf.com.Tools.Url;
@@ -94,6 +99,49 @@ public class DetailsActivity extends AppCompatActivity {
 
     @BindView(R.id.sugg_head)
     TextView suggestionTag;
+
+
+    //720p
+    @BindView(R.id.sev_container)
+    LinearLayout llContainer7;
+
+
+    @BindView(R.id.sev_quality)
+    TextView tvQuality7;
+
+    @BindView(R.id.sev_seed)
+    TextView tvSeeds7;
+
+    @BindView(R.id.sev_leech)
+    TextView tvLeech7;
+
+    @BindView(R.id.sev_size)
+    TextView tvSize7;
+    @BindView(R.id.sev_download)
+    FloatingTextButton tvDown7;
+
+
+
+    //1080p
+    @BindView(R.id.ten_container)
+    LinearLayout llContainer1;
+
+    @BindView(R.id.ten_quality)
+    TextView tvQuality1;
+
+    @BindView(R.id.ten_seeds)
+    TextView tvSeeds1;
+
+    @BindView(R.id.ten_leech)
+    TextView tvLeech1;
+
+    @BindView(R.id.ten_size)
+    TextView tvSize1;
+
+    @BindView(R.id.ten_download)
+    FloatingTextButton tvDown1;
+
+    //ten_download
 
 
    /* @BindView(R.id.tab_layout)
@@ -201,7 +249,50 @@ public class DetailsActivity extends AppCompatActivity {
             recyclerViewSuggestion.setNestedScrollingEnabled(false);
             startSuggestionRequest(Url.SuggestionUrl+"?movie_id="+movieModel.getId());
 
-            SectionsPagerAdapter mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
+                if(movieModel.getTorrents()!=null) {
+                    List<Torrent> listTorModel = movieModel.getTorrents();
+                    if (listTorModel.size() > 0) {
+                        for (int i = 0; i < listTorModel.size(); i++){
+                            if(i==0){
+                                final Torrent model = listTorModel.get(i);
+                                tvQuality7.setText(model.getQuality());
+                                tvSeeds7.setText(model.getSeeds()+" Seeds");
+                                tvLeech7.setText(model.getPeers()+" Peers");
+                                tvSize7.setText(model.getSize()+"");
+                                llContainer7.setVisibility(View.VISIBLE);
+
+                            }
+                            else if(i==1){
+                                final Torrent model = listTorModel.get(i);
+                                tvQuality1.setText(model.getQuality());
+                                tvSeeds1.setText(model.getSeeds()+" Seeds");
+                                tvLeech1.setText(model.getPeers()+" Peers");
+                                tvSize1.setText(model.getSize()+"");
+                                llContainer1.setVisibility(View.VISIBLE);
+                                tvDown1.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        DownloadManager.Request r = new DownloadManager.Request(Uri.parse(model.getUrl()));
+                                        r.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, "Downloads");
+
+                                        r.allowScanningByMediaScanner();
+
+                                        r.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
+
+                                        DownloadManager dm = (DownloadManager) getSystemService(DOWNLOAD_SERVICE);
+                                        dm.enqueue(r);
+                                    }
+                                });
+                            }
+                        }
+
+
+
+                    }
+                }
+
+
+          //  SectionsPagerAdapter mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
            // viewPager.setAdapter(mSectionsPagerAdapter);
          //   tabLayout.setViewPager(viewPager);
 

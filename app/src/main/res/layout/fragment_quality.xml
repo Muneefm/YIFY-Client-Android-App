@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-
+    android:gravity="center"
     android:layout_height="250dp"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:background="@color/white"
@@ -10,8 +10,8 @@
 
     <!-- TODO: Update blank fragment layout -->
     <android.support.v7.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         card_view:cardElevation="1dp"
         android:elevation="1dp"
         card_view:cardUseCompatPadding="true"
@@ -25,19 +25,23 @@
             android:layout_height="match_parent">
 
             <LinearLayout
+                android:id="@+id/sev_container"
                 android:layout_width="match_parent"
                 android:orientation="vertical"
                 android:layout_weight="2"
+                android:gravity="center"
+                android:visibility="gone"
                 android:background="@color/blue_grey400"
                 android:layout_height="match_parent">
                 <TextView
+                    android:id="@+id/sev_quality"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@color/white"
                     android:paddingTop="5dp"
                     android:gravity="center"
                     android:textSize="18dp"
-                    android:paddingLeft="10dp"
+                    android:paddingLeft="0dp"
 
                     android:textStyle="bold"
                     android:text="720p " />
@@ -47,7 +51,7 @@
                     android:layout_width="wrap_content"
                     android:orientation="horizontal"
                     android:paddingTop="10dp"
-                    android:paddingLeft="10dp"
+                    android:paddingLeft="0dp"
                     android:layout_height="wrap_content">
                     <ImageView
                         android:layout_width="20dp"
@@ -55,6 +59,7 @@
                         android:src="@mipmap/folder"
                         />
                     <TextView
+                        android:id="@+id/sev_size"
                         android:layout_width="wrap_content"
                         android:layout_height="20dp"
                         android:gravity="center"
@@ -68,7 +73,7 @@
                     android:layout_width="wrap_content"
                     android:orientation="horizontal"
                     android:paddingTop="10dp"
-                    android:paddingLeft="10dp"
+                    android:paddingLeft="0dp"
                     android:layout_height="wrap_content">
                     <ImageView
                         android:layout_width="20dp"
@@ -76,6 +81,7 @@
                         android:src="@mipmap/seed"
                         />
                     <TextView
+                        android:id="@+id/sev_seed"
                         android:layout_width="wrap_content"
                         android:layout_height="20dp"
                         android:gravity="center"
@@ -88,7 +94,7 @@
                     android:layout_width="wrap_content"
                     android:orientation="horizontal"
                     android:paddingTop="10dp"
-                    android:paddingLeft="10dp"
+                    android:paddingLeft="0dp"
                     android:layout_height="wrap_content">
                     <ImageView
                         android:layout_width="20dp"
@@ -96,6 +102,8 @@
                         android:src="@mipmap/leech"
                         />
                     <TextView
+                        android:id="@+id/sev_leech"
+
                         android:layout_width="wrap_content"
                         android:layout_height="20dp"
                         android:gravity="center"
@@ -108,7 +116,7 @@
 
 
                 <ru.dimorinny.floatingtextbutton.FloatingTextButton
-                    android:id="@+id/action_button_sev_down"
+                    android:id="@+id/sev_download"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="15dp"
@@ -119,7 +127,7 @@
                     app:floating_title_color="@android:color/white"
                     />
 
-                <ru.dimorinny.floatingtextbutton.FloatingTextButton
+             <!--   <ru.dimorinny.floatingtextbutton.FloatingTextButton
                     android:id="@+id/action_button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -131,23 +139,29 @@
 
                     app:floating_title="Copy magnet url"
                     app:floating_title_color="@android:color/white"
-                    />
+                    /> -->
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/ten_container"
+
                 android:layout_width="match_parent"
                 android:orientation="vertical"
                 android:layout_weight="2"
+                android:visibility="gone"
+                android:gravity="center"
                 android:background="@color/blue_grey500"
                 android:layout_height="match_parent">
                 <TextView
+                    android:id="@+id/ten_quality"
+
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@color/white"
                     android:paddingTop="5dp"
                     android:gravity="center"
                     android:textSize="18dp"
-                    android:paddingLeft="10dp"
+                    android:paddingLeft="0dp"
 
                     android:textStyle="bold"
                     android:text="1080p " />
@@ -156,7 +170,7 @@
                     android:layout_width="wrap_content"
                     android:orientation="horizontal"
                     android:paddingTop="10dp"
-                    android:paddingLeft="10dp"
+                    android:paddingLeft="0dp"
                     android:layout_height="wrap_content">
                     <ImageView
                         android:layout_width="20dp"
@@ -164,6 +178,8 @@
                         android:src="@mipmap/folder"
                         />
                     <TextView
+                        android:id="@+id/ten_size"
+
                         android:layout_width="wrap_content"
                         android:layout_height="20dp"
                         android:gravity="center"
@@ -178,7 +194,7 @@
                     android:layout_width="wrap_content"
                     android:orientation="horizontal"
                     android:paddingTop="10dp"
-                    android:paddingLeft="10dp"
+                    android:paddingLeft="0dp"
                     android:layout_height="wrap_content">
                     <ImageView
                         android:layout_width="20dp"
@@ -186,6 +202,8 @@
                         android:src="@mipmap/seed"
                         />
                 <TextView
+                    android:id="@+id/ten_seeds"
+
                     android:layout_width="wrap_content"
                     android:layout_height="20dp"
                     android:gravity="center"
@@ -198,7 +216,7 @@
                     android:layout_width="wrap_content"
                     android:orientation="horizontal"
                     android:paddingTop="10dp"
-                    android:paddingLeft="10dp"
+                    android:paddingLeft="0dp"
                     android:layout_height="wrap_content">
                     <ImageView
                         android:layout_width="20dp"
@@ -206,19 +224,19 @@
                         android:src="@mipmap/leech"
                         />
                 <TextView
+                    android:id="@+id/ten_leech"
                     android:layout_width="wrap_content"
                     android:layout_height="20dp"
                     android:gravity="center"
                     android:textColor="@color/white"
                     android:paddingLeft="5dp"
-
                     android:text="2345 Leech" />
                     </LinearLayout>
 
 
 
                 <ru.dimorinny.floatingtextbutton.FloatingTextButton
-                    android:id="@+id/action_button_ten_down"
+                    android:id="@+id/ten_download"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="15dp"
@@ -229,7 +247,7 @@
                     app:floating_title_color="@android:color/white"
                     />
 
-                <ru.dimorinny.floatingtextbutton.FloatingTextButton
+            <!--    <ru.dimorinny.floatingtextbutton.FloatingTextButton
                     android:id="@+id/action_button_ten"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -239,9 +257,10 @@
                     app:floating_icon="@mipmap/magnet"
                     app:floating_title="Copy magnet url"
                     app:floating_title_color="@android:color/white"
-                    />
+                    />  -->
 
             </LinearLayout>
+
 
 
 
