@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Typeface;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.design.widget.FloatingActionButton;
@@ -20,6 +21,7 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.util.Pair;
 import android.support.v4.view.ViewPager;
+import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -32,11 +34,16 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.afollestad.materialdialogs.MaterialDialog;
+import com.afollestad.materialdialogs.Theme;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -166,6 +173,15 @@ public class DetailsActivity extends AppCompatActivity {
     @BindView(R.id.ten_downloadt)
     FloatingTextButton tvDownT;
 
+
+    @BindView(R.id.scroll_nest)
+    NestedScrollView scrollView;
+
+    @BindView(R.id.container_quality)
+    LinearLayout downloadDetails;
+
+    @BindView(R.id.download_torrent)
+    Button downloadTorrent;
     //ten_download
 
 
@@ -191,7 +207,10 @@ public class DetailsActivity extends AppCompatActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            Window w = getWindow(); // in Activity's onCreate() for instance
+            w.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
+        }
         if(getIntent().hasExtra("movie_json")) {
             Log.e(TAG,"activity has extra ");
             String target = getIntent().getStringExtra("movie_json");
@@ -230,7 +249,7 @@ public class DetailsActivity extends AppCompatActivity {
 
         if(movieModel!=null){
             tvMovie.setText(movieModel.getTitle());
-            Config.loadImage(posterMain,movieModel.getMediumCoverImage());
+            Config.loadImage(posterMain,movieModel.getLargeCoverImage());
             tvDesc.setText(movieModel.getDescriptionFull());
             tvRate.setText(movieModel.getRating().toString());
             tvTime.setText(movieModel.getRuntime()+"ms");
@@ -275,7 +294,7 @@ public class DetailsActivity extends AppCompatActivity {
             startSuggestionRequest(Url.SuggestionUrl+"?movie_id="+movieModel.getId());
 
                 if(movieModel.getTorrents()!=null) {
-                    List<Torrent> listTorModel = movieModel.getTorrents();
+                    final List<Torrent> listTorModel = movieModel.getTorrents();
                     if (listTorModel.size() > 0) {
                         for (int i = 0; i < listTorModel.size(); i++){
                             if(i==0){
@@ -338,20 +357,30 @@ public class DetailsActivity extends AppCompatActivity {
 
 
                     }
-                    /*if(listTorModel.size()<3){
+                    if(listTorModel.size()<3){
                         Log.e("tag","less 3");
                         ((ViewGroup)llContainerT.getParent()).removeView(llContainerT);
+                        llContainer7.setPadding(30,5,30,5);
+                        llContainer1.setPadding(30,5,30,5);
                     }
                     if(listTorModel.size()<2){
                         Log.e("tag","less 2");
 
                         ((ViewGroup)llContainer1.getParent()).removeView(llContainer1);
+                        llContainer7.setPadding(100,5,100,5);
                     }
                     if(listTorModel.size()<1){
                         Log.e("tag","less 1");
 
                         ((ViewGroup)llContainer7.getParent()).removeView(llContainer7);
-                    }*/
+                    }
+                    downloadTorrent.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            //  focusOnView();
+                            showDialogue(listTorModel);
+                        }
+                    });
                 }
 
 
@@ -361,11 +390,38 @@ public class DetailsActivity extends AppCompatActivity {
            // viewPager.setAdapter(mSectionsPagerAdapter);
          //   tabLayout.setViewPager(viewPager);
 
+
+
+
+
+
+
         }
 
 
 
 
+    }
+
+    public void showDialogue(final List<Torrent> torrents){
+        String[] title =new String[torrents.size()];
+        for (int i=0;i<torrents.size();i++) {
+            title[i] = torrents.get(i).getQuality()+" "+torrents.get(i).getSize();
+
+        }
+        new MaterialDialog.Builder(this)
+                .title("Download")
+                .items(title)
+                .itemsCallback(new MaterialDialog.ListCallback() {
+                    @Override
+                    public void onSelection(MaterialDialog dialog, View view, int which, CharSequence text) {
+                        //Toast.makeText(DetailsActivity.this, which + ": " + text + ", ID = " , Toast.LENGTH_SHORT).show();
+                        new AppController().startBrowser(torrents.get(which).getUrl(),c);
+                        Log.e("TAG","onSelction download which = "+which);
+
+                    }
+                })
+                .show();
     }
 
     public void startSuggestionRequest(String url){
@@ -525,5 +581,12 @@ public class DetailsActivity extends AppCompatActivity {
         Snackbar.make(tvMovie,""+msg,Snackbar.LENGTH_LONG).show();
     }
 
-
+    private final void focusOnView(){
+        scrollView.post(new Runnable() {
+            @Override
+            public void run() {
+                scrollView.smoothScrollTo(0, downloadDetails.getBottom());
+            }
+        });
+    }
 }
