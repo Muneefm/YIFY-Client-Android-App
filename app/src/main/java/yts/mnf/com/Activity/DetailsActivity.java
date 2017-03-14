@@ -1,19 +1,23 @@
 package yts.mnf.com.Activity;
 
+import android.Manifest;
 import android.app.Activity;
 import android.app.DownloadManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.util.Pair;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -55,6 +59,7 @@ import butterknife.ButterKnife;
 import ru.dimorinny.floatingtextbutton.FloatingTextButton;
 import yts.mnf.com.Adapter.RecycleAdapter;
 import yts.mnf.com.Adapter.SuggestionsAdapter;
+import yts.mnf.com.AppController;
 import yts.mnf.com.Fragment.QualityFragment;
 import yts.mnf.com.GridSpacingItemDecoration;
 import yts.mnf.com.Models.ListModel;
@@ -140,6 +145,26 @@ public class DetailsActivity extends AppCompatActivity {
 
     @BindView(R.id.ten_download)
     FloatingTextButton tvDown1;
+
+
+    //T version
+    @BindView(R.id.ten_containert)
+    LinearLayout llContainerT;
+
+    @BindView(R.id.ten_qualityt)
+    TextView tvQualityT;
+
+    @BindView(R.id.ten_seedst)
+    TextView tvSeedsT;
+
+    @BindView(R.id.ten_leecht)
+    TextView tvLeechT;
+
+    @BindView(R.id.ten_sizet)
+    TextView tvSizeT;
+
+    @BindView(R.id.ten_downloadt)
+    FloatingTextButton tvDownT;
 
     //ten_download
 
@@ -260,7 +285,16 @@ public class DetailsActivity extends AppCompatActivity {
                                 tvLeech7.setText(model.getPeers()+" Peers");
                                 tvSize7.setText(model.getSize()+"");
                                 llContainer7.setVisibility(View.VISIBLE);
-
+                                tvDown7.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                       // if(checkPermission()) {
+                                        new AppController().startBrowser(model.getUrl(),c);
+                                       // }else{
+                                        //    reqPermission();
+                                       // }
+                                    }
+                                });
                             }
                             else if(i==1){
                                 final Torrent model = listTorModel.get(i);
@@ -272,15 +306,30 @@ public class DetailsActivity extends AppCompatActivity {
                                 tvDown1.setOnClickListener(new View.OnClickListener() {
                                     @Override
                                     public void onClick(View v) {
-                                        DownloadManager.Request r = new DownloadManager.Request(Uri.parse(model.getUrl()));
-                                        r.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, "Downloads");
+                                       // if(checkPermission()) {
+                                        new AppController().startBrowser(model.getUrl(),c);
 
-                                        r.allowScanningByMediaScanner();
+                                        //  }else{
+                                         //   reqPermission();
+                                       // }
+                                    }
+                                });
+                            }else if(i==2){
+                                final Torrent model = listTorModel.get(i);
+                                tvQualityT.setText(model.getQuality());
+                                tvSeedsT.setText(model.getSeeds()+" Seeds");
+                                tvLeechT.setText(model.getPeers()+" Peers");
+                                tvSizeT.setText(model.getSize()+"");
+                                llContainerT.setVisibility(View.VISIBLE);
+                                tvDownT.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        // if(checkPermission()) {
+                                        new AppController().startBrowser(model.getUrl(),c);
 
-                                        r.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
-
-                                        DownloadManager dm = (DownloadManager) getSystemService(DOWNLOAD_SERVICE);
-                                        dm.enqueue(r);
+                                        //  }else{
+                                        //   reqPermission();
+                                        // }
                                     }
                                 });
                             }
@@ -289,8 +338,24 @@ public class DetailsActivity extends AppCompatActivity {
 
 
                     }
+                    /*if(listTorModel.size()<3){
+                        Log.e("tag","less 3");
+                        ((ViewGroup)llContainerT.getParent()).removeView(llContainerT);
+                    }
+                    if(listTorModel.size()<2){
+                        Log.e("tag","less 2");
+
+                        ((ViewGroup)llContainer1.getParent()).removeView(llContainer1);
+                    }
+                    if(listTorModel.size()<1){
+                        Log.e("tag","less 1");
+
+                        ((ViewGroup)llContainer7.getParent()).removeView(llContainer7);
+                    }*/
                 }
 
+
+               // reqPermission();
 
           //  SectionsPagerAdapter mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
            // viewPager.setAdapter(mSectionsPagerAdapter);
@@ -378,4 +443,87 @@ public class DetailsActivity extends AppCompatActivity {
         super.onBackPressed();
 
     }
+
+    public boolean checkPermission(){
+
+        if (ContextCompat.checkSelfPermission(this,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                == PackageManager.PERMISSION_GRANTED) {
+            Log.e("tag","checkPermission  true");
+
+            return true;
+        }else{
+            Log.e("tag","checkPermission  false ");
+
+            return false;
+        }
+    }
+
+    public void reqPermission(){
+        Log.e("tag","reqPermission   ");
+
+        if (ContextCompat.checkSelfPermission(this,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED) {
+
+            // Should we show an explanation?
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+                Log.e("tag","reqPermission  shouldShowRequestPermissionRationale ");
+
+                // Show an explanation to the user *asynchronously* -- don't block
+                // this thread waiting for the user's response! After the user
+                // sees the explanation, try again to request the permission.
+
+            } else {
+                Log.e("tag","reqPermission  No explanation needed, we can request the permission. ");
+
+                // No explanation needed, we can request the permission.
+
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                        1);
+
+                // MY_PERMISSIONS_REQUEST_READ_CONTACTS is an
+                // app-defined int constant. The callback method gets the
+                // result of the request.
+            }
+        }
+    }
+
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case 1: {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                    // permission was granted, yay! Do the
+                    // contacts-related task you need to do.
+                    Log.e("tag","permission granted   ");
+                } else {
+
+                    // permission denied, boo! Disable the
+                    // functionality that depends on this permission.
+
+                    Log.e("tag","permission not granted   ");
+                    showSnackBar("Permission needed for writing to storage");
+                }
+                return;
+            }
+
+            // other 'case' lines to check for other
+            // permissions this app might request
+        }
+    }
+
+    private void showSnackBar(String msg) {
+        if(tvMovie!=null)
+        Snackbar.make(tvMovie,""+msg,Snackbar.LENGTH_LONG).show();
+    }
+
+
 }
