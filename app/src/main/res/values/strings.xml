@@ -1,4 +1,59 @@
 <resources>
+
+
+    <string-array name="quality">
+        <item>All</item>
+        <item>720p</item>
+        <item>1080p</item>
+        <item>3D</item>
+    </string-array>
+
+    <string-array name="genre">
+        <item>All</item>
+        <item>Action</item>
+        <item>Animation</item>
+        <item>Comedy</item>
+        <item>Documentary</item>
+        <item>Family</item>
+        <item>Film-Noir</item>
+        <item>Horror</item>
+        <item>Musical</item>
+        <item>Romance</item>
+        <item>Sport</item>
+        <item>War</item>
+        <item>Adventure</item>
+        <item>Biography</item>
+
+    </string-array>
+
+
+    <string-array name="rating">
+        <item>All</item>
+        <item>9+</item>
+        <item>8+</item>
+        <item>7+</item>
+        <item>6+</item>
+        <item>5+</item>
+        <item>4+</item>
+        <item>3+</item>
+        <item>2+</item>
+        <item>1+</item>
+    </string-array>
+
+    <string-array name="sort">
+        <item>Latest</item>
+        <item>Seeds</item>
+        <item>Peers</item>
+        <item>Year</item>
+        <item>Rating</item>
+        <item>Likes</item>
+        <item>Alphabetical</item>
+        <item>Downloads</item>
+
+    </string-array>
+
+
+
     <string name="app_name">YIFY</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
@@ -100,4 +155,5 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_search">SearchActivity</string>
 </resources>

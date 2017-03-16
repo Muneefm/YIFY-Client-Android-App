@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context="yts.mnf.com.Activity.SearchActivity">
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/app_bar"
+        android:layout_width="match_parent"
+        android:layout_height="340dp"
+        android:fitsSystemWindows="true"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <android.support.design.widget.CollapsingToolbarLayout
+            android:id="@+id/toolbar_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fitsSystemWindows="true"
+            app:contentScrim="?attr/colorPrimary"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="?attr/actionBarSize"
+                android:paddingTop="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:orientation="vertical"
+                    android:layout_height="match_parent">
+              <!--  <android.support.v7.widget.AppCompatEditText
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="20dp"
+                    android:layout_height="wrap_content"
+                    android:hint="Search"
+                    /> -->
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:text="More Filters"
+                        android:textStyle="bold"
+                        android:textSize="15dp"
+                        android:gravity="center"
+                        android:layout_marginTop="20dp"
+
+                        android:layout_height="wrap_content" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="20dp"
+
+                        android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:text="Quality: "
+                    android:textStyle="bold"
+                    android:paddingRight="5dp"
+                    />
+                <android.support.v7.widget.AppCompatSpinner
+                    android:id="@+id/spinner_quality"
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                </android.support.v7.widget.AppCompatSpinner>
+                    </LinearLayout>
+
+
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="20dp"
+
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_width="80dp"
+                        android:layout_height="wrap_content"
+                        android:text="Genre: "
+                        android:textStyle="bold"
+                        android:paddingRight="5dp"
+                        />
+
+                    <android.support.v7.widget.AppCompatSpinner
+                        android:id="@+id/spinner_genre"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                    </android.support.v7.widget.AppCompatSpinner>
+                    </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="20dp"
+
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_width="80dp"
+                        android:layout_height="wrap_content"
+                        android:text="Rating: "
+                        android:textStyle="bold"
+                        android:paddingRight="5dp"
+                        />
+                    <android.support.v7.widget.AppCompatSpinner
+                        android:id="@+id/spinner_rating"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                    </android.support.v7.widget.AppCompatSpinner>
+                    </LinearLayout>
+
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="20dp"
+
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:layout_width="80dp"
+                            android:layout_height="wrap_content"
+                            android:text="Sort By: "
+                            android:textStyle="bold"
+                            android:paddingRight="5dp"
+                            />
+                        <android.support.v7.widget.AppCompatSpinner
+                            android:id="@+id/spinner_sort_by"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                        </android.support.v7.widget.AppCompatSpinner>
+                    </LinearLayout>
+                </LinearLayout>
+            </RelativeLayout>
+
+
+
+
+
+
+
+
+
+
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:layout_collapseMode="pin"
+                app:popupTheme="@style/AppTheme.PopupOverlay" >
+                <android.support.v7.widget.AppCompatEditText
+                    android:id="@+id/search_edt"
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="20dp"
+                    android:layout_height="wrap_content"
+                    android:hint="Search (Optional)"
+                    />
+
+
+            </android.support.v7.widget.Toolbar>
+
+        </android.support.design.widget.CollapsingToolbarLayout>
+    </android.support.design.widget.AppBarLayout>
+
+    <include layout="@layout/content_search" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/fab_margin"
+        app:layout_anchor="@id/app_bar"
+        app:popupTheme="@style/AppTheme.PopupOverlay"
+        app:layout_anchorGravity="bottom|end"
+
+        app:srcCompat="@android:drawable/ic_menu_search" />
+
+</android.support.design.widget.CoordinatorLayout>

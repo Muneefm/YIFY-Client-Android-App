@@ -13,26 +13,26 @@
 
     <android.support.v4.widget.SwipeRefreshLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/swiperefresh"
+        android:id="@+id/swiperefreshSearch"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recycler_view"
-        android:visibility="gone"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="0dp"
-        android:layout_centerHorizontal="true"
-        android:columnWidth="@dimen/column_width"
-        android:clipToPadding="false"
-        android:scrollbars="vertical" />
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler_view_search"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="0dp"
+            android:layout_centerHorizontal="true"
+            android:columnWidth="@dimen/column_width"
+            android:clipToPadding="false"
+            android:scrollbars="vertical" />
 
     </android.support.v4.widget.SwipeRefreshLayout>
 
     <fr.castorflex.android.circularprogressbar.CircularProgressBar
-        android:id="@+id/main_activty_loading"
+        android:id="@+id/search_loading"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:indeterminate="true"

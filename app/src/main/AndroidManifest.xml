@@ -6,10 +6,10 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
+        android:name=".AppController"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:name=".AppController"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
@@ -29,9 +29,13 @@
         <activity
             android:name=".Activity.ActDetails"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".Activity.ImageViewActivity"
-            android:theme="@style/AppTheme.NoActionBar"
-            ></activity>
+        <activity
+            android:name=".Activity.ImageViewActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Activity.SearchActivity"
+            android:label="@string/title_activity_search"
+            android:theme="@style/AppThemeSearch"></activity>
     </application>
 
 </manifest>

@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.transition.Slide;
@@ -39,6 +40,7 @@ import butterknife.ButterKnife;
 import fr.castorflex.android.circularprogressbar.CircularProgressBar;
 import fr.castorflex.android.circularprogressbar.CircularProgressDrawable;
 import yts.mnf.com.Activity.DetailsActivity;
+import yts.mnf.com.Activity.SearchActivity;
 import yts.mnf.com.Tools.Config;
 import yts.mnf.com.Tools.Url;
 import yts.mnf.com.Adapter.RecycleAdapter;
@@ -56,6 +58,9 @@ public class MainActivity extends AppCompatActivity
 
     @BindView(R.id.recycler_view)
     RecyclerView recyclerView;
+
+    @BindView(R.id.swiperefresh)
+    SwipeRefreshLayout refreshSwipe;
 
     private RecycleAdapter adapter;
     private List<Movie> mModels;
@@ -128,7 +133,7 @@ public class MainActivity extends AppCompatActivity
                             Log.e("TAGl", "last inside tot & page = " + totalPages + " " + page);
                             page++;
                             //  paramsModel.add(new ParamsModel("page", page + ""));
-                            makeNetwoekRequest(Url.ListUrl+"?page="+page);
+                            makeNetwoekRequest(Url.ListUrl+"?page="+page,false);
                             //  RequestData(Url + "?page=" + page);
                             //  showProgg();
                         }
@@ -145,7 +150,24 @@ public class MainActivity extends AppCompatActivity
 
 
 
-        makeNetwoekRequest(Url.ListUrl);
+        makeNetwoekRequest(Url.ListUrl,false);
+
+
+        refreshSwipe.setOnRefreshListener(
+                new SwipeRefreshLayout.OnRefreshListener() {
+                    @Override
+                    public void onRefresh() {
+                        Log.i("TAG", "onRefresh called from SwipeRefreshLayout");
+
+                        // This method performs the actual data-refresh operation.
+                        // The method calls setRefreshing(false) when it's finished.
+                        makeNetwoekRequest(Url.ListUrl,true);
+                        refreshSwipe.setRefreshing(true);
+
+                    }
+                }
+        );
+
     }
 
 
@@ -161,8 +183,8 @@ public void startLoading(){
 
 
 
-    public void makeNetwoekRequest(String url){
-        RequestQueue queue = Volley.newRequestQueue(this);
+    public void makeNetwoekRequest(String url, final boolean swipeRefresh){
+       // RequestQueue queue = Volley.newRequestQueue(this);
 
         startLoading();
 
@@ -187,8 +209,16 @@ public void startLoading(){
                             totalPages++;
                         }
                         Log.e("MainActivity","movieCount = "+movieCount+" movieLimit = "+movieLimit+" totalPage = "+totalPages);
-                        adapter.addItems(mModels);
-                        recyclerView.setVisibility(View.VISIBLE);
+                        if(mModels!=null) {
+                            if (swipeRefresh) {
+                                refreshSwipe.setRefreshing(false);
+
+                                adapter.replaceItems(mModels);
+                            } else {
+                                adapter.addItems(mModels);
+                            }
+                            recyclerView.setVisibility(View.VISIBLE);
+                        }
 
 
                     }
@@ -203,7 +233,9 @@ public void startLoading(){
 
             }
         });
-        queue.add(jsonObjReq);
+AppController.getInstance().addToRequestQueue(jsonObjReq,"movie_list");
+        AppController.getInstance().getRequestQueue().getCache().invalidate(url, true);
+
     }
 
 
@@ -256,7 +288,8 @@ public void startLoading(){
         if (id == R.id.nav_camera) {
             // Handle the camera action
         } else if (id == R.id.nav_gallery) {
-
+        Intent search = new Intent(MainActivity.this, SearchActivity.class);
+            startActivity(search);
         } else if (id == R.id.nav_slideshow) {
 
         } else if (id == R.id.nav_manage) {

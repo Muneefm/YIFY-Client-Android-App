@@ -67,7 +67,10 @@ public class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.ViewHold
         this.mModels = models;
         this.fm = fm;
     }
-
+    public void replaceItems(List<Movie> models){
+        this.mModels = models;
+        notifyDataSetChanged();
+    }
     public void addItems(List<Movie> models){
         this.mModels.addAll(models);
         notifyDataSetChanged();
