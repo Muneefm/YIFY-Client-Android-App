@@ -7,7 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="yts.mnf.com.Activity.SearchActivity">
+    tools:context="yts.mnf.me.Activity.SearchActivity">
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/app_bar"
@@ -195,6 +195,36 @@
 
     <include layout="@layout/content_search" />
 
+   <!-- <RelativeLayout
+        android:id="@+id/container_error"
+        android:layout_width="match_parent"
+        android:layout_marginTop="50dp"
+        android:visibility="gone"
+        android:layout_height="match_parent">
+        <TextView
+            android:id="@+id/tag_sad"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:text=":("
+            android:textSize="40dp"
+            android:textColor="@color/grey800"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/tag_msg"
+            android:layout_below="@+id/tag_sad"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_marginTop="15dp"
+            android:text="No result found !"
+            android:textSize="15dp"
+            android:textColor="@color/black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </RelativeLayout>
+ -->
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
         android:layout_width="wrap_content"

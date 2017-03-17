@@ -91,7 +91,7 @@
 
 
         </LinearLayout>
-        <!--<com.cunoraz.tagview.TagView
+        <!--<me.cunoraz.tagview.TagView
             xmlns:tagview="http://schemas.android.com/apk/res-auto"
             android:id="@+id/tag_group"
             android:layout_below="@+id/movie_year"

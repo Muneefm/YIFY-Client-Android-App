@@ -9,7 +9,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
 
-    tools:context="yts.mnf.com.Activity.ActDetails">
+    tools:context="yts.mnf.me.Activity.ActDetails">
 
     <RelativeLayout
         android:layout_width="match_parent"

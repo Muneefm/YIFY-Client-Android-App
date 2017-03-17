@@ -66,7 +66,7 @@
 
 
 
-    <string name="app_name">YIFY</string>
+    <string name="app_name">YIFY yts browser</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -171,10 +171,10 @@
 
 
 
-    <string name="home_banner_id">ca-app-pub-7269223551241818/8013182281</string>
+    <string name="home_banner_id">ca-app-pub-7269223551241818/7321851489</string>
 
-    <string name="detail_page_banner_id">ca-app-pub-7269223551241818/1547846287</string>
+    <string name="detail_page_banner_id">ca-app-pub-7269223551241818/8798584683</string>
 
-    <string name="search_page_banner_id">ca-app-pub-7269223551241818/5919170288</string>
+    <string name="search_page_banner_id">ca-app-pub-7269223551241818/1275317887</string>
 
 </resources>

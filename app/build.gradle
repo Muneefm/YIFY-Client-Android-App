@@ -4,7 +4,7 @@ android {
     compileSdkVersion 25
     buildToolsVersion "25.0.2"
     defaultConfig {
-        applicationId "yts.mnf.com"
+        applicationId "yts.mnf.me"
         minSdkVersion 16
         targetSdkVersion 25
         versionCode 1
@@ -49,4 +49,3 @@ dependencies {
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
 }
 apply plugin: 'com.google.gms.google-services'
-
