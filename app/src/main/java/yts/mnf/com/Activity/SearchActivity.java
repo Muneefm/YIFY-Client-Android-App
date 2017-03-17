@@ -15,6 +15,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
@@ -23,6 +24,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.google.gson.Gson;
 
 import org.json.JSONObject;
@@ -69,6 +72,10 @@ public class SearchActivity extends AppCompatActivity {
     @BindView(R.id.search_edt)
     EditText searchEdt;
 
+
+    @BindView(R.id.search_btn)
+    Button searchBtn;
+
     String qualityString="",genreString="",ratingString="",sortString="latest",queryString="";
 
     private RecycleAdapter adapter;
@@ -98,6 +105,18 @@ public class SearchActivity extends AppCompatActivity {
                 searchRequest(generateSearchUrl(),true);
             }
         });
+        searchBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                searchRequest(generateSearchUrl(),true);
+
+            }
+        });
+
+        AdView mAdView = (AdView) findViewById(R.id.adSearch);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+
 
         ArrayAdapter<CharSequence> adapterQuality = ArrayAdapter.createFromResource(this,
                 R.array.quality, android.R.layout.simple_spinner_item);
@@ -202,6 +221,37 @@ public class SearchActivity extends AppCompatActivity {
                         break;
                     case 12:
                         genreString = "adventure";
+                        break;
+                    case 13:
+                        genreString = "biography";
+                        break;
+                    case 14:
+                        genreString = "crime";
+                        break;
+                    case 15:
+                        genreString = "drama";
+                        break;
+                    case 16:
+                        genreString = "fantasy";
+                        break;
+                    case 17:
+                        genreString = "history";
+                        break;
+                    case 18:
+                        genreString = "music";
+                        break;
+                    case 19:
+                        genreString = "mystery";
+                        break;
+
+                    case 20:
+                        genreString = "Sci-Fi";
+                        break;
+                    case 21:
+                        genreString = "thriller";
+                        break;
+                    case 22:
+                        genreString = "western";
                         break;
                 }
                 Log.e("TAG","onItemClick position "+position+" genreString = "+genreString );

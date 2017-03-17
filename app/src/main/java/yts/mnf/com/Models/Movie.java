@@ -19,7 +19,7 @@ public class Movie {
     private String summary;
     private String description_full;
     private String synopsis;
-    private String ytTrailerCode;
+    private String yt_trailer_code;
     private String language;
     private String mpaRating;
     private String backgroundImage;
@@ -145,11 +145,11 @@ public class Movie {
     }
 
     public String getYtTrailerCode() {
-        return ytTrailerCode;
+        return yt_trailer_code;
     }
 
-    public void setYtTrailerCode(String ytTrailerCode) {
-        this.ytTrailerCode = ytTrailerCode;
+    public void setYtTrailerCode(String yt_trailer_code) {
+        this.yt_trailer_code = yt_trailer_code;
     }
 
     public String getLanguage() {

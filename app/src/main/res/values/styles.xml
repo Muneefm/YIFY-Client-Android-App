@@ -3,9 +3,9 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/green_500</item>
+        <item name="colorPrimary">@color/red</item>
+        <item name="colorPrimaryDark">@color/redDark</item>
+        <item name="colorAccent">@color/white</item>
         <item name="android:windowContentTransitions">true</item>
 
     </style>
@@ -25,14 +25,14 @@
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+
         <item name="android:windowContentTransitions">true</item>
         <item name="android:windowTranslucentStatus">true</item>
         <item name="android:windowTranslucentNavigation">true</item>
 
     </style>
 
-
-    <style name="AppThemeSearch" parent="Theme.AppCompat" >
+    <style name="AppThemeDetails" parent="Theme.AppCompat" >
         <!-- Customize your theme here. -->
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
@@ -41,6 +41,21 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/green_500</item>
+        <item name="android:windowContentTransitions">true</item>
+
+    </style>
+
+
+
+    <style name="AppThemeSearch" parent="Theme.AppCompat" >
+        <!-- Customize your theme here. -->
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowTranslucentNavigation">true</item>
+        <item name="colorPrimary">@color/blue_grey700</item>
+        <item name="colorPrimaryDark">@color/blue_grey900</item>
+        <item name="colorAccent">@color/blue_grey800</item>
         <item name="android:windowContentTransitions">true</item>
 
     </style>

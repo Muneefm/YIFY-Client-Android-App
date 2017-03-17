@@ -24,6 +24,18 @@
         <item>Adventure</item>
         <item>Biography</item>
 
+
+
+        <item>Crime</item>
+        <item>Drama</item>
+        <item>Fantasy</item>
+        <item>History</item>
+        <item>Music</item>
+        <item>Mystery</item>
+        <item>Sci-Fi</item>
+        <item>Thriller</item>
+        <item>Western</item>
+
     </string-array>
 
 
@@ -156,4 +168,13 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_search">SearchActivity</string>
+
+
+
+    <string name="home_banner_id">ca-app-pub-7269223551241818/8013182281</string>
+
+    <string name="detail_page_banner_id">ca-app-pub-7269223551241818/1547846287</string>
+
+    <string name="search_page_banner_id">ca-app-pub-7269223551241818/5919170288</string>
+
 </resources>

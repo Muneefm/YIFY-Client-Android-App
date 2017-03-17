@@ -51,6 +51,8 @@ import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.google.gson.Gson;
 import com.ogaclejapan.smarttablayout.SmartTabLayout;
 import com.robertlevonyan.views.chip.Chip;
@@ -180,8 +182,8 @@ public class DetailsActivity extends AppCompatActivity {
     @BindView(R.id.container_quality)
     LinearLayout downloadDetails;
 
-    @BindView(R.id.download_torrent)
-    Button downloadTorrent;
+    //@BindView(R.id.download_torrent)
+   // Button downloadTorrent;
     //ten_download
 
 
@@ -221,6 +223,11 @@ public class DetailsActivity extends AppCompatActivity {
 
         }
 
+//adDetailPage
+        AdView mAdView = (AdView) findViewById(R.id.adDetailPage);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+
 
         Typeface face=Typeface.createFromAsset(getAssets(), "fonts/FjallaOne-Regular.ttf");
         tvMovie.setTypeface(face);
@@ -231,25 +238,25 @@ public class DetailsActivity extends AppCompatActivity {
         Typeface faceTime=Typeface.createFromAsset(getAssets(), "fonts/QuattrocentoSans-Regular.ttf");
         tvTime.setTypeface(faceTime);
         tvDirected.setTypeface(faceTime);
-        suggestionTag.setTypeface(faceTime);
+        suggestionTag.setTypeface(faceRate);
 
         Typeface faceDesc=Typeface.createFromAsset(getAssets(), "fonts/Abel-Regular.ttf");
         tvDesc.setTypeface(faceDesc);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
 
 
 
         if(movieModel!=null){
             tvMovie.setText(movieModel.getTitle());
-            Config.loadImage(posterMain,movieModel.getLargeCoverImage());
+
+            Log.e("TAG","detail large cover url = "+movieModel.getLargeCoverImage());
+            if(movieModel.getLargeCoverImage()==null){
+                Config.loadImage(posterMain,movieModel.getMediumCoverImage());
+
+            }else {
+                Config.loadImage(posterMain, movieModel.getLargeCoverImage());
+            }
             tvDesc.setText(movieModel.getDescriptionFull());
             tvRate.setText(movieModel.getRating().toString());
             tvTime.setText(movieModel.getRuntime()+"ms");
@@ -273,6 +280,15 @@ public class DetailsActivity extends AppCompatActivity {
                     ActivityOptionsCompat options = ActivityOptionsCompat.
                             makeSceneTransitionAnimation(DetailsActivity.this, p1);
                     startActivity(detailAct,options.toBundle());
+
+                }
+            });
+            fab.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("vnd.youtube://" + movieModel.getYtTrailerCode()));
+                    startActivity(intent);
 
                 }
             });
@@ -374,13 +390,13 @@ public class DetailsActivity extends AppCompatActivity {
 
                         ((ViewGroup)llContainer7.getParent()).removeView(llContainer7);
                     }
-                    downloadTorrent.setOnClickListener(new View.OnClickListener() {
+                   /* downloadTorrent.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
                             //  focusOnView();
                             showDialogue(listTorModel);
                         }
-                    });
+                    });*/
                 }
 
 

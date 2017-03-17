@@ -77,6 +77,8 @@
                 android:textSize="18dp"
                 android:gravity="center"
                 android:lines="1"
+                android:transitionName="rating"
+
                 android:textStyle="bold"
                 android:text="9.0"
                 />

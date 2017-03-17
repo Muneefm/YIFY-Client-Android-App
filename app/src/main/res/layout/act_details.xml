@@ -25,7 +25,6 @@
         android:elevation="5dp"
         android:scaleType="centerCrop"
         attribute:curvature="100dp"
-        android:src="@mipmap/cc"
         attribute:tintMode="manual"
         attribute:tintColor="#FFFFFF"
         attribute:tintAlpha="50" />

@@ -52,6 +52,7 @@
     <color name="teal50">#E0F2F1</color>
     <color name="red500">#F44336</color>
     <color name="red700">#D32F2F</color>
+    <color name="red800">#C62828</color>
 
 
 
@@ -60,6 +61,12 @@
     <color name="purple500">#9C27B0</color>
 
 
+    <color name="green600">#43A047</color>
+    <color name="green700">#388E3C</color>
+
+    <color name="green900">#1B5E20</color>
+
+    <color name="green800">#2E7D32</color>
 
 
 

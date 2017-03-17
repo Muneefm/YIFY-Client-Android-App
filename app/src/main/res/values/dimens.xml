@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="nav_header_vertical_spacing">16dp</dimen>
     <dimen name="nav_header_height">160dp</dimen>
@@ -15,4 +15,6 @@
 
     <dimen name="tab_height">48dp</dimen>
     <dimen name="tab_height_large">72dp</dimen>
+    <dimen name="design_fab_image_size" tools:override="true">36dp</dimen>
+
 </resources>

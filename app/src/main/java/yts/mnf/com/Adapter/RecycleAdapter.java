@@ -41,6 +41,7 @@ import yts.mnf.com.Fragment.DetailFragment;
 import yts.mnf.com.Models.Movie;
 import yts.mnf.com.Models.Torrent;
 import yts.mnf.com.R;
+import yts.mnf.com.Tools.Config;
 import yts.mnf.com.Tools.DetailsTransition;
 
 import static android.R.attr.bitmap;
@@ -77,7 +78,7 @@ public class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.ViewHold
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        public TextView movieTitle, movieYear;
+        public TextView movieTitle, movieYear,tvRating;
         public ImageView moviePoster, overflow;
         public RelativeLayout relativeLayout;
         public CardView cv;
@@ -89,7 +90,9 @@ public class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.ViewHold
             relativeLayout = (RelativeLayout) view.findViewById(R.id.name_relative);
             cv = (CardView) view.findViewById(R.id.card_view);
             movieYear = (TextView) view.findViewById(R.id.movie_year);
-           //  tagGroup = (TagView) view.findViewById(R.id.tag_group);
+            tvRating = (TextView) view.findViewById(R.id.rate_tv_adapter);
+
+            //  tagGroup = (TagView) view.findViewById(R.id.tag_group);
 
             // count = (TextView) view.findViewById(R.id.count);
             //thumbnail = (ImageView) view.findViewById(R.id.thumbnail);
@@ -116,6 +119,7 @@ public class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.ViewHold
         if(movie.getYear()!=null){
             holder.movieYear.setText(movie.getYear().toString());
         }
+        holder.tvRating.setText(movie.getRating()+"");
 
         //holder.tagGroup.removeAll();
         Glide.clear(holder.moviePoster);
@@ -144,6 +148,7 @@ public class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.ViewHold
                                     public void onGenerated(Palette p) {
                                         // Use generated instance
                                         holder.relativeLayout.setBackgroundColor(p.getDarkVibrantColor(mContext.getResources().getColor(R.color.grey700)));
+                                        //holder.tvRating.setTextColor(Config.manipulateColor(p.getDarkVibrantColor(mContext.getResources().getColor(R.color.white)),0.9f));
                                     }
                                 });
                             }
@@ -244,10 +249,12 @@ public class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.ViewHold
                 detailAct.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 Pair<View, String> p1 = Pair.create((View)holder.moviePoster, "poster");
                 Pair<View, String> p2 = Pair.create((View)holder.movieTitle, "title");
+                Pair<View, String> p3 = Pair.create((View)holder.tvRating, "rating");
+
 
                 detailAct.putExtra("movie_json", movieJson);
                 ActivityOptionsCompat options = ActivityOptionsCompat.
-                        makeSceneTransitionAnimation((Activity) mContext, p1,p2);
+                        makeSceneTransitionAnimation((Activity) mContext, p1,p2,p3);
                 mContext.startActivity(detailAct,options.toBundle());
 
             }
@@ -256,4 +263,6 @@ public class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.ViewHold
 
 
     }
+
+
 }

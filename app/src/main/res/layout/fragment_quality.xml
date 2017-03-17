@@ -136,7 +136,7 @@
                     android:layout_gravity="center"
                     app:floating_background_color="@color/blue_grey700"
                     app:floating_icon="@mipmap/download"
-                    app:floating_title="Download"
+                    app:floating_title="Torrent"
                     app:floating_title_color="@android:color/white"
                     />
 
@@ -257,7 +257,7 @@
                     android:layout_gravity="center"
                     app:floating_background_color="@color/blue_grey700"
                     app:floating_icon="@mipmap/download"
-                    app:floating_title="Download"
+                    app:floating_title="Torrent"
                     app:floating_title_color="@android:color/white"
                     />
 
@@ -378,7 +378,7 @@
                     android:layout_gravity="center"
                     app:floating_background_color="@color/blue_grey700"
                     app:floating_icon="@mipmap/download"
-                    app:floating_title="Download"
+                    app:floating_title="Torrent"
                     app:floating_title_color="@android:color/white"
                     />
 

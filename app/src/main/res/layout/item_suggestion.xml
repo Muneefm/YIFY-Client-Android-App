@@ -32,7 +32,7 @@
 
             <RelativeLayout
                 android:id="@+id/name_relative"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_alignParentBottom="true"
                 android:layout_height="70dp"
                 android:background="@color/grey700"
@@ -62,21 +62,33 @@
                     android:textColor="@android:color/white"
                     />
 
-                <com.cunoraz.tagview.TagView
-                    xmlns:tagview="http://schemas.android.com/apk/res-auto"
-                    android:id="@+id/tag_group"
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_below="@+id/movie_year"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="0dp"
-                    tagview:lineMargin="0dp"
-                    tagview:tagMargin="1dp"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    >
+                    <ImageView
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:layout_marginRight="10dp"
+                        android:src="@mipmap/imdb"
+                        />
 
-                    tagview:textPaddingLeft="8dp"
-                    tagview:textPaddingTop="1dp"
-                    tagview:textPaddingRight="8dp"
-                    tagview:textPaddingBottom="1dp" />
+                    <TextView
+                        android:id="@+id/rate_tv_adapter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/white"
+                        android:textSize="15dp"
+                        android:gravity="center"
+                        android:lines="1"
+                        android:text="9.0"
+                        />
 
+
+                </LinearLayout>
 
             </RelativeLayout>
 

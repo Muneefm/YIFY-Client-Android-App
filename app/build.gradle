@@ -26,6 +26,8 @@ dependencies {
     })
     compile files('libs/gson-2.8.0.jar')
 
+    compile 'com.google.firebase:firebase-ads:10.2.0'
+    compile 'com.google.firebase:firebase-core:10.2.0'
     compile 'com.afollestad.material-dialogs:core:0.9.4.1'
     compile 'com.github.dimorinny:floating-text-button:0.0.2'
     compile 'com.ogaclejapan.smarttablayout:library:1.6.1@aar'
@@ -46,3 +48,5 @@ dependencies {
     testCompile 'junit:junit:4.12'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
 }
+apply plugin: 'com.google.gms.google-services'
+

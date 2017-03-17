@@ -4,12 +4,15 @@ import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Bundle;
 import android.text.TextUtils;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.Volley;
+import com.google.android.gms.ads.MobileAds;
+import com.google.firebase.analytics.FirebaseAnalytics;
 
 /**
  * Created by muneef on 14/03/17.
@@ -21,18 +24,22 @@ public class AppController extends Application {
             .getSimpleName();
 
     private RequestQueue mRequestQueue;
+    private FirebaseAnalytics mFirebaseAnalytics;
 
     private static AppController mInstance;
     @Override
     public void onCreate() {
         super.onCreate();
         mInstance = this;
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
+        MobileAds.initialize(getApplicationContext(), "ca-app-pub-7269223551241818~5059715880");
 
     }
 
 
 
     public void startBrowser(String url, Context c){
+        logFirebase("startBrowser = "+url);
         if (!url.startsWith("http://") && !url.startsWith("https://"))
             url = "https://" + url;
 
@@ -68,5 +75,12 @@ public class AppController extends Application {
         if (mRequestQueue != null) {
             mRequestQueue.cancelAll(tag);
         }
+    }
+
+    public void logFirebase(String msg){
+      /*  Bundle bundle = new Bundle();
+        bundle.putString("Action", msg);
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
+        mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);*/
     }
 }

@@ -55,7 +55,7 @@ public class SuggestionsAdapter  extends RecyclerView.Adapter<SuggestionsAdapter
 
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        public TextView movieTitle, count;
+        public TextView movieTitle, movieYear,tvRating;
         public ImageView moviePoster, overflow;
         public RelativeLayout relativeLayout;
         public CardView cv;
@@ -66,6 +66,8 @@ public class SuggestionsAdapter  extends RecyclerView.Adapter<SuggestionsAdapter
             moviePoster = (ImageView) view.findViewById(R.id.poster);
             relativeLayout = (RelativeLayout) view.findViewById(R.id.name_relative);
             cv = (CardView) view.findViewById(R.id.card_view);
+            movieYear = (TextView) view.findViewById(R.id.movie_year);
+            tvRating = (TextView) view.findViewById(R.id.rate_tv_adapter);
             //  tagGroup = (TagView) view.findViewById(R.id.tag_group);
 
             // count = (TextView) view.findViewById(R.id.count);
@@ -90,6 +92,10 @@ public class SuggestionsAdapter  extends RecyclerView.Adapter<SuggestionsAdapter
 
         holder.movieTitle.setText(movie.getTitle());
         //holder.tagGroup.removeAll();
+        if(movie.getYear()!=null){
+            holder.movieYear.setText(movie.getYear().toString());
+        }
+        holder.tvRating.setText(movie.getRating()+"");
         Glide.clear(holder.moviePoster);
 
 
