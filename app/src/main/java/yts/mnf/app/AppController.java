@@ -1,4 +1,4 @@
-package yts.mnf.me;
+package yts.mnf.app;
 
 import android.app.Application;
 import android.content.Context;
@@ -30,7 +30,7 @@ public class AppController extends Application {
         super.onCreate();
         mInstance = this;
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
-        MobileAds.initialize(getApplicationContext(), "ca-app-pub-7269223551241818~4368385084");
+        MobileAds.initialize(getApplicationContext(), "ca-app-pub-7269223551241818~8430154688");
 
     }
 

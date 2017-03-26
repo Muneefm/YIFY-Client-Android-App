@@ -1,4 +1,4 @@
-package yts.mnf.me;
+package yts.mnf.app;
 
 import android.content.Context;
 import android.content.Intent;
@@ -39,13 +39,13 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.castorflex.android.circularprogressbar.CircularProgressBar;
 import fr.castorflex.android.circularprogressbar.CircularProgressDrawable;
-import yts.mnf.me.Activity.DetailsActivity;
-import yts.mnf.me.Activity.SearchActivity;
-import yts.mnf.me.Tools.Config;
-import yts.mnf.me.Tools.Url;
-import yts.mnf.me.Adapter.RecycleAdapter;
-import yts.mnf.me.Models.ListModel;
-import yts.mnf.me.Models.Movie;
+import yts.mnf.app.Activity.DetailsActivity;
+import yts.mnf.app.Activity.SearchActivity;
+import yts.mnf.app.Tools.Config;
+import yts.mnf.app.Tools.Url;
+import yts.mnf.app.Adapter.RecycleAdapter;
+import yts.mnf.app.Models.ListModel;
+import yts.mnf.app.Models.Movie;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {

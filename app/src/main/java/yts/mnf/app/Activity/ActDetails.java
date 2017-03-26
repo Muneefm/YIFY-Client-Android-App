@@ -1,4 +1,4 @@
-package yts.mnf.me.Activity;
+package yts.mnf.app.Activity;
 
 import android.graphics.Color;
 import android.os.Build;
@@ -6,7 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
-import yts.mnf.me.R;
+import yts.mnf.app.R;
 
 public class ActDetails extends AppCompatActivity {
 

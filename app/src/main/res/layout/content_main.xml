@@ -10,7 +10,7 @@
     android:background="@android:color/white"
     android:gravity="center"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="yts.mnf.me.MainActivity"
+    tools:context="yts.mnf.app.MainActivity"
     tools:showIn="@layout/app_bar_main">
 
 
@@ -54,7 +54,7 @@
         android:id="@+id/container_error"
         android:layout_width="match_parent"
         android:layout_marginTop="0dp"
-        android:visibility="visible"
+        android:visibility="gone"
         android:layout_height="match_parent"
        >
         <TextView
@@ -73,7 +73,7 @@
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
             android:layout_marginTop="15dp"
-            android:text="No result found !"
+            android:text="!"
             android:textSize="15dp"
 
             android:textColor="@color/grey500"

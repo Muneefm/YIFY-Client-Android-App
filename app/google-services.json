@@ -1,27 +1,27 @@
 {
   "project_info": {
-    "project_number": "373191235542",
-    "firebase_url": "https://yify-new.firebaseio.com",
-    "project_id": "yify-new",
-    "storage_bucket": "yify-new.appspot.com"
+    "project_number": "1008135000528",
+    "firebase_url": "https://yts-app-f7e9c.firebaseio.com",
+    "project_id": "yts-app-f7e9c",
+    "storage_bucket": "yts-app-f7e9c.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:373191235542:android:5a78e4d5df320fbc",
+        "mobilesdk_app_id": "1:1008135000528:android:e3a7cbd74b374061",
         "android_client_info": {
-          "package_name": "yts.mnf.me"
+          "package_name": "yts.mnf.app"
         }
       },
       "oauth_client": [
         {
-          "client_id": "373191235542-bnm5c123hiqscoj2m6mhon23nt380pgt.apps.googleusercontent.com",
+          "client_id": "1008135000528-248brup80f2ekoag849l55ciosfsis2c.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCcV882W3FUJtS-lP3jTdQlShHI_WJECNE"
+          "current_key": "AIzaSyDn5SWamO86UQLPbmjvEKGBYDhk64Nh0zo"
         }
       ],
       "services": {

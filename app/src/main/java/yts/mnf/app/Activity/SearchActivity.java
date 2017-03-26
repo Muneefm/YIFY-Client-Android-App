@@ -1,4 +1,4 @@
-package yts.mnf.me.Activity;
+package yts.mnf.app.Activity;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -36,14 +36,14 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import yts.mnf.me.Adapter.RecycleAdapter;
-import yts.mnf.me.AppController;
-import yts.mnf.me.GridSpacingItemDecoration;
-import yts.mnf.me.Models.ListModel;
-import yts.mnf.me.Models.Movie;
-import yts.mnf.me.R;
-import yts.mnf.me.Tools.Config;
-import yts.mnf.me.Tools.Url;
+import yts.mnf.app.Adapter.RecycleAdapter;
+import yts.mnf.app.AppController;
+import yts.mnf.app.GridSpacingItemDecoration;
+import yts.mnf.app.Models.ListModel;
+import yts.mnf.app.Models.Movie;
+import yts.mnf.app.R;
+import yts.mnf.app.Tools.Config;
+import yts.mnf.app.Tools.Url;
 
 public class SearchActivity extends AppCompatActivity {
 

@@ -1,4 +1,4 @@
-package yts.mnf.me;
+package yts.mnf.app;
 
 import android.content.Context;
 import android.graphics.Rect;

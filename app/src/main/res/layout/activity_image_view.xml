@@ -7,7 +7,7 @@
     android:fitsSystemWindows="true"
     android:layout_height="match_parent"
 
-    tools:context="yts.mnf.me.Activity.ImageViewActivity">
+    tools:context="yts.mnf.app.Activity.ImageViewActivity">
 
 
     <ImageView

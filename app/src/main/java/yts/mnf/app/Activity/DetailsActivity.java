@@ -1,6 +1,8 @@
-package yts.mnf.me.Activity;
+package yts.mnf.app.Activity;
 
 import android.Manifest;
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -31,6 +33,7 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.android.volley.Request;
@@ -47,22 +50,24 @@ import com.robertlevonyan.views.chip.Chip;
 
 import org.json.JSONObject;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import ru.dimorinny.floatingtextbutton.FloatingTextButton;
-import yts.mnf.me.Adapter.SuggestionsAdapter;
-import yts.mnf.me.AppController;
-import yts.mnf.me.Fragment.QualityFragment;
-import yts.mnf.me.GridSpacingItemDecoration;
-import yts.mnf.me.Models.ListModel;
-import yts.mnf.me.Models.Movie;
-import yts.mnf.me.Models.Torrent;
-import yts.mnf.me.R;
-import yts.mnf.me.Tools.Config;
-import yts.mnf.me.Tools.Url;
+import yts.mnf.app.Adapter.SuggestionsAdapter;
+import yts.mnf.app.AppController;
+import yts.mnf.app.Fragment.QualityFragment;
+import yts.mnf.app.GridSpacingItemDecoration;
+import yts.mnf.app.Models.ListModel;
+import yts.mnf.app.Models.Movie;
+import yts.mnf.app.Models.Torrent;
+import yts.mnf.app.R;
+import yts.mnf.app.Tools.Config;
+import yts.mnf.app.Tools.Url;
 
 public class DetailsActivity extends AppCompatActivity {
 
@@ -120,6 +125,9 @@ public class DetailsActivity extends AppCompatActivity {
     @BindView(R.id.sev_download)
     FloatingTextButton tvDown7;
 
+    @BindView(R.id.sev_magnet)
+    FloatingTextButton tvMagnet7;
+
 
 
     //1080p
@@ -141,6 +149,9 @@ public class DetailsActivity extends AppCompatActivity {
     @BindView(R.id.ten_download)
     FloatingTextButton tvDown1;
 
+    @BindView(R.id.ten_magnet)
+    FloatingTextButton tvMagnet1;
+
 
     //T version
     @BindView(R.id.ten_containert)
@@ -161,6 +172,13 @@ public class DetailsActivity extends AppCompatActivity {
     @BindView(R.id.ten_downloadt)
     FloatingTextButton tvDownT;
 
+    @BindView(R.id.ten_magnett)
+    FloatingTextButton tvMagnetT;
+
+
+
+
+
 
     @BindView(R.id.scroll_nest)
     NestedScrollView scrollView;
@@ -180,6 +198,7 @@ public class DetailsActivity extends AppCompatActivity {
     ViewPager viewPager;*/
 
     Movie movieModel;
+    String movieName;
     static String TAG = "DetailsActivity";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -235,6 +254,12 @@ public class DetailsActivity extends AppCompatActivity {
 
         if(movieModel!=null){
             tvMovie.setText(movieModel.getTitle());
+            if(movieModel.getTitleEnglish()!=null) {
+                movieName = movieModel.getTitleEnglish();
+            }else{
+                movieName = movieModel.getTitle();
+
+            }
 
             Log.e("TAG","detail large cover url = "+movieModel.getLargeCoverImage());
             if(movieModel.getLargeCoverImage()==null){
@@ -316,6 +341,22 @@ public class DetailsActivity extends AppCompatActivity {
                                        // }
                                     }
                                 });
+                                tvMagnet7.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        try {
+                                            String mUrl = generateMagneticUrl(model.getHash(),movieName);
+                                            Log.e("TAG","720p magneturl = "+mUrl);
+                                            copyText(mUrl);
+                                            if(c!=null) {
+                                                Toast.makeText(c, "Magnetic url Copied", Toast.LENGTH_LONG).show();
+                                            }
+                                        } catch (UnsupportedEncodingException e) {
+                                            e.printStackTrace();
+                                            Log.e("TAG","try catch error");
+                                        }
+                                    }
+                                });
                             }
                             else if(i==1){
                                 final Torrent model = listTorModel.get(i);
@@ -335,6 +376,24 @@ public class DetailsActivity extends AppCompatActivity {
                                        // }
                                     }
                                 });
+
+                                tvMagnet1.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        try {
+                                            String mUrl = generateMagneticUrl(model.getHash(),movieName);
+                                            Log.e("TAG","720p magneturl = "+mUrl);
+                                            copyText(mUrl);
+                                            if(c!=null) {
+                                                Toast.makeText(c, "Magnetic url Copied", Toast.LENGTH_LONG).show();
+                                            }
+                                        } catch (UnsupportedEncodingException e) {
+                                            e.printStackTrace();
+                                            Log.e("TAG","try catch error");
+                                        }
+                                    }
+                                });
+
                             }else if(i==2){
                                 final Torrent model = listTorModel.get(i);
                                 tvQualityT.setText(model.getQuality());
@@ -351,6 +410,22 @@ public class DetailsActivity extends AppCompatActivity {
                                         //  }else{
                                         //   reqPermission();
                                         // }
+                                    }
+                                });
+                                tvMagnetT.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        try {
+                                            String mUrl = generateMagneticUrl(model.getHash(),movieName);
+                                            Log.e("TAG","720p magneturl = "+mUrl);
+                                            copyText(mUrl);
+                                            if(c!=null) {
+                                                Toast.makeText(c, "Magnetic url Copied", Toast.LENGTH_LONG).show();
+                                            }
+                                        } catch (UnsupportedEncodingException e) {
+                                            e.printStackTrace();
+                                            Log.e("TAG","try catch error");
+                                        }
                                     }
                                 });
                             }
@@ -399,6 +474,47 @@ public class DetailsActivity extends AppCompatActivity {
 
 
         }
+
+
+
+
+    }
+
+    public void copyText(String mUrl){
+        ClipboardManager clipboard = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
+        ClipData clip = ClipData.newPlainText("yify", mUrl);
+        clipboard.setPrimaryClip(clip);
+    }
+
+    public String generateMagneticUrl(String hash,String movieName) throws UnsupportedEncodingException {
+        //magnet:?xt=urn:btih:TORRENT_HASH&dn=Url+Encoded+Movie+Name&tr=http://track.one:1234/announce&tr=udp://track.two:80
+
+        String baseString = "magnet:?xt=urn:btih:"+hash+"&dn=";
+        String encodedMovieName = URLEncoder.encode(movieName, "utf-8").replace("+", "%20");
+        baseString+=encodedMovieName;
+        Log.e("TAG","after mName encode = "+baseString);
+
+        String tracker1 = "udp://open.demonii.com:1337/announce";
+        String tracker2 = "udp://tracker.openbittorrent.com:80";
+        String tracker3 = "udp://tracker.coppersurfer.tk:6969";
+        String tracker4 = "udp://glotorrents.pw:6969/announce";
+        String tracker5 = "udp://tracker.opentrackr.org:1337/announce";
+        String tracker6 = "udp://torrent.gresille.org:80/announce";
+        String tracker7 = "udp://p4p.arenabg.com:1337";
+        String tracker8 = "udp://tracker.leechers-paradise.org:6969";
+
+        String[] trackerArray = {tracker1,tracker2,tracker3,tracker4,tracker5,tracker6,tracker7,tracker8};
+        String trackers ="";
+
+
+        for (String trackerItem: trackerArray) {
+            trackers+="&tr="+URLEncoder.encode(trackerItem, "utf-8").replace("+", "%20");
+        }
+        Log.e("TAG","after tracker encode = "+trackers);
+        Log.e("TAG","final magnetic url  = "+baseString+trackers);
+
+        return baseString+trackers;
+
 
 
 

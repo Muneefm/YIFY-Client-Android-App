@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="yts.mnf.me">
+    package="yts.mnf.app">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
-        android:name="yts.mnf.me.AppController"
+        android:name="yts.mnf.app.AppController"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name="yts.mnf.me.MainActivity"
+            android:name="yts.mnf.app.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -23,17 +23,17 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="yts.mnf.me.Activity.DetailsActivity"
+            android:name="yts.mnf.app.Activity.DetailsActivity"
             android:label="@string/title_activity_details"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name="yts.mnf.me.Activity.ActDetails"
+            android:name="yts.mnf.app.Activity.ActDetails"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name="yts.mnf.me.Activity.ImageViewActivity"
+            android:name="yts.mnf.app.Activity.ImageViewActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name="yts.mnf.me.Activity.SearchActivity"
+            android:name="yts.mnf.app.Activity.SearchActivity"
             android:label="@string/title_activity_search"
             android:theme="@style/AppThemeSearch"></activity>
     </application>

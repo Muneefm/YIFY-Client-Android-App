@@ -1,4 +1,4 @@
-package yts.mnf.me;
+package yts.mnf.app;
 
 import org.junit.Test;
 

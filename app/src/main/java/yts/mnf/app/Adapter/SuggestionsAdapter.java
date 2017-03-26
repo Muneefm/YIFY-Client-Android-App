@@ -1,4 +1,4 @@
-package yts.mnf.me.Adapter;
+package yts.mnf.app.Adapter;
 
 import android.app.Activity;
 import android.content.Context;
@@ -25,9 +25,9 @@ import com.google.gson.Gson;
 
 import java.util.List;
 
-import yts.mnf.me.Activity.DetailsActivity;
-import yts.mnf.me.Models.Movie;
-import yts.mnf.me.R;
+import yts.mnf.app.Activity.DetailsActivity;
+import yts.mnf.app.Models.Movie;
+import yts.mnf.app.R;
 
 /**
  * Created by muneef on 11/03/17.

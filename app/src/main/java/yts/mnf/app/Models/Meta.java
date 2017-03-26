@@ -1,5 +1,5 @@
 
-package yts.mnf.me.Models;
+package yts.mnf.app.Models;
 
 
 public class Meta {
