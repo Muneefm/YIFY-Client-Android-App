@@ -1,4 +1,4 @@
-package yts.mnf.app.Tools;
+package yts.mnf.torrent.Tools;
 
 /**
  * Created by muneef on 10/03/17.

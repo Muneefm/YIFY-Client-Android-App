@@ -1,4 +1,4 @@
-package yts.mnf.app.Activity;
+package yts.mnf.torrent.Activity;
 
 import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
@@ -10,8 +10,8 @@ import android.widget.ImageView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import yts.mnf.app.R;
-import yts.mnf.app.Tools.Config;
+import yts.mnf.torrent.R;
+import yts.mnf.torrent.Tools.Config;
 
 public class ImageViewActivity extends AppCompatActivity {
 

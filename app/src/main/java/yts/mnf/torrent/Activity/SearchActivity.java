@@ -1,4 +1,4 @@
-package yts.mnf.app.Activity;
+package yts.mnf.torrent.Activity;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -36,14 +36,14 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import yts.mnf.app.Adapter.RecycleAdapter;
-import yts.mnf.app.AppController;
-import yts.mnf.app.GridSpacingItemDecoration;
-import yts.mnf.app.Models.ListModel;
-import yts.mnf.app.Models.Movie;
-import yts.mnf.app.R;
-import yts.mnf.app.Tools.Config;
-import yts.mnf.app.Tools.Url;
+import yts.mnf.torrent.Adapter.RecycleAdapter;
+import yts.mnf.torrent.AppController;
+import yts.mnf.torrent.GridSpacingItemDecoration;
+import yts.mnf.torrent.Models.ListModel;
+import yts.mnf.torrent.Models.Movie;
+import yts.mnf.torrent.R;
+import yts.mnf.torrent.Tools.Config;
+import yts.mnf.torrent.Tools.Url;
 
 public class SearchActivity extends AppCompatActivity {
 

@@ -1,4 +1,4 @@
-package yts.mnf.app;
+package yts.mnf.torrent;
 
 import android.content.Context;
 import android.graphics.Rect;

@@ -1,6 +1,6 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="yts.mnf.app.Activity.SearchActivity">
+    tools:context="yts.mnf.torrent.Activity.SearchActivity">
 
 </menu>

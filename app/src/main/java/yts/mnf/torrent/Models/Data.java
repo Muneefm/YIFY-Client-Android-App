@@ -1,5 +1,5 @@
 
-package yts.mnf.app.Models;
+package yts.mnf.torrent.Models;
 
 import java.util.List;
 

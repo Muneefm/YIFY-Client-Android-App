@@ -1,4 +1,4 @@
-package yts.mnf.app.Tools;
+package yts.mnf.torrent.Tools;
 
 import android.content.Context;
 import android.content.res.Resources;

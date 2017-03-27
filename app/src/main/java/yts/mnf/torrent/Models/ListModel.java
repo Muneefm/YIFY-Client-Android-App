@@ -1,5 +1,5 @@
 
-package yts.mnf.app.Models;
+package yts.mnf.torrent.Models;
 
 
 public class ListModel {

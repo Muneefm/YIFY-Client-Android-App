@@ -1,4 +1,4 @@
-package yts.mnf.app.Activity;
+package yts.mnf.torrent.Activity;
 
 import android.Manifest;
 import android.content.ClipData;
@@ -58,16 +58,16 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import ru.dimorinny.floatingtextbutton.FloatingTextButton;
-import yts.mnf.app.Adapter.SuggestionsAdapter;
-import yts.mnf.app.AppController;
-import yts.mnf.app.Fragment.QualityFragment;
-import yts.mnf.app.GridSpacingItemDecoration;
-import yts.mnf.app.Models.ListModel;
-import yts.mnf.app.Models.Movie;
-import yts.mnf.app.Models.Torrent;
-import yts.mnf.app.R;
-import yts.mnf.app.Tools.Config;
-import yts.mnf.app.Tools.Url;
+import yts.mnf.torrent.Adapter.SuggestionsAdapter;
+import yts.mnf.torrent.AppController;
+import yts.mnf.torrent.Fragment.QualityFragment;
+import yts.mnf.torrent.GridSpacingItemDecoration;
+import yts.mnf.torrent.Models.ListModel;
+import yts.mnf.torrent.Models.Movie;
+import yts.mnf.torrent.Models.Torrent;
+import yts.mnf.torrent.R;
+import yts.mnf.torrent.Tools.Config;
+import yts.mnf.torrent.Tools.Url;
 
 public class DetailsActivity extends AppCompatActivity {
 

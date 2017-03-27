@@ -1,4 +1,4 @@
-package yts.mnf.app;
+package yts.mnf.torrent;
 
 import android.graphics.Rect;
 import android.support.v7.widget.RecyclerView;

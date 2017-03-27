@@ -1,4 +1,4 @@
-package yts.mnf.app;
+package yts.mnf.torrent;
 
 import android.content.Context;
 import android.content.Intent;
@@ -39,13 +39,13 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.castorflex.android.circularprogressbar.CircularProgressBar;
 import fr.castorflex.android.circularprogressbar.CircularProgressDrawable;
-import yts.mnf.app.Activity.DetailsActivity;
-import yts.mnf.app.Activity.SearchActivity;
-import yts.mnf.app.Tools.Config;
-import yts.mnf.app.Tools.Url;
-import yts.mnf.app.Adapter.RecycleAdapter;
-import yts.mnf.app.Models.ListModel;
-import yts.mnf.app.Models.Movie;
+import yts.mnf.torrent.Activity.DetailsActivity;
+import yts.mnf.torrent.Activity.SearchActivity;
+import yts.mnf.torrent.Tools.Config;
+import yts.mnf.torrent.Tools.Url;
+import yts.mnf.torrent.Adapter.RecycleAdapter;
+import yts.mnf.torrent.Models.ListModel;
+import yts.mnf.torrent.Models.Movie;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -97,6 +97,18 @@ public class MainActivity extends AppCompatActivity
         AdView mAdView = (AdView) findViewById(R.id.ad_home);
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
+
+
+        if(getIntent().getExtras()!=null){
+            Log.e("TAG","notification intent not null");
+            if(getIntent().getExtras().containsKey("url")){
+                Log.e("TAG","notification intent not url = "+getIntent().getExtras().getString("url"));
+                new AppController().startBrowser(getIntent().getExtras().getString("url"),c);
+            }
+        }else{
+            Log.e("TAG","notification intent is null");
+        }
+
         /*FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override

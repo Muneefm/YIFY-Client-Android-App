@@ -5,7 +5,7 @@
     android:layout_height="280dp"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:background="@color/white"
-    tools:context="yts.mnf.app.Fragment.QualityFragment"
+    tools:context="yts.mnf.torrent.Fragment.QualityFragment"
 
     >
 
