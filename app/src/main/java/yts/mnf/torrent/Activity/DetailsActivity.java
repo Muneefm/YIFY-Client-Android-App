@@ -205,9 +205,12 @@ public class DetailsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         getWindow().requestFeature(Window.FEATURE_CONTENT_TRANSITIONS);
 // set an enter transition
-        getWindow().setEnterTransition(new Slide());
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getWindow().setEnterTransition(new Slide());
+            getWindow().setExitTransition(new Slide());
+
+        }
 // set an exit transition
-        getWindow().setExitTransition(new Slide());
         setContentView(R.layout.activity_details);
         ButterKnife.bind(this);
         c =this;

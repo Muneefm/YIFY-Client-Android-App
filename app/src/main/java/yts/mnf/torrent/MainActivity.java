@@ -2,6 +2,7 @@ package yts.mnf.torrent;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
@@ -85,9 +86,13 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         getWindow().requestFeature(Window.FEATURE_CONTENT_TRANSITIONS);
 // set an enter transition
-        getWindow().setEnterTransition(new Slide());
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getWindow().setEnterTransition(new Slide());
+            getWindow().setExitTransition(new Slide());
+
+        }
 // set an exit transition
-        getWindow().setExitTransition(new Slide());
+
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         c = this;
