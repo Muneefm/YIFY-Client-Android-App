@@ -32,7 +32,7 @@
 
     </style>
 
-    <style name="AppThemeDetails" parent="Theme.AppCompat" >
+    <style name="AppThemeDetails" parent="Theme.AppCompat">
         <!-- Customize your theme here. -->
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
@@ -46,8 +46,7 @@
     </style>
 
 
-
-    <style name="AppThemeSearch" parent="Theme.AppCompat" >
+    <style name="AppThemeSearch" parent="Theme.AppCompat">
         <!-- Customize your theme here. -->
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>

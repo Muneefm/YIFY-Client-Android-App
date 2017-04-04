@@ -7,8 +7,8 @@ android {
         applicationId "yts.mnf.torrent"
         minSdkVersion 16
         targetSdkVersion 25
-        versionCode 2
-        versionName "1.2"
+        versionCode 3
+        versionName "1.3"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {

@@ -16,5 +16,6 @@
     <dimen name="tab_height">48dp</dimen>
     <dimen name="tab_height_large">72dp</dimen>
     <dimen name="design_fab_image_size" tools:override="true">36dp</dimen>
+    <dimen name="appbar_padding_top">8dp</dimen>
 
 </resources>

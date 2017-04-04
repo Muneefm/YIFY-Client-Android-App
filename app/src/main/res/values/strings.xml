@@ -25,7 +25,6 @@
         <item>Biography</item>
 
 
-
         <item>Crime</item>
         <item>Drama</item>
         <item>Fantasy</item>
@@ -63,7 +62,6 @@
         <item>Downloads</item>
 
     </string-array>
-
 
 
     <string name="app_name">YIFY torrents (YTS)</string>
@@ -170,11 +168,13 @@
     <string name="title_activity_search">SearchActivity</string>
 
 
-
     <string name="home_banner_id">ca-app-pub-7269223551241818/2401163883</string>
 
     <string name="detail_page_banner_id">ca-app-pub-7269223551241818/5354630282</string>
 
     <string name="search_page_banner_id">ca-app-pub-7269223551241818/6831363486</string>
+    <string name="title_activity_tabbed">TabbedActivity</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+    <string name="title_activity_new_main">NewMainActivity</string>
 
 </resources>
