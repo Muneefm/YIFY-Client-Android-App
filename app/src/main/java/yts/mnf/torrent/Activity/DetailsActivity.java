@@ -518,10 +518,6 @@ public class DetailsActivity extends AppCompatActivity {
 
         return baseString+trackers;
 
-
-
-
-
     }
 
     public void showDialogue(final List<Torrent> torrents){

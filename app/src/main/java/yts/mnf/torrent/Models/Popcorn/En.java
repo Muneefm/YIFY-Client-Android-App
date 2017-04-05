@@ -4,6 +4,7 @@ package yts.mnf.torrent.Models.Popcorn;
 
 public class En {
 
+
     private _720p _720p;
     private _1080p _1080p;
 

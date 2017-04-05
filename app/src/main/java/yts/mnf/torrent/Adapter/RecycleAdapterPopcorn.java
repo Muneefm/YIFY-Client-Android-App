@@ -26,6 +26,7 @@ import com.google.gson.Gson;
 import java.util.List;
 
 import yts.mnf.torrent.Activity.DetailsActivity;
+import yts.mnf.torrent.Activity.PopcornDetailActivity;
 import yts.mnf.torrent.Models.Movie;
 import yts.mnf.torrent.Models.Popcorn.PopcornModel;
 import yts.mnf.torrent.R;
@@ -148,9 +149,9 @@ public class RecycleAdapterPopcorn extends RecyclerView.Adapter<RecycleAdapterPo
             @Override
             public void onClick(View v) {
 
-            /*    Gson gS = new Gson();
-                String movieJson = gS.toJson(movie);
-                Intent detailAct = new Intent(mContext, DetailsActivity.class);
+                Gson gS = new Gson();
+                String movieJson = gS.toJson(popModel);
+                Intent detailAct = new Intent(mContext, PopcornDetailActivity.class);
                 detailAct.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 Pair<View, String> p1 = Pair.create((View)holder.moviePoster, "poster");
                 Pair<View, String> p2 = Pair.create((View)holder.movieTitle, "title");
@@ -161,7 +162,7 @@ public class RecycleAdapterPopcorn extends RecyclerView.Adapter<RecycleAdapterPo
                 ActivityOptionsCompat options = ActivityOptionsCompat.
                         makeSceneTransitionAnimation((Activity) mContext, p1,p2,p3);
                 mContext.startActivity(detailAct,options.toBundle());
-*/
+
             }
         });
 

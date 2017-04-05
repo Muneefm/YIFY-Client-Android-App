@@ -176,5 +176,6 @@
     <string name="title_activity_tabbed">TabbedActivity</string>
     <string name="section_format">Hello World from section: %1$d</string>
     <string name="title_activity_new_main">NewMainActivity</string>
+    <string name="title_activity_popcorn_detail">PopcornDetailActivity</string>
 
 </resources>

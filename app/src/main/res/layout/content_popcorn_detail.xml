@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/scroll_nest"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="yts.mnf.torrent.Activity.PopcornDetailActivity"
+    tools:showIn="@layout/activity_popcorn_detail">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:id="@+id/container_margin"
+            android:layout_width="match_parent"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:id="@+id/ll"
+                android:weightSum="4"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_weight="3"
+                    android:gravity="left"
+                    android:orientation="vertical"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_width="210dp"
+                        android:layout_height="wrap_content"
+                        android:textColor="@android:color/black"
+                        android:textSize="25dp"
+                        android:transitionName="title"
+
+                        android:text="The Disappointments Room"
+                        android:id="@+id/title_movie"
+                        />
+
+                    <TextView
+                        android:id="@+id/directed_tv"
+                        android:layout_width="wrap_content"
+                        android:textSize="11dp"
+                        android:layout_height="wrap_content"
+                        android:text=""
+                        />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="right|bottom"
+                    android:orientation="vertical"
+                    android:layout_height="match_parent">
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center"
+                        android:layout_height="wrap_content">
+                        <ImageView
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_marginRight="10dp"
+                            android:src="@mipmap/imdb"
+                            />
+
+                        <TextView
+                            android:id="@+id/rate_tv"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/colorAccent"
+                            android:textSize="18dp"
+                            android:gravity="center"
+                            android:lines="1"
+                            android:transitionName="rating"
+
+                            android:textStyle="bold"
+                            android:text="9.0"
+                            />
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/runtime_tv"
+                        android:layout_width="wrap_content"
+                        android:textSize="11dp"
+                        android:layout_height="wrap_content"
+                        android:text="143mins"
+                        />
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_below="@+id/ll"
+                android:id="@+id/gener_container"
+                android:layout_marginTop="20dp"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:layout_height="wrap_content">
+
+
+
+            </LinearLayout>
+
+
+            <RelativeLayout
+                android:id="@+id/desc_container"
+                android:layout_width="match_parent"
+                android:layout_below="@+id/gener_container"
+                android:layout_marginTop="20dp"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/desc_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="The Columbine Massacre of April 20, 1999 completely redefined America's view of the lives of high school students. Drawn straight from Columbine victim Rachel Joy Scott's words and journal entries, through the insight of her mother, Beth Nimmo, it is the true story of a high school student whose compassionate, caring faith caused her to reach out to fellow students including her killers who made her a target of their murderous plan."
+                    android:textSize="13dp"
+
+                    />
+
+
+
+            </RelativeLayout>
+
+
+
+
+
+
+
+
+        </RelativeLayout>
+
+
+      <!--  <LinearLayout
+            android:id="@+id/container_quality"
+            android:layout_width="match_parent"
+            android:layout_below="@+id/container_margin"
+
+            android:layout_marginTop="20dp"
+            android:orientation="vertical"
+            android:layout_height="wrap_content">
+
+            <include layout="@layout/fragment_quality" /> -->
+
+            <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:layout_height="280dp"
+                android:layout_below="@+id/container_margin"
+
+                xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                android:background="@color/white"
+                tools:context="yts.mnf.torrent.Fragment.QualityFragment"
+
+                >
+
+            <!-- TODO: Update blank fragment layout -->
+            <HorizontalScrollView
+                android:id="@+id/scroll_view_quality"
+                android:layout_width="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:scrollbarStyle="outsideOverlay"
+                android:fillViewport="true"
+                android:layout_height="match_parent">
+                <android.support.v7.widget.CardView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    card_view:cardElevation="4dp"
+                    android:elevation="4dp"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    card_view:cardUseCompatPadding="true"
+                    card_view:cardCornerRadius="5dp"
+                    android:id="@+id/tvcard">
+
+                <LinearLayout
+                    android:id="@+id/quality_linear"
+                    android:layout_width="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="4"
+                    android:background="@color/red"
+                    android:layout_height="match_parent">
+
+
+
+
+
+
+
+
+                 </LinearLayout>
+                </android.support.v7.widget.CardView>
+                </HorizontalScrollView>
+            </RelativeLayout>
+            <!--  <me.ogaclejapan.smarttablayout.SmartTabLayout
+                  xmlns:android="http://schemas.android.com/apk/res/android"
+                  xmlns:app="http://schemas.android.com/apk/res-auto"
+                  android:id="@+id/tab_layout"
+                  android:layout_width="match_parent"
+                  android:layout_height="@dimen/tab_height"
+                  android:clipToPadding="false"
+                  android:paddingLeft="4dp"
+                  android:paddingRight="4dp"
+                  app:stl_indicatorAlwaysInCenter="true"
+                  app:stl_defaultTabTextColor="@color/grey500"
+                  app:stl_defaultTabTextHorizontalPadding="18dp"
+                  app:stl_dividerColor="@color/transparent"
+                  app:stl_dividerThickness="0dp"
+                  app:stl_indicatorColor="@color/blue_grey900"
+                  app:stl_indicatorCornerRadius="18dp"
+                  app:stl_indicatorGravity="center"
+                  app:stl_indicatorInterpolation="smart"
+                  app:stl_indicatorThickness="36dp"
+                  app:stl_underlineColor="@color/black"
+                  app:stl_underlineThickness="0dp"
+                  />
+
+
+
+              <android.support.v4.view.ViewPager
+                  android:id="@+id/view_pager"
+                  android:layout_width="match_parent"
+                  android:layout_height="100dp"
+                  android:background="@color/grey700" /> -->
+     <!--   </LinearLayout> -->
+
+
+
+
+
+
+
+
+    </RelativeLayout>
+</android.support.v4.widget.NestedScrollView>
+
+
+

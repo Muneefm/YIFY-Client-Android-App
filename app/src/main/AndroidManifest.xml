@@ -31,7 +31,7 @@
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Activity.DetailsActivity"
             android:label="@string/title_activity_details"
@@ -62,7 +62,7 @@
             android:name=".Activity.TabbedActivity"
             android:label="@string/title_activity_tabbed"
             android:theme="@style/AppTheme.NoActionBar">
-           \
+            \
         </activity>
         <activity
             android:name=".Activity.NewMainActivity"
@@ -74,6 +74,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".Activity.PopcornDetailActivity"
+            android:label="@string/title_activity_popcorn_detail"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

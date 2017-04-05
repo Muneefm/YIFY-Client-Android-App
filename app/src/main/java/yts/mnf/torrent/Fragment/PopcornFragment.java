@@ -21,6 +21,7 @@ import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 
 import org.json.JSONObject;
 
@@ -91,13 +92,13 @@ public class PopcornFragment extends Fragment {
     private List<PopcornModel> mModels;
     Context c;
 
-    int totalPages=1;
+    int totalPages=10;
     int page =1;
 
     int pastVisiblesItems, visibleItemCount, totalItemCount;
     boolean loading =true;
 
-
+    String params = "?sort=last%20added&order=-1";
 
 
     /**
@@ -161,7 +162,7 @@ public class PopcornFragment extends Fragment {
                             Log.e("TAGl", "last inside tot & page = " + totalPages + " " + page);
                             page++;
                             //  paramsModel.add(new ParamsModel("page", page + ""));
-                            //makeNetwoekRequest(Url.ListMoviePopcorn+"?page="+page,false);
+                            makeNetwoekRequest(Url.ListMoviePopcorn+"/"+page+params,false);
                             //  RequestData(Url + "?page=" + page);
                             //  showProgg();
                         }
@@ -178,8 +179,8 @@ public class PopcornFragment extends Fragment {
 
 
 
-        makeNetwoekRequest(Url.ListMoviePopcorn,false);
-
+        makeNetwoekRequest(Url.ListMoviePopcorn+"/1"+params,false);
+        reqPages(Url.ListMoviePopcorn);
 
         refreshSwipe.setOnRefreshListener(
                 new SwipeRefreshLayout.OnRefreshListener() {
@@ -189,7 +190,7 @@ public class PopcornFragment extends Fragment {
 
                         // This method performs the actual data-refresh operation.
                         // The method calls setRefreshing(false) when it's finished.
-                        makeNetwoekRequest(Url.ListUrl,true);
+                        makeNetwoekRequest(Url.ListMoviePopcorn+"/1"+params,false);
                         refreshSwipe.setRefreshing(true);
 
                     }
@@ -222,6 +223,7 @@ public class PopcornFragment extends Fragment {
 
     public void makeNetwoekRequest(String url, final boolean swipeRefresh){
         // RequestQueue queue = Volley.newRequestQueue(this);
+        Log.e("PopcornFragment","url request = "+url);
         if(!swipeRefresh)
             startLoading();
         StringRequest req = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
@@ -238,7 +240,7 @@ public class PopcornFragment extends Fragment {
                 mModels = listMode.getPopcornModel();
                 int movieCount = 10;//listMode.getData().getMovieCount();
                 int movieLimit = 10;//listMode.getData().getLimit();
-                totalPages = 100;
+                //totalPages = 100;
                                 /*= movieCount/movieLimit;
                         if(movieCount%movieLimit != 0){
                             totalPages++;
@@ -271,66 +273,38 @@ public class PopcornFragment extends Fragment {
                 containerError.setVisibility(View.VISIBLE);
             }
         });
-
-       /* JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET,
-                url, null,
-                new Response.Listener<JSONObject>() {
-
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        Log.e("TAG", response.toString());
-                        stopLoading();
-                        containerError.setVisibility(View.INVISIBLE);
-                        recyclerView.setVisibility(View.VISIBLE);
-                        listMode = gson.fromJson("{\"popcornmodel\":"+response.toString()+"}",ListPopcorn.class);
-                        Log.e("tag","response "+listMode);
-                        loading = true;
-
-                        mModels = listMode.getPopcornModel();
-                        int movieCount = 10;//listMode.getData().getMovieCount();
-                        int movieLimit = 10;//listMode.getData().getLimit();
-                        totalPages = 100;
-                                /*= movieCount/movieLimit;
-                        if(movieCount%movieLimit != 0){
-                            totalPages++;
-                        }*/
-      /*                  Log.e("MainActivity","movieCount = "+movieCount+" movieLimit = "+movieLimit+" totalPage = "+totalPages);
-                        if(mModels!=null) {
-                            if (swipeRefresh) {
-                                refreshSwipe.setRefreshing(false);
-
-                                adapter.replaceItems(mModels);
-                            } else {
-                                adapter.addItems(mModels);
-                            }
-                            recyclerView.setVisibility(View.VISIBLE);
-                        }
-
-
-                    }
-                }, new Response.ErrorListener() {
-
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                VolleyLog.d("TAG", "Error: " + error.getMessage());
-                Log.e("TAG"," Volley Error: " + error.getMessage());
-                // hide the progress dialog
-                loading = true;
-                stopLoading();
-                refreshSwipe.setRefreshing(false);
-
-                tvErrorMsg.setText("Network Issue, Please try again !!");
-                recyclerView.setVisibility(View.INVISIBLE);
-                containerError.setVisibility(View.VISIBLE);
-
-            }
-        });*/
         AppController.getInstance().addToRequestQueue(req,"movie_list");
         AppController.getInstance().getRequestQueue().getCache().invalidate(url, true);
 
     }
 
 
+    public void reqPages(String url){
+
+
+        StringRequest stringReq = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+
+                response = "{\"data\":"+response+"}";
+                JsonObject jsonObj = gson.fromJson(response,JsonObject.class);
+
+                Log.e("TAG","size  = "+jsonObj.get("data").getAsJsonArray().size());
+                totalPages =  jsonObj.get("data").getAsJsonArray().size();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        });
+
+
+
+        AppController.getInstance().addToRequestQueue(stringReq,"movie_pages");
+        AppController.getInstance().getRequestQueue().getCache().invalidate(url, true);
+
+    }
 
 
 
