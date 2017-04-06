@@ -1,9 +1,12 @@
 package yts.mnf.torrent.Activity;
 
+import android.content.Context;
+import android.content.Intent;
 import android.support.design.widget.TabLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.view.WindowCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
@@ -19,11 +22,18 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import android.view.Window;
 import android.widget.TextView;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+
+import yts.mnf.torrent.AppController;
 import yts.mnf.torrent.Fragment.PopcornFragment;
 import yts.mnf.torrent.Fragment.YifyMovieFragment;
+import yts.mnf.torrent.MainActivity;
 import yts.mnf.torrent.R;
+import yts.mnf.torrent.Tools.PreferensHandler;
 
 public class NewMainActivity extends AppCompatActivity {
 
@@ -41,14 +51,24 @@ public class NewMainActivity extends AppCompatActivity {
      * The {@link ViewPager} that will host the section contents.
      */
     private ViewPager mViewPager;
+Context c;
+    Toolbar toolbar;
+    PreferensHandler pref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_main);
+        c = this;
+        pref = new PreferensHandler(c);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        AdView mAdView = (AdView) findViewById(R.id.ad_home);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
@@ -64,11 +84,38 @@ public class NewMainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                Intent search = new Intent(NewMainActivity.this, SearchActivity.class);
+                startActivity(search);
             }
         });
+        if(getIntent().getExtras()!=null){
+            Log.e("TAG","notification intent not null");
+            if(getIntent().getExtras().containsKey("url")){
+                Log.e("TAG","notification intent not url = "+getIntent().getExtras().getString("url"));
+                new AppController().startBrowser(getIntent().getExtras().getString("url"),c);
+            }
+        }else{
+            Log.e("TAG","notification intent is null");
+        }
+      //  setUpDrakTheme(pref.getThemeDark());
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+      //  setUpDrakTheme(pref.getThemeDark());
+
+    }
+    public void setUpDrakTheme(boolean key){
+        if(toolbar!=null) {
+            if (key) {
+                toolbar.setBackgroundColor(getResources().getColor(R.color.blue_grey900));
+            } else {
+                toolbar.setBackgroundColor(getResources().getColor(R.color.red500));
+
+            }
+        }
     }
 
 
@@ -87,7 +134,14 @@ public class NewMainActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_search) {
+            Intent search = new Intent(NewMainActivity.this, SearchActivity.class);
+            startActivity(search);
+            return true;
+        }
+        else if (id == R.id.action_settings) {
+            Intent settings = new Intent(NewMainActivity.this, NewSettingsAct.class);
+            startActivity(settings);
             return true;
         }
 
@@ -165,8 +219,7 @@ public class NewMainActivity extends AppCompatActivity {
                     return "Yify Movies";
                 case 1:
                     return "Popcorn Movies";
-                case 2:
-                    return "SECTION 3";
+
             }
             return null;
         }

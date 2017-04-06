@@ -66,8 +66,8 @@
         </activity>
         <activity
             android:name=".Activity.NewMainActivity"
-            android:label="@string/title_activity_new_main"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -77,7 +77,15 @@
         <activity
             android:name=".Activity.PopcornDetailActivity"
             android:label="@string/title_activity_popcorn_detail"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Activity.SettingsActivity"
+            android:label="@string/title_activity_settings" />
+        <activity android:name=".Activity.SettingsActivityCustom" />
+        <activity
+            android:name=".Activity.NewSettingsAct"
+            android:label="Settings"
+            android:theme="@style/AppThemeSettings"></activity>
     </application>
 
 </manifest>

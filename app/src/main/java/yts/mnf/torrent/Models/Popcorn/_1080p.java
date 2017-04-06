@@ -6,9 +6,9 @@ public class _1080p {
 
     private String provider;
     private String filesize;
-    private Integer size;
-    private Integer peer;
-    private Integer seed;
+    private double size;
+    private double peer;
+    private double seed;
     private String url;
 
     public String getProvider() {
@@ -27,27 +27,27 @@ public class _1080p {
         this.filesize = filesize;
     }
 
-    public Integer getSize() {
+    public double getSize() {
         return size;
     }
 
-    public void setSize(Integer size) {
+    public void setSize(double size) {
         this.size = size;
     }
 
-    public Integer getPeer() {
+    public double getPeer() {
         return peer;
     }
 
-    public void setPeer(Integer peer) {
+    public void setPeer(double peer) {
         this.peer = peer;
     }
 
-    public Integer getSeed() {
+    public double getSeed() {
         return seed;
     }
 
-    public void setSeed(Integer seed) {
+    public void setSeed(double seed) {
         this.seed = seed;
     }
 

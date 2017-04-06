@@ -12,6 +12,7 @@ import android.util.Log;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
+import yts.mnf.torrent.Activity.NewMainActivity;
 import yts.mnf.torrent.MainActivity;
 import yts.mnf.torrent.R;
 
@@ -103,12 +104,12 @@ public class NotificationService extends FirebaseMessagingService {
                         Uri.parse(remoteMessage.getData().get("url")));
 
             }else{
-                intent = new Intent(this, MainActivity.class);
+                intent = new Intent(this, NewMainActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             }
 
         }else{
-             intent = new Intent(this, MainActivity.class);
+             intent = new Intent(this, NewMainActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         }
 

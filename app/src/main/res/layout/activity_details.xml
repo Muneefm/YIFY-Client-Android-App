@@ -6,7 +6,8 @@
     xmlns:attribute="http://schemas.android.com/apk/res-auto"
     xmlns:ads="http://schemas.android.com/apk/res-auto"
 
-    android:background="@android:color/white"
+    android:background="@color/white"
+    android:id="@+id/detail_root_view"
 
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -27,14 +28,15 @@
             android:fitsSystemWindows="true"
             app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
-          <developer.shivam.library.CrescentoImageView android:id="@+id/movie_poster_main"
+          <yts.mnf.torrent.Tools.CresentImage
+              android:id="@+id/movie_poster_main"
                 android:layout_width="match_parent"
                 android:layout_height="400dp"
                 android:elevation="5dp"
                 android:scaleType="centerCrop"
                 attribute:curvature="100dp"
-
-               app:layout_collapseMode="pin"
+                android:background="@color/white"
+              app:layout_collapseMode="pin"
                 />
             <RelativeLayout
                 android:layout_width="match_parent"

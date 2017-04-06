@@ -4,7 +4,7 @@
                     xmlns:tools="http://schemas.android.com/tools"
                     xmlns:app="http://schemas.android.com/apk/res-auto"
                     xmlns:card_view="http://schemas.android.com/apk/res-auto"
-                    android:id="@+id/ten_containert"
+                    android:id="@+id/qua_root_linear"
                     android:paddingRight="0dp"
                     android:paddingLeft="0dp"
                     android:layout_width="wrap_content"
@@ -15,7 +15,7 @@
                     android:background="@color/blue_grey600"
                     android:layout_height="match_parent">
                     <TextView
-                        android:id="@+id/ten_qualityt"
+                        android:id="@+id/qua_head"
 
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -40,7 +40,7 @@
                             android:src="@mipmap/folder"
                             />
                         <TextView
-                            android:id="@+id/ten_sizet"
+                            android:id="@+id/tv_size"
 
                             android:layout_width="wrap_content"
                             android:layout_height="20dp"
@@ -64,7 +64,7 @@
                             android:src="@mipmap/seed"
                             />
                         <TextView
-                            android:id="@+id/ten_seedst"
+                            android:id="@+id/tv_seed"
 
                             android:layout_width="wrap_content"
                             android:layout_height="20dp"
@@ -86,7 +86,7 @@
                             android:src="@mipmap/leech"
                             />
                         <TextView
-                            android:id="@+id/ten_leecht"
+                            android:id="@+id/tv_leech"
                             android:layout_width="wrap_content"
                             android:layout_height="20dp"
                             android:gravity="center"
@@ -96,7 +96,7 @@
                     </LinearLayout>
 
                     <ru.dimorinny.floatingtextbutton.FloatingTextButton
-                        android:id="@+id/ten_magnett"
+                        android:id="@+id/btn_copy"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="15dp"
@@ -108,7 +108,7 @@
                         />
 
                     <ru.dimorinny.floatingtextbutton.FloatingTextButton
-                        android:id="@+id/ten_downloadt"
+                        android:id="@+id/btn_torrent"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"

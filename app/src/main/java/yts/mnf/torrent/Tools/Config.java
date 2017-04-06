@@ -33,46 +33,7 @@ public class Config {
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(imageView);
 
-    /*  Picasso
-                .with(imageView
-                .getContext())
-                .load(url+"")
-                .placeholder(R.mipmap.star_off)
-                .error(R.mipmap.imdb)
-                .into(imageView, new Callback() {
-            @Override
-            public void onSuccess() {
-               // holder.mMediaEvidencePb.setVisibility(View.GONE);
-                Log.e(TAG,"succes loading image  ");
 
-            }
-
-            @Override
-            public void onError() {
-                Log.e(TAG,"error loading image  ");
-
-            }
-        });
-*/
-
-
-
-    /*    Picasso.Builder builder = new Picasso.Builder(imageView.getContext());
-        builder.listener(new Picasso.Listener()
-        {
-            @Override
-            public void onImageLoadFailed(Picasso picasso, Uri uri, Exception exception)
-            {
-                exception.printStackTrace();
-                Log.e(TAG,"error loading image = "+exception.getMessage());
-            }
-
-        });
-        builder.build().load(url)
-                .placeholder(R.mipmap.star_off)
-                .error(R.mipmap.imdb)
-                .into(imageView);
-*/
 
 
     }

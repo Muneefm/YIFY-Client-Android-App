@@ -42,6 +42,7 @@ import yts.mnf.torrent.Models.Popcorn.ListPopcorn;
 import yts.mnf.torrent.Models.Popcorn.PopcornModel;
 import yts.mnf.torrent.R;
 import yts.mnf.torrent.Tools.Config;
+import yts.mnf.torrent.Tools.PreferensHandler;
 import yts.mnf.torrent.Tools.Url;
 
 /**
@@ -87,6 +88,8 @@ public class PopcornFragment extends Fragment {
     @BindView(R.id.tag_msg)
     TextView tvErrorMsg;
 
+    @BindView(R.id.content_main)
+    RelativeLayout rootViewPopFrag;
 
     private RecycleAdapterPopcorn adapter;
     private List<PopcornModel> mModels;
@@ -99,6 +102,7 @@ public class PopcornFragment extends Fragment {
     boolean loading =true;
 
     String params = "?sort=last%20added&order=-1";
+    PreferensHandler pref;
 
 
     /**
@@ -135,7 +139,7 @@ public class PopcornFragment extends Fragment {
         View v =  inflater.inflate(R.layout.fragment_popcorn, container, false);
         ButterKnife.bind(this,v);
         c = getContext();
-
+        pref = new PreferensHandler(c);
         mModels = new ArrayList<>();
         final GridLayoutManager mLayoutManager = new GridLayoutManager(getContext(), 2);
         recyclerView.setLayoutManager(mLayoutManager);
@@ -144,7 +148,7 @@ public class PopcornFragment extends Fragment {
         recyclerView.setHasFixedSize(true);
 
         // recyclerView.setItemAnimator(new DefaultItemAnimator());
-
+            setUpDrakTheme(pref.getThemeDark());
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
@@ -190,7 +194,7 @@ public class PopcornFragment extends Fragment {
 
                         // This method performs the actual data-refresh operation.
                         // The method calls setRefreshing(false) when it's finished.
-                        makeNetwoekRequest(Url.ListMoviePopcorn+"/1"+params,false);
+                        makeNetwoekRequest(Url.ListMoviePopcorn+"/1"+params,true);
                         refreshSwipe.setRefreshing(true);
 
                     }
@@ -203,10 +207,12 @@ public class PopcornFragment extends Fragment {
     }
 
 
-
-
-
-
+    @Override
+    public void onResume() {
+        super.onResume();
+        if(pref!=null)
+            setUpDrakTheme(pref.getThemeDark());
+    }
 
     public void startLoading(){
         containerError.setVisibility(View.INVISIBLE);
@@ -226,6 +232,7 @@ public class PopcornFragment extends Fragment {
         Log.e("PopcornFragment","url request = "+url);
         if(!swipeRefresh)
             startLoading();
+
         StringRequest req = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -306,6 +313,13 @@ public class PopcornFragment extends Fragment {
 
     }
 
+
+    public void setUpDrakTheme(boolean key){
+        if(key)
+            rootViewPopFrag.setBackgroundColor(getResources().getColor(R.color.blue_grey900));
+        else
+            rootViewPopFrag.setBackgroundColor(getResources().getColor(R.color.white));
+    }
 
 
 

@@ -12,7 +12,7 @@
     <android.support.design.widget.AppBarLayout
         android:id="@+id/app_bar"
         android:layout_width="match_parent"
-        android:layout_height="340dp"
+        android:layout_height="360dp"
         android:fitsSystemWindows="true"
         android:theme="@style/AppTheme.AppBarOverlay">
 
@@ -42,6 +42,25 @@
                     android:layout_height="wrap_content"
                     android:hint="Search"
                     /> -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="20dp"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:layout_width="80dp"
+                            android:layout_height="wrap_content"
+                            android:text="Provider: "
+                            android:textStyle="bold"
+                            android:paddingRight="5dp"
+                            />
+                        <android.support.v7.widget.AppCompatSpinner
+                            android:id="@+id/spinner_provider"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                        </android.support.v7.widget.AppCompatSpinner>
+                    </LinearLayout>
 
                     <TextView
                         android:layout_width="match_parent"
@@ -54,6 +73,7 @@
                         android:layout_height="wrap_content" />
 
                     <LinearLayout
+                        android:id="@+id/yts_qua_container"
                         android:layout_width="match_parent"
                         android:orientation="horizontal"
                         android:layout_marginTop="20dp"
@@ -102,6 +122,7 @@
 
 
                 <LinearLayout
+                    android:id="@+id/yts_rating_container"
                     android:layout_width="match_parent"
                     android:orientation="horizontal"
                     android:layout_marginTop="20dp"
@@ -125,8 +146,10 @@
 
 
                     <LinearLayout
+                        android:id="@+id/yts_sort_container"
                         android:layout_width="match_parent"
                         android:orientation="horizontal"
+                        android:visibility="visible"
                         android:layout_marginTop="20dp"
 
                         android:layout_height="wrap_content">
@@ -139,6 +162,30 @@
                             />
                         <android.support.v7.widget.AppCompatSpinner
                             android:id="@+id/spinner_sort_by"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                        </android.support.v7.widget.AppCompatSpinner>
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:id="@+id/pop_sort_container"
+                        android:layout_width="match_parent"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="20dp"
+                        android:visibility="gone"
+
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:layout_width="80dp"
+                            android:layout_height="wrap_content"
+                            android:text="Sort By: "
+                            android:textStyle="bold"
+                            android:paddingRight="5dp"
+                            />
+                        <android.support.v7.widget.AppCompatSpinner
+                            android:id="@+id/pop_spinner_sort_by"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content">
 

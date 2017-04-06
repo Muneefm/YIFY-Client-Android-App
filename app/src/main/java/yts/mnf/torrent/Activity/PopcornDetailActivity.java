@@ -8,6 +8,7 @@ import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityOptionsCompat;
@@ -50,10 +51,12 @@ import yts.mnf.torrent.GridSpacingItemDecoration;
 import yts.mnf.torrent.Models.ListModel;
 import yts.mnf.torrent.Models.Movie;
 import yts.mnf.torrent.Models.Popcorn.PopcornModel;
+import yts.mnf.torrent.Models.Popcorn._1080p;
 import yts.mnf.torrent.Models.Popcorn._720p;
 import yts.mnf.torrent.Models.Torrent;
 import yts.mnf.torrent.R;
 import yts.mnf.torrent.Tools.Config;
+import yts.mnf.torrent.Tools.PreferensHandler;
 import yts.mnf.torrent.Tools.Url;
 
 public class PopcornDetailActivity extends AppCompatActivity {
@@ -67,7 +70,8 @@ public class PopcornDetailActivity extends AppCompatActivity {
 
    // @BindView(R.id.recycler_view_suggestion)
    // RecyclerView recyclerViewSuggestion;
-
+   @BindView(R.id.detail_root_view)
+   CoordinatorLayout rootCoordinateView;
     @BindView(R.id.title_movie)
     TextView tvMovie;
 
@@ -195,6 +199,7 @@ public class PopcornDetailActivity extends AppCompatActivity {
     String movieName;
     static String TAG = "PopcornDetailActivity";
 
+    PreferensHandler pref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -215,6 +220,7 @@ public class PopcornDetailActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         c =this;
 
+        pref = new PreferensHandler(this);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
@@ -254,6 +260,9 @@ public class PopcornDetailActivity extends AppCompatActivity {
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 
 
+        if(pref.getThemeDark()){
+            setDarkModeColor();
+        }
 
         if(movieModel!=null){
             tvMovie.setText(movieModel.getTitle());
@@ -267,7 +276,7 @@ public class PopcornDetailActivity extends AppCompatActivity {
                 Config.loadImage(posterMain, movieModel.getImages().getPoster());
             }
             tvDesc.setText(movieModel.getSynopsis());
-            tvRate.setText(movieModel.getRating().getPercentage().toString());
+            tvRate.setText(String.valueOf(movieModel.getRating().getPercentage()));
             tvTime.setText(movieModel.getRuntime()+"ms");
             tvDirected.setText(movieModel.getYear().toString());
             for (int i = 0;i<movieModel.getGenres().size();i++){
@@ -329,48 +338,94 @@ public class PopcornDetailActivity extends AppCompatActivity {
             // viewPager.setAdapter(mSectionsPagerAdapter);
             //   tabLayout.setViewPager(viewPager);
 
-            LayoutInflater factory = LayoutInflater.from(this);
-            View qualityView = factory.inflate(R.layout.single_quality, null);
-            qualityView.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT));
+           // View qualityView = factory.inflate(R.layout.single_quality, null);
+          //  qualityView.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT));
           /*  View qualityViewOne = factory.inflate(R.layout.single_quality, null);
             View qualityViewTwo = factory.inflate(R.layout.single_quality, null);
             View qualityViewThree = factory.inflate(R.layout.single_quality, null);
             View qualityViewFour = factory.inflate(R.layout.single_quality, null);*/
 
 
-            qualityLinear.addView(qualityView);
+         //   qualityLinear.addView(qualityView);
         /*    qualityLinear.addView(qualityViewOne);
             qualityLinear.addView(qualityViewTwo);
             qualityLinear.addView(qualityViewThree);
             qualityLinear.addView(qualityViewFour);
-*/
+*/            LayoutInflater factory = LayoutInflater.from(this);
 
-        if(movieModel.getTorrents().getEn().get720p()!=null){
+
+            if(movieModel.getTorrents().getEn().get720p()!=null){
                 Log.e("TAG","not null 720");
-            }else{
-            Log.e("TAG","null 720");
-        }
+            View view720p = factory.inflate(R.layout.single_quality, null);
+            view720p.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT));
+            setQualityData(view720p,movieModel.getTorrents().getEn().get720p(),"720p");
+                LinearLayout rootView = (LinearLayout) view720p.findViewById(R.id.qua_root_linear);
+                rootView.setBackgroundColor(getResources().getColor(R.color.blue_grey400));
+                qualityLinear.addView(view720p);
+                }
 
+            if(movieModel.getTorrents().getEn().get1080p()!=null){
+                Log.e("TAG","not null get1080p");
+                View view1080p = factory.inflate(R.layout.single_quality, null);
+                view1080p.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT));
+                setQualityData(view1080p,movieModel.getTorrents().getEn().get720p(),"1080p");
+                LinearLayout rootView = (LinearLayout) view1080p.findViewById(R.id.qua_root_linear);
 
+                rootView.setBackgroundColor(getResources().getColor(R.color.blue_grey500));
 
-            Gson gson = new Gson();
-            String jsonStringTorrent = gson.toJson(movieModel.getTorrents().getEn());
-            JsonObject jsonObjTorrent = gson.fromJson(jsonStringTorrent,JsonObject.class);
-          //  jsonObjTorrent.getAsJsonArray().get
-
-            if(jsonObjTorrent.get("720p")!=null) {
-                _720p json720p = gson.fromJson(jsonStringTorrent, _720p.class);
+                qualityLinear.addView(view1080p);
 
             }
+
 
 
         }
     }
 
+
+    public void setDarkModeColor(){
+        tvMovie.setTextColor(getResources().getColor(R.color.white));
+        tvDesc.setTextColor(getResources().getColor(R.color.white));
+        tvDirected.setTextColor(getResources().getColor(R.color.white));
+        tvTime.setTextColor(getResources().getColor(R.color.white));
+
+       // rootQuality.setBackgroundColor(getResources().getColor(R.color.blue_grey900));
+        posterMain.setBackgroundColor(getResources().getColor(R.color.blue_grey900));
+
+        rootCoordinateView.setBackgroundColor(getResources().getColor(R.color.blue_grey900));
+    }
+
+
+
     public void copyText(String mUrl){
         ClipboardManager clipboard = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
-        ClipData clip = ClipData.newPlainText("yify", mUrl);
+        ClipData clip = ClipData.newPlainText("popcorn", mUrl);
         clipboard.setPrimaryClip(clip);
+    }
+
+    public void setQualityData(View v, final _720p model, String head){
+    TextView headQua  = (TextView) v.findViewById(R.id.qua_head);
+        TextView size  = (TextView) v.findViewById(R.id.tv_size);
+        TextView seed  = (TextView) v.findViewById(R.id.tv_seed);
+        TextView leech  = (TextView) v.findViewById(R.id.tv_leech);
+        FloatingTextButton cpyBtn  = (FloatingTextButton) v.findViewById(R.id.btn_copy);
+
+        headQua.setText(head);
+        if(model!=null){
+            size.setText(model.getFilesize());
+            seed.setText(String.valueOf(model.getSeed()));
+            leech.setText(String.valueOf(model.getPeer()));
+            cpyBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    copyText(model.getUrl());
+                }
+            });
+
+        }
+
+
+
     }
 
     public String generateMagneticUrl(String hash,String movieName) throws UnsupportedEncodingException {

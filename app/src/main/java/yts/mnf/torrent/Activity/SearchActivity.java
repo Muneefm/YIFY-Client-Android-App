@@ -16,6 +16,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -25,6 +26,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.gson.Gson;
@@ -37,10 +39,13 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import yts.mnf.torrent.Adapter.RecycleAdapter;
+import yts.mnf.torrent.Adapter.RecycleAdapterPopcorn;
 import yts.mnf.torrent.AppController;
 import yts.mnf.torrent.GridSpacingItemDecoration;
 import yts.mnf.torrent.Models.ListModel;
 import yts.mnf.torrent.Models.Movie;
+import yts.mnf.torrent.Models.Popcorn.ListPopcorn;
+import yts.mnf.torrent.Models.Popcorn.PopcornModel;
 import yts.mnf.torrent.R;
 import yts.mnf.torrent.Tools.Config;
 import yts.mnf.torrent.Tools.Url;
@@ -49,6 +54,14 @@ public class SearchActivity extends AppCompatActivity {
 
     Gson gson = new Gson();
     ListModel listMode;
+    ListPopcorn listModePop;
+
+    final static int YTS_PROVIDER =0;
+    final static int POPCORN_TIME_PROVIDER =1;
+    int searchProvider = 0;
+
+    @BindView(R.id.spinner_provider)
+    Spinner spinnerProvider;
 
     @BindView(R.id.spinner_quality)
     Spinner spinnerQuality;
@@ -61,6 +74,9 @@ public class SearchActivity extends AppCompatActivity {
 
     @BindView(R.id.spinner_sort_by)
     Spinner spinnerSort;
+
+    @BindView(R.id.pop_spinner_sort_by)
+    Spinner popSpinnerSort;
 
     @BindView(R.id.recycler_view_search)
     RecyclerView recyclerView;
@@ -85,10 +101,29 @@ public class SearchActivity extends AppCompatActivity {
     TextView tvErrorMsg;
 
 
-    String qualityString="",genreString="",ratingString="",sortString="latest",queryString="";
+    @BindView(R.id.yts_qua_container)
+    LinearLayout ytsQuaContainer;
+    @BindView(R.id.yts_rating_container)
+    LinearLayout ytsRatingContainer;
+    @BindView(R.id.yts_sort_container)
+    LinearLayout ytsSortContainer;
 
-    private RecycleAdapter adapter;
+    @BindView(R.id.pop_sort_container)
+    LinearLayout popSortContainer;
+
+
+
+
+
+    String qualityString="",genreString="",ratingString="",sortString="latest",queryString="",popSortString="";
+
+    private RecycleAdapter adapterYts;
     private List<Movie> mModels;
+
+    private RecycleAdapterPopcorn adapterPopcorn;
+    private List<PopcornModel> mModelsPopcorn;
+
+
     Context c;
 
     int totalPages=1;
@@ -111,13 +146,26 @@ public class SearchActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                searchRequest(generateSearchUrl(),true);
+                Log.e("TAG","fab click searchProvider"+searchProvider );
+
+                page =1 ;
+                if(searchProvider==YTS_PROVIDER) {
+                    searchRequest(generateSearchUrlYTS(), true);
+                }else{
+                searchReqestPopcornTimes(generateSearchUrlPopcornTimes("1"),true);
+                }
             }
         });
         searchBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                searchRequest(generateSearchUrl(),true);
+                page =1;
+                if(searchProvider==YTS_PROVIDER) {
+                    searchRequest(generateSearchUrlYTS(), true);
+                }else{
+                    searchReqestPopcornTimes(generateSearchUrlPopcornTimes("1"),true);
+
+                }
 
             }
         });
@@ -125,6 +173,81 @@ public class SearchActivity extends AppCompatActivity {
         AdView mAdView = (AdView) findViewById(R.id.adSearch);
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
+
+        ArrayAdapter<CharSequence> adapterProvider = ArrayAdapter.createFromResource(this,
+                R.array.provider, android.R.layout.simple_spinner_item);
+// Specify the layout to use when the list of choices appears
+        adapterProvider.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+// Apply the adapter to the spinner
+        spinnerProvider.setAdapter(adapterProvider);
+
+spinnerProvider.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        Log.e("TAG","spinnerProvider onItemSelected "+position );
+
+        switch (position){
+            case 0:
+                searchProvider = YTS_PROVIDER;
+                setupYtsProviderView();
+                break;
+            case 1:
+                searchProvider = POPCORN_TIME_PROVIDER;
+                setupPopcornProviderView();
+                break;
+            default:
+                searchProvider = YTS_PROVIDER;
+                setupYtsProviderView();
+                break;
+        }
+        Log.e("TAG","spinnerProvider onItemSelected searchProvider"+searchProvider );
+
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
+    }
+});
+
+
+        ArrayAdapter<CharSequence> adapterPopSort = ArrayAdapter.createFromResource(this,
+                R.array.pop_sort, android.R.layout.simple_spinner_item);
+// Specify the layout to use when the list of choices appears
+        adapterPopSort.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+// Apply the adapter to the spinner
+        popSpinnerSort.setAdapter(adapterPopSort);
+        popSpinnerSort.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                switch (position){
+                    case 0:
+                        popSortString ="trending";
+                        break;
+                    case 1:
+                        popSortString ="last%20added";
+                        break;
+                    case 2:
+                        popSortString = "popularity";
+                        break;
+                    case 3:
+                        popSortString = "year";
+                        break;
+                    case 4:
+                        popSortString = "title";
+                        break;
+                    case 5:
+                        popSortString = "rating";
+                        break;
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
 
 
         ArrayAdapter<CharSequence> adapterQuality = ArrayAdapter.createFromResource(this,
@@ -387,7 +510,6 @@ public class SearchActivity extends AppCompatActivity {
 
 
 
-        mModels = new ArrayList<>();
         final GridLayoutManager mLayoutManager = new GridLayoutManager(this, 2);
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.addItemDecoration(new GridSpacingItemDecoration(1, Config.dpToPx(1,getApplicationContext()), true));
@@ -416,7 +538,11 @@ public class SearchActivity extends AppCompatActivity {
                            // makeNetwoekRequest(Url.ListUrl+"?page="+page,false);
                             //  RequestData(Url + "?page=" + page);
                             //  showProgg();
-                            searchRequest(generateSearchUrl()+"&page="+page,false);
+                            if(searchProvider == YTS_PROVIDER) {
+                                searchRequest(generateSearchUrlYTS() + "&page=" + page, false);
+                            }else{
+                                searchReqestPopcornTimes(generateSearchUrlPopcornTimes(String.valueOf(page)),false);
+                            }
                         }
 
                     }
@@ -425,9 +551,17 @@ public class SearchActivity extends AppCompatActivity {
             }
         });
 
+        mModels = new ArrayList<>();
+        mModelsPopcorn = new ArrayList<>();
+        adapterYts = new RecycleAdapter(c, mModels,getSupportFragmentManager());
+        adapterPopcorn = new RecycleAdapterPopcorn(c, mModelsPopcorn,getSupportFragmentManager());
 
-        adapter = new RecycleAdapter(c, mModels,getSupportFragmentManager());
-        recyclerView.setAdapter(adapter);
+        if(searchProvider == YTS_PROVIDER) {
+            recyclerView.setAdapter(adapterYts);
+        }else{
+            recyclerView.setAdapter(adapterPopcorn);
+
+        }
 
 
 
@@ -436,7 +570,43 @@ public class SearchActivity extends AppCompatActivity {
     }
 
 
-    public String generateSearchUrl(){
+
+
+
+    public void setupYtsProviderView(){
+
+        popSortContainer.setVisibility(View.GONE);
+
+        ytsQuaContainer.setVisibility(View.VISIBLE);
+        ytsRatingContainer.setVisibility(View.VISIBLE);
+        ytsSortContainer.setVisibility(View.VISIBLE);
+        recyclerView.setAdapter(adapterYts);
+
+
+    }
+
+
+    public void setupPopcornProviderView(){
+
+        popSortContainer.setVisibility(View.VISIBLE);
+
+        ytsQuaContainer.setVisibility(View.GONE);
+        ytsRatingContainer.setVisibility(View.GONE);
+        ytsSortContainer.setVisibility(View.GONE);
+        recyclerView.setAdapter(adapterPopcorn);
+    }
+
+    public String generateSearchUrlPopcornTimes(String pageParam){
+String params = "?order=-1&genre="+genreString+"&sort="+popSortString+"&order=-1&keywords="+queryString;
+        Log.e("TAG","generateSearchUrlPopcornTimes paramsString = "+params);
+        String url = Url.ListMoviePopcorn+pageParam+params;
+        Log.e("TAG","generateSearchUrlPopcornTimes final url  = "+url);
+        return url;
+    }
+
+
+
+    public String generateSearchUrlYTS(){
         String params = "?quality="+qualityString+"&minimum_rating="+ratingString+"&genre="+genreString+"&sort_by="+sortString+"&query_term="+queryString;
         Log.e("TAG","paramsString = "+params);
         String url = Url.ListUrl+params;
@@ -461,37 +631,37 @@ public class SearchActivity extends AppCompatActivity {
                         Log.e("TAG", response.toString());
                         stopLoading();
 
-                        listMode = gson.fromJson(response.toString(),ListModel.class);
-                        Log.e("tag","response "+listMode.getStatus());
-                        loading = true;
+                            listMode = gson.fromJson(response.toString(), ListModel.class);
+                            Log.e("tag", "response " + listMode.getStatus());
+                            loading = true;
 
-                        mModels = listMode.getData().getMovies();
-                        if(mModels==null){
-                            tvErrorMsg.setText("No Result Found !!");
-                            containerError.setVisibility(View.VISIBLE);
-                            recyclerView.setVisibility(View.INVISIBLE);
-                        }else{
-                            containerError.setVisibility(View.INVISIBLE);
-                            recyclerView.setVisibility(View.VISIBLE);
-                        }
-                        int movieCount = listMode.getData().getMovieCount();
-                        int movieLimit = listMode.getData().getLimit();
-                        totalPages = movieCount/movieLimit;
-                        if(movieCount%movieLimit != 0){
-                            totalPages++;
-                        }
-                        Log.e("MainActivity","movieCount = "+movieCount+" movieLimit = "+movieLimit+" totalPage = "+totalPages);
-                            refreshSwipe.setRefreshing(false);
-                        if(mModels!=null) {
-
-                            if (newSearch) {
-                                adapter.replaceItems(mModels);
+                            mModels = listMode.getData().getMovies();
+                            if (mModels == null) {
+                                tvErrorMsg.setText("No Result Found !!");
+                                containerError.setVisibility(View.VISIBLE);
+                                recyclerView.setVisibility(View.INVISIBLE);
                             } else {
-                                adapter.addItems(mModels);
+                                containerError.setVisibility(View.INVISIBLE);
+                                recyclerView.setVisibility(View.VISIBLE);
                             }
+                            int movieCount = listMode.getData().getMovieCount();
+                            int movieLimit = listMode.getData().getLimit();
+                            totalPages = movieCount / movieLimit;
+                            if (movieCount % movieLimit != 0) {
+                                totalPages++;
+                            }
+                            Log.e("MainActivity", "movieCount = " + movieCount + " movieLimit = " + movieLimit + " totalPage = " + totalPages);
+                            refreshSwipe.setRefreshing(false);
+                            if (mModels != null) {
 
-                            recyclerView.setVisibility(View.VISIBLE);
-                        }
+                                if (newSearch) {
+                                    adapterYts.replaceItems(mModels);
+                                } else {
+                                    adapterYts.addItems(mModels);
+                                }
+
+                                recyclerView.setVisibility(View.VISIBLE);
+                            }
 
                     }
                 }, new Response.ErrorListener() {
@@ -515,7 +685,63 @@ public class SearchActivity extends AppCompatActivity {
 
     }
 
+    public void searchReqestPopcornTimes(String url, final boolean newSearch){
+        // RequestQueue queue = Volley.newRequestQueue(this);
+        Log.e("PopcornFragment","url request = "+url);
+            startLoading();
+        StringRequest req = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Log.e("TAG", response.toString());
+                stopLoading();
 
+                listModePop = gson.fromJson("{\"popcornmodel\":"+response.toString()+"}",ListPopcorn.class);
+                Log.e("tag","response "+listMode);
+                loading = true;
+
+                mModelsPopcorn = listModePop.getPopcornModel();
+                int movieCount = 10;//listMode.getData().getMovieCount();
+                int movieLimit = 10;//listMode.getData().getLimit();
+                totalPages = 100;
+                                /*= movieCount/movieLimit;
+                        if(movieCount%movieLimit != 0){
+                            totalPages++;
+                        }*/
+                Log.e("MainActivity","movieCount = "+movieCount+" movieLimit = "+movieLimit+" totalPage = "+totalPages);
+                refreshSwipe.setRefreshing(false);
+                if (mModelsPopcorn != null) {
+
+                    if (newSearch) {
+                        adapterPopcorn.replaceItems(mModelsPopcorn);
+                    } else {
+                        adapterPopcorn.addItems(mModelsPopcorn);
+                    }
+
+                    recyclerView.setVisibility(View.VISIBLE);
+                }else{
+                    totalPages = 1;
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                VolleyLog.d("TAG", "Error: " + error.getMessage());
+                Log.e("TAG"," Volley Error: " + error.getMessage());
+                // hide the progress dialog
+                loading = true;
+                stopLoading();
+                refreshSwipe.setRefreshing(false);
+
+                tvErrorMsg.setText("Network Issue, Please try again !!");
+                recyclerView.setVisibility(View.INVISIBLE);
+                containerError.setVisibility(View.VISIBLE);
+            }
+        });
+        AppController.getInstance().addToRequestQueue(req,"movie_list");
+        AppController.getInstance().getRequestQueue().getCache().invalidate(url, true);
+
+    }
 
 
     public void startLoading(){

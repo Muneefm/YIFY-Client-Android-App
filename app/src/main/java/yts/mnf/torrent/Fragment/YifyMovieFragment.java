@@ -37,6 +37,7 @@ import yts.mnf.torrent.Models.ListModel;
 import yts.mnf.torrent.Models.Movie;
 import yts.mnf.torrent.R;
 import yts.mnf.torrent.Tools.Config;
+import yts.mnf.torrent.Tools.PreferensHandler;
 import yts.mnf.torrent.Tools.Url;
 
 /**
@@ -84,6 +85,9 @@ public class YifyMovieFragment extends Fragment {
     @BindView(R.id.tag_msg)
     TextView tvErrorMsg;
 
+    @BindView(R.id.content_main)
+    RelativeLayout rootViewYifyFrag;
+
 
     private RecycleAdapter adapter;
     private List<Movie> mModels;
@@ -94,7 +98,7 @@ public class YifyMovieFragment extends Fragment {
 
     int pastVisiblesItems, visibleItemCount, totalItemCount;
     boolean loading =true;
-
+    PreferensHandler pref;
 
 
 
@@ -133,6 +137,7 @@ public class YifyMovieFragment extends Fragment {
         View v =  inflater.inflate(R.layout.fragment_yify_movie, container, false);
         ButterKnife.bind(this,v);
         c = getContext();
+        pref = new PreferensHandler(c);
         mModels = new ArrayList<>();
         final GridLayoutManager mLayoutManager = new GridLayoutManager(getContext(), 2);
         recyclerView.setLayoutManager(mLayoutManager);
@@ -141,6 +146,8 @@ public class YifyMovieFragment extends Fragment {
         recyclerView.setHasFixedSize(true);
 
         // recyclerView.setItemAnimator(new DefaultItemAnimator());
+
+            setUpDrakTheme(pref.getThemeDark());
 
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
@@ -198,9 +205,13 @@ public class YifyMovieFragment extends Fragment {
     }
 
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        if(pref!=null)
+            setUpDrakTheme(pref.getThemeDark());
 
-
-
+    }
 
     public void startLoading(){
         containerError.setVisibility(View.INVISIBLE);
@@ -276,6 +287,12 @@ public class YifyMovieFragment extends Fragment {
 
     }
 
+    public void setUpDrakTheme(boolean key){
+        if(key)
+        rootViewYifyFrag.setBackgroundColor(getResources().getColor(R.color.blue_grey900));
+        else
+            rootViewYifyFrag.setBackgroundColor(getResources().getColor(R.color.white));
+    }
 
 
 

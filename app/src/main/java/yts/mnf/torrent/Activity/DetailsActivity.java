@@ -10,6 +10,7 @@ import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
@@ -32,6 +33,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -67,6 +69,7 @@ import yts.mnf.torrent.Models.Movie;
 import yts.mnf.torrent.Models.Torrent;
 import yts.mnf.torrent.R;
 import yts.mnf.torrent.Tools.Config;
+import yts.mnf.torrent.Tools.PreferensHandler;
 import yts.mnf.torrent.Tools.Url;
 
 public class DetailsActivity extends AppCompatActivity {
@@ -186,6 +189,14 @@ public class DetailsActivity extends AppCompatActivity {
     @BindView(R.id.container_quality)
     LinearLayout downloadDetails;
 
+
+    @BindView(R.id.quality_root_view)
+    RelativeLayout rootQuality;
+
+
+    @BindView(R.id.detail_root_view)
+    CoordinatorLayout rootCoordinateView;
+
     //@BindView(R.id.download_torrent)
    // Button downloadTorrent;
     //ten_download
@@ -200,6 +211,7 @@ public class DetailsActivity extends AppCompatActivity {
     Movie movieModel;
     String movieName;
     static String TAG = "DetailsActivity";
+    PreferensHandler pref;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -214,6 +226,7 @@ public class DetailsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_details);
         ButterKnife.bind(this);
         c =this;
+        pref = new PreferensHandler(this);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -232,6 +245,11 @@ public class DetailsActivity extends AppCompatActivity {
         }
 
 //adDetailPage
+
+
+
+
+
         AdView mAdView = (AdView) findViewById(R.id.adDetailPage);
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
@@ -253,7 +271,9 @@ public class DetailsActivity extends AppCompatActivity {
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 
-
+        if(pref.getThemeDark()){
+            setDarkModeColor();
+        }
 
         if(movieModel!=null){
             tvMovie.setText(movieModel.getTitle());
@@ -482,6 +502,23 @@ public class DetailsActivity extends AppCompatActivity {
 
 
     }
+
+
+
+    public void setDarkModeColor(){
+        tvMovie.setTextColor(getResources().getColor(R.color.white));
+        tvDesc.setTextColor(getResources().getColor(R.color.white));
+        tvDirected.setTextColor(getResources().getColor(R.color.white));
+        tvTime.setTextColor(getResources().getColor(R.color.white));
+
+        rootQuality.setBackgroundColor(getResources().getColor(R.color.blue_grey900));
+        posterMain.setBackgroundColor(getResources().getColor(R.color.blue_grey900));
+       // rootQuality.setBackgroundColor(getResources().getColor(R.color.blue_grey900));
+
+        rootCoordinateView.setBackgroundColor(getResources().getColor(R.color.blue_grey900));
+    }
+
+
 
     public void copyText(String mUrl){
         ClipboardManager clipboard = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);

@@ -10,8 +10,10 @@ public class Rating {
     private Integer loved;
     private Integer hated;
 
-    public Integer getPercentage() {
-        return percentage;
+    public float getPercentage() {
+
+        float rating = (float)percentage/10;
+        return rating;
     }
 
     public void setPercentage(Integer percentage) {
