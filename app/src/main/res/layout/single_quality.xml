@@ -5,13 +5,14 @@
                     xmlns:app="http://schemas.android.com/apk/res-auto"
                     xmlns:card_view="http://schemas.android.com/apk/res-auto"
                     android:id="@+id/qua_root_linear"
-                    android:paddingRight="0dp"
-                    android:paddingLeft="0dp"
+                    android:paddingRight="20dp"
+                    android:paddingLeft="20dp"
                     android:layout_width="wrap_content"
                     android:orientation="vertical"
                     android:layout_weight="2"
                     android:visibility="visible"
                     android:gravity="center"
+
                     android:background="@color/blue_grey600"
                     android:layout_height="match_parent">
                     <TextView
@@ -107,7 +108,7 @@
                         app:floating_title_color="@android:color/white"
                         />
 
-                    <ru.dimorinny.floatingtextbutton.FloatingTextButton
+                 <!--   <ru.dimorinny.floatingtextbutton.FloatingTextButton
                         android:id="@+id/btn_torrent"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -117,7 +118,7 @@
                         app:floating_icon="@mipmap/download"
                         app:floating_title="Torrent"
                         app:floating_title_color="@android:color/white"
-                        />
+                        /> -->
 
                     <!--    <ru.dimorinny.floatingtextbutton.FloatingTextButton
                             android:id="@+id/action_button_ten"

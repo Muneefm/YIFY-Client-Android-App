@@ -60,7 +60,7 @@
         <item name="windowNoTitle">true</item>
         <item name="android:windowTranslucentStatus">true</item>
         <item name="android:windowTranslucentNavigation">true</item>
-        <item name="colorPrimary">@color/blue_grey700</item>
+        <item name="colorPrimary">@color/blue_grey900</item>
         <item name="colorPrimaryDark">@color/blue_grey900</item>
         <item name="colorAccent">@color/blue_grey800</item>
         <item name="android:windowContentTransitions">true</item>

@@ -2,6 +2,7 @@ package yts.mnf.torrent.Activity;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -11,7 +12,9 @@ import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -48,6 +51,7 @@ import yts.mnf.torrent.Models.Popcorn.ListPopcorn;
 import yts.mnf.torrent.Models.Popcorn.PopcornModel;
 import yts.mnf.torrent.R;
 import yts.mnf.torrent.Tools.Config;
+import yts.mnf.torrent.Tools.PreferensHandler;
 import yts.mnf.torrent.Tools.Url;
 
 public class SearchActivity extends AppCompatActivity {
@@ -111,6 +115,9 @@ public class SearchActivity extends AppCompatActivity {
     @BindView(R.id.pop_sort_container)
     LinearLayout popSortContainer;
 
+    @BindView(R.id.content_main)
+    RelativeLayout rootViewRelativeLayout;
+
 
 
 
@@ -131,6 +138,7 @@ public class SearchActivity extends AppCompatActivity {
 
     int pastVisiblesItems, visibleItemCount, totalItemCount;
     boolean loading =true;
+    PreferensHandler pref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -138,6 +146,7 @@ public class SearchActivity extends AppCompatActivity {
         setContentView(R.layout.activity_search);
         ButterKnife.bind(this);
         c=this;
+        pref = new PreferensHandler(c);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -173,6 +182,9 @@ public class SearchActivity extends AppCompatActivity {
         AdView mAdView = (AdView) findViewById(R.id.adSearch);
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
+
+
+        setUpDrakTheme(pref.getThemeDark());
 
         ArrayAdapter<CharSequence> adapterProvider = ArrayAdapter.createFromResource(this,
                 R.array.provider, android.R.layout.simple_spinner_item);
@@ -273,6 +285,22 @@ spinnerProvider.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener
                 queryString = String.valueOf(s);
                 Log.e("TAG","afterTextChanged string "+queryString );
 
+            }
+        });
+        searchEdt.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                    page =1;
+                    if(searchProvider==YTS_PROVIDER) {
+                        searchRequest(generateSearchUrlYTS(), true);
+                    }else{
+                        searchReqestPopcornTimes(generateSearchUrlPopcornTimes("1"),true);
+
+                    }
+                    return true;
+                }
+                return false;
             }
         });
 
@@ -618,7 +646,7 @@ String params = "?order=-1&genre="+genreString+"&sort="+popSortString+"&order=-1
     public void searchRequest(String url, final boolean newSearch){
         // RequestQueue queue = Volley.newRequestQueue(this);
         Log.e("TAG","searchRequest final url  = "+url);
-
+        searchEdt.clearFocus();
 
         startLoading();
 
@@ -687,6 +715,7 @@ String params = "?order=-1&genre="+genreString+"&sort="+popSortString+"&order=-1
 
     public void searchReqestPopcornTimes(String url, final boolean newSearch){
         // RequestQueue queue = Volley.newRequestQueue(this);
+        searchEdt.clearFocus();
         Log.e("PopcornFragment","url request = "+url);
             startLoading();
         StringRequest req = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
@@ -756,6 +785,20 @@ String params = "?order=-1&genre="+genreString+"&sort="+popSortString+"&order=-1
         refreshSwipe.setEnabled( false );
 
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if(pref!=null)
+            setUpDrakTheme(pref.getThemeDark());
+    }
+
+    public void setUpDrakTheme(boolean key){
+        if(key)
+            rootViewRelativeLayout.setBackgroundColor(getResources().getColor(R.color.blue_grey900));
+        else
+            rootViewRelativeLayout.setBackgroundColor(getResources().getColor(R.color.white));
     }
 
 }

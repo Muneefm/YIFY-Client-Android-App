@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:ads="http://schemas.android.com/apk/res-auto"
-
+    android:id="@+id/root_search_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
@@ -13,6 +13,7 @@
         android:id="@+id/app_bar"
         android:layout_width="match_parent"
         android:layout_height="360dp"
+
         android:fitsSystemWindows="true"
         android:theme="@style/AppTheme.AppBarOverlay">
 
@@ -20,6 +21,8 @@
             android:id="@+id/toolbar_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:elevation="20dp"
+
             android:fitsSystemWindows="true"
             app:contentScrim="?attr/colorPrimary"
             app:layout_scrollFlags="scroll|exitUntilCollapsed">
@@ -209,7 +212,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 app:layout_collapseMode="pin"
-
+                android:background="@color/blue_grey900"
                 app:popupTheme="@style/AppTheme.PopupOverlay" >
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -223,6 +226,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="4"
+                    android:imeOptions="actionSearch"
+                    android:inputType="text"
                     android:hint="Search (Optional)"
                     />
 

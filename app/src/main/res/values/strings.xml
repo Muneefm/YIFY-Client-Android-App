@@ -78,7 +78,7 @@
         <item>Rating</item>
     </string-array>
 
-    <string name="app_name">YIFY torrents (YTS)</string>
+    <string name="app_name">YIFY Movies Torrents</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>

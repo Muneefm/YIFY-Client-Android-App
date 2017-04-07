@@ -28,6 +28,11 @@
     <color name="greyDivi">#B6B6B6</color>
 
 
+    <color name="light_blue800">#0277BD</color>
+    <color name="light_blue900">#01579B</color>
+    <color name="light_blue900_dark">#002f6c</color>
+
+
     <color name="blue_grey50">#ECEFF1</color>
     <color name="blue_grey100">#CFD8DC</color>
     <color name="blue_grey200">#B0BEC5</color>
@@ -78,6 +83,7 @@
     <color name="theme300">#F06292</color>
     <color name="theme100">#F8BBD0</color>
 
+    <color name="pink800">#880E4F</color>
     <color name="pink400">#EC407A</color>
     <color name="pink300">#F06292</color>
     <color name="pink100">#F8BBD0</color>
