@@ -275,7 +275,7 @@ public class PopcornFragment extends Fragment {
                 stopLoading();
                 refreshSwipe.setRefreshing(false);
 
-                tvErrorMsg.setText("Network Issue, Please try again !!");
+                tvErrorMsg.setText("Network Issue, Please try again !! \n Pull Down to Refresh");
                 recyclerView.setVisibility(View.INVISIBLE);
                 containerError.setVisibility(View.VISIBLE);
             }

@@ -81,13 +81,10 @@
             android:layout_height="wrap_content" />
 
     </RelativeLayout>
-    <com.google.android.gms.ads.AdView
-        android:id="@+id/ad_home"
+    <com.startapp.android.publish.ads.banner.Banner
+        android:id="@+id/startAppBanner"
+        android:layout_alignParentBottom="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_alignParentBottom="true"
-        ads:adSize="BANNER"
-        ads:adUnitId="@string/home_banner_id">
-    </com.google.android.gms.ads.AdView>
+        android:layout_centerHorizontal="true"/>
 </RelativeLayout>

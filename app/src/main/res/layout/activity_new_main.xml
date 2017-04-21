@@ -42,15 +42,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-    <com.google.android.gms.ads.AdView
-        android:id="@+id/ad_home"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_alignParentBottom="true"
-        ads:adSize="BANNER"
-        ads:adUnitId="@string/home_banner_id">
-    </com.google.android.gms.ads.AdView>
+
     </RelativeLayout>
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"

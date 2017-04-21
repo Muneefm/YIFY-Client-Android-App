@@ -25,19 +25,20 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.robertlevonyan.views.chip.Chip;
 
 import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
@@ -50,6 +51,7 @@ import yts.mnf.torrent.AppController;
 import yts.mnf.torrent.GridSpacingItemDecoration;
 import yts.mnf.torrent.Models.ListModel;
 import yts.mnf.torrent.Models.Movie;
+import yts.mnf.torrent.Models.Popcorn.En;
 import yts.mnf.torrent.Models.Popcorn.PopcornModel;
 import yts.mnf.torrent.Models.Popcorn._1080p;
 import yts.mnf.torrent.Models.Popcorn._720p;
@@ -184,8 +186,8 @@ public class PopcornDetailActivity extends AppCompatActivity {
 
     @BindView(R.id.quality_linear)
     LinearLayout qualityLinear;
-    //@BindView(R.id.download_torrent)
-    // Button downloadTorrent;
+    @BindView(R.id.download_torrent)
+    Button downloadTorrent;
     //ten_download
 
 
@@ -236,11 +238,6 @@ public class PopcornDetailActivity extends AppCompatActivity {
             Log.e(TAG,"activity has no extra ");
 
         }
-
-//adDetailPage
-        AdView mAdView = (AdView) findViewById(R.id.adDetailPage);
-        AdRequest adRequest = new AdRequest.Builder().build();
-        mAdView.loadAd(adRequest);
 
 
         Typeface face=Typeface.createFromAsset(getAssets(), "fonts/FjallaOne-Regular.ttf");
@@ -301,13 +298,37 @@ public class PopcornDetailActivity extends AppCompatActivity {
 
                 }
             });
+            if(movieModel.getTrailer()==null){
+                fab.setVisibility(View.GONE);
+            }else{
+                fab.setVisibility(View.VISIBLE);
+            }
             fab.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
 
-                    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("vnd.youtube://" + movieModel.getTrailer()));
-                    startActivity(intent);
 
+                    if(movieModel.getTrailer()!=null){
+                        String url = movieModel.getTrailer();
+                        Uri uri = Uri.parse(url);
+                        try {
+
+                            String ytId = URLDecoder.decode(uri.getQueryParameter("v"), "UTF-8");
+                            Log.e("Youtube", "try parsed youtube id = " + ytId);
+
+                            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("vnd.youtube://" + ytId));
+                            startActivity(intent);
+                        } catch (UnsupportedEncodingException e) {
+                            e.printStackTrace();
+                            Intent webIntent = new Intent(Intent.ACTION_VIEW,
+                                    Uri.parse(url));
+                            startActivity(webIntent);
+                            Log.e("Youtube", " catch  youtube url = " + url);
+
+                        }
+                        // Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("vnd.youtube://" + movieModel.getTrailer()));
+                        //  startActivity(intent);
+                    }
                 }
             });
 
@@ -376,10 +397,52 @@ public class PopcornDetailActivity extends AppCompatActivity {
                 qualityLinear.addView(view1080p);
 
             }
+            downloadTorrent.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    //  focusOnView();
+                  //  showDialogue(movieModel.getTorrents().getEn());
 
+                    if(movieModel.getTorrents().getEn().get1080p()!=null) {
+                        copyText(movieModel.getTorrents().getEn().get1080p().getUrl());
+                        Toast.makeText(c,"Copied 1080p  magnetic url",Toast.LENGTH_LONG).show();
+                    }
+                    else if(movieModel.getTorrents().getEn().get720p()!=null) {
+                        copyText(movieModel.getTorrents().getEn().get720p().getUrl());
+                        Toast.makeText(c,"Copied 720p  magnetic url",Toast.LENGTH_LONG).show();
+                    }
+                }
+            });
 
 
         }
+    }
+
+    public void showDialogue(final En torrents){
+List<String> titles = new ArrayList<>();
+
+        if(movieModel.getTorrents().getEn().get720p()!=null) {
+        titles.add(0,"720p - "+movieModel.getTorrents().getEn().get720p().getFilesize());
+        }
+        if(movieModel.getTorrents().getEn().get1080p()!=null) {
+            titles.add(1,"1080p - "+movieModel.getTorrents().getEn().get1080p().getFilesize());
+
+        }
+
+
+
+        new MaterialDialog.Builder(this)
+                .title("Copy magnetic url")
+                .items(titles)
+                .itemsCallback(new MaterialDialog.ListCallback() {
+                    @Override
+                    public void onSelection(MaterialDialog dialog, View view, int which, CharSequence text) {
+                        //Toast.makeText(DetailsActivity.this, which + ": " + text + ", ID = " , Toast.LENGTH_SHORT).show();
+                        Log.e("TAG","onSelction download which = "+which);
+
+                    }
+                })
+                .show();
     }
 
 

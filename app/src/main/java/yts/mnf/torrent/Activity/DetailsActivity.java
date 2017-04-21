@@ -31,6 +31,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -45,8 +46,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
+
 import com.google.gson.Gson;
 import com.robertlevonyan.views.chip.Chip;
 
@@ -197,8 +197,8 @@ public class DetailsActivity extends AppCompatActivity {
     @BindView(R.id.detail_root_view)
     CoordinatorLayout rootCoordinateView;
 
-    //@BindView(R.id.download_torrent)
-   // Button downloadTorrent;
+    @BindView(R.id.download_torrent)
+    Button downloadTorrent;
     //ten_download
 
 
@@ -250,9 +250,7 @@ public class DetailsActivity extends AppCompatActivity {
 
 
 
-        AdView mAdView = (AdView) findViewById(R.id.adDetailPage);
-        AdRequest adRequest = new AdRequest.Builder().build();
-        mAdView.loadAd(adRequest);
+
 
 
         Typeface face=Typeface.createFromAsset(getAssets(), "fonts/FjallaOne-Regular.ttf");
@@ -474,13 +472,13 @@ public class DetailsActivity extends AppCompatActivity {
 
                         ((ViewGroup)llContainer7.getParent()).removeView(llContainer7);
                     }
-                   /* downloadTorrent.setOnClickListener(new View.OnClickListener() {
+                   downloadTorrent.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
                             //  focusOnView();
                             showDialogue(listTorModel);
                         }
-                    });*/
+                    });
                 }
 
 

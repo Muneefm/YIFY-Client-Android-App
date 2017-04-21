@@ -25,8 +25,9 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.TextView;
 
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
+
+import com.startapp.android.publish.adsCommon.AutoInterstitialPreferences;
+import com.startapp.android.publish.adsCommon.StartAppAd;
 
 import yts.mnf.torrent.AppController;
 import yts.mnf.torrent.Fragment.PopcornFragment;
@@ -64,10 +65,11 @@ Context c;
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        StartAppAd.setAutoInterstitialPreferences(
+                new AutoInterstitialPreferences()
+                        .setSecondsBetweenAds(60)
+        );
 
-        AdView mAdView = (AdView) findViewById(R.id.ad_home);
-        AdRequest adRequest = new AdRequest.Builder().build();
-        mAdView.loadAd(adRequest);
 
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
@@ -142,6 +144,11 @@ Context c;
         else if (id == R.id.action_settings) {
             Intent settings = new Intent(NewMainActivity.this, NewSettingsAct.class);
             startActivity(settings);
+            return true;
+        }
+        else if (id == R.id.action_about) {
+            Intent about = new Intent(NewMainActivity.this, AboutAcitivty.class);
+            startActivity(about);
             return true;
         }
 

@@ -17,4 +17,10 @@
         android:title="Search"
         android:icon="@drawable/ic_search_white"
         app:showAsAction="always" />
+
+    <item
+        android:id="@+id/action_about"
+        android:orderInCategory="100"
+        android:title="About"
+        app:showAsAction="ifRoom" />
 </menu>

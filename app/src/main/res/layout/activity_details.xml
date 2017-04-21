@@ -69,7 +69,7 @@
         android:layout_alignParentBottom="true"
         android:gravity="bottom"
         android:layout_height="match_parent">
-      <!-- <Button
+      <Button
             android:id="@+id/download_torrent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -77,22 +77,13 @@
             android:textColor="@android:color/white"
             android:background="@color/purple500"
             android:layout_alignParentBottom="true"
-            /> -->
+            />
     </LinearLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <com.google.android.gms.ads.AdView
-            android:id="@+id/adDetailPage"
-            android:layout_width="wrap_content"
 
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_alignParentBottom="true"
-            ads:adSize="BANNER"
-            ads:adUnitId="@string/detail_page_banner_id">
-        </com.google.android.gms.ads.AdView>
     </RelativeLayout>
 
 

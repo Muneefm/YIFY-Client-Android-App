@@ -30,8 +30,6 @@ import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
 import com.google.gson.Gson;
 
 import org.json.JSONObject;
@@ -179,9 +177,6 @@ public class SearchActivity extends AppCompatActivity {
             }
         });
 
-        AdView mAdView = (AdView) findViewById(R.id.adSearch);
-        AdRequest adRequest = new AdRequest.Builder().build();
-        mAdView.loadAd(adRequest);
 
 
         setUpDrakTheme(pref.getThemeDark());
@@ -762,7 +757,7 @@ String params = "?order=-1&genre="+genreString+"&sort="+popSortString+"&order=-1
                 stopLoading();
                 refreshSwipe.setRefreshing(false);
 
-                tvErrorMsg.setText("Network Issue, Please try again !!");
+                tvErrorMsg.setText("Network Issue, Please try again !! ");
                 recyclerView.setVisibility(View.INVISIBLE);
                 containerError.setVisibility(View.VISIBLE);
             }
