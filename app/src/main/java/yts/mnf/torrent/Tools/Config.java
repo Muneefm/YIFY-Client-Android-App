@@ -48,4 +48,8 @@ public class Config {
                 Math.min(g,255),
                 Math.min(b,255));
     }
+
+    public static int getAdClickLimit(){
+        return 2;
+    }
 }

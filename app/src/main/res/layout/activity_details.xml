@@ -73,7 +73,7 @@
             android:id="@+id/download_torrent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Get Torrent Now"
+            android:text="Download Torrent"
             android:textColor="@android:color/white"
             android:background="@color/purple500"
             android:layout_alignParentBottom="true"

@@ -402,7 +402,7 @@ public class PopcornDetailActivity extends AppCompatActivity {
                 public void onClick(View v) {
                     //  focusOnView();
                   //  showDialogue(movieModel.getTorrents().getEn());
-
+                    pref.increaseClick();
                     if(movieModel.getTorrents().getEn().get1080p()!=null) {
                         copyText(movieModel.getTorrents().getEn().get1080p().getUrl());
                         Toast.makeText(c,"Copied 1080p  magnetic url",Toast.LENGTH_LONG).show();
@@ -481,6 +481,7 @@ List<String> titles = new ArrayList<>();
             cpyBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    pref.increaseClick();
                     copyText(model.getUrl());
                 }
             });
