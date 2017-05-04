@@ -70,6 +70,9 @@ Context c;
                         .setSecondsBetweenAds(60)
         );
 
+        //Intent stream = new Intent(NewMainActivity.this,StreamActivity.class);
+       // startActivity(stream);
+
 
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.

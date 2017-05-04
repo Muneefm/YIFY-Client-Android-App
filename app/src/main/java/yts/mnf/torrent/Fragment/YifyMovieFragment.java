@@ -284,7 +284,7 @@ public class YifyMovieFragment extends Fragment {
         });
         AppController.getInstance().addToRequestQueue(jsonObjReq,"movie_list");
         AppController.getInstance().getRequestQueue().getCache().invalidate(url, true);
-
+        AppController.getInstance().getRequestQueue().getCache().clear();
     }
 
     public void setUpDrakTheme(boolean key){

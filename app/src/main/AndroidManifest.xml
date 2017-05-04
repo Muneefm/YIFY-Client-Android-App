@@ -17,9 +17,7 @@
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.gms.permission.ACTIVITY_RECOGNITION" />
-
-
-
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:name=".AppController"
@@ -126,6 +124,10 @@
         <activity
             android:name=".Activity.AboutAcitivty"
             android:label="@string/title_activity_about_acitivty"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".Activity.StreamActivity"
+            android:label="@string/title_activity_stream"
             android:theme="@style/AppTheme"></activity>
     </application>
 

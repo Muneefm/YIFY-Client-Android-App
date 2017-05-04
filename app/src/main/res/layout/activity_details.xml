@@ -17,7 +17,7 @@
     <android.support.design.widget.AppBarLayout
         android:id="@+id/app_bar"
         android:layout_width="match_parent"
-        android:layout_height="400dp"
+        android:layout_height="500dp"
         android:fitsSystemWindows="true"
         android:theme="@style/AppThemeWhite">
 
@@ -28,28 +28,28 @@
             android:fitsSystemWindows="true"
             app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
-          <yts.mnf.torrent.Tools.CresentImage
-              android:id="@+id/movie_poster_main"
+            <yts.mnf.torrent.Tools.CresentImage
+                android:id="@+id/movie_poster_main"
                 android:layout_width="match_parent"
-                android:layout_height="400dp"
+                android:layout_height="500dp"
                 android:elevation="5dp"
                 android:scaleType="centerCrop"
                 attribute:curvature="100dp"
                 android:background="@color/white"
-              app:layout_collapseMode="pin"
+                app:layout_collapseMode="pin"
                 />
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:id="@+id/fakeRl"
 
-                android:layout_height="320dp">
+                android:layout_height="420dp">
 
             </RelativeLayout>
-          <!--  <ImageView
-                android:id="@+id/fakeimg"
-                android:layout_width="match_parent"
-                android:transitionName="poster"
-                android:layout_height="400dp" /> -->
+            <!--  <ImageView
+                  android:id="@+id/fakeimg"
+                  android:layout_width="match_parent"
+                  android:transitionName="poster"
+                  android:layout_height="400dp" /> -->
         </android.support.design.widget.CollapsingToolbarLayout>
     </android.support.design.widget.AppBarLayout>
 
@@ -69,7 +69,7 @@
         android:layout_alignParentBottom="true"
         android:gravity="bottom"
         android:layout_height="match_parent">
-      <Button
+        <Button
             android:id="@+id/download_torrent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

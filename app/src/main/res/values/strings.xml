@@ -268,6 +268,7 @@
     <string name="title_activity_about_acitivty">About App</string>
 
     <string name="appnext_placement_id">773e0e10-1717-4ead-8560-dc08ca47feb2</string>
+    <string name="title_activity_stream">StreamActivity</string>
 
 
 </resources>
