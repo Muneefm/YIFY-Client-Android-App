@@ -37,6 +37,7 @@
                 attribute:curvature="100dp"
                 android:background="@color/white"
                 app:layout_collapseMode="pin"
+
                 />
             <RelativeLayout
                 android:layout_width="match_parent"

@@ -23,6 +23,8 @@ import com.startapp.android.publish.adsCommon.AutoInterstitialPreferences;
 import com.startapp.android.publish.adsCommon.StartAppAd;
 import com.startapp.android.publish.adsCommon.StartAppSDK;
 
+import io.realm.Realm;
+import yts.mnf.torrent.Models.DBModel.WishlistModel;
 import yts.mnf.torrent.Tools.Config;
 import yts.mnf.torrent.Tools.PreferensHandler;
 
@@ -53,6 +55,7 @@ public class AppController extends Application {
         StartAppAd.disableSplash();
         StartAppAd.disableAutoInterstitial();
 
+        Realm.init(getInstance());
 
 
 
@@ -175,6 +178,10 @@ public class AppController extends Application {
             mRequestQueue.cancelAll(tag);
         }
     }
+
+
+
+
 
     public void logFirebase(String msg){
       /*  Bundle bundle = new Bundle();
