@@ -3,6 +3,7 @@
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:fabview="http://schemas.android.com/apk/res-auto"
     xmlns:attribute="http://schemas.android.com/apk/res-auto"
     xmlns:ads="http://schemas.android.com/apk/res-auto"
 
@@ -81,13 +82,34 @@
     </LinearLayout>
 
     <RelativeLayout
+        android:id="@+id/cont"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
 
     </RelativeLayout>
 
-    <android.support.design.widget.FloatingActionButton
+    <com.github.clans.fab.FloatingActionButton
+        android:id="@+id/fab_fav"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|right"
+        android:layout_marginBottom="8dp"
+        android:layout_marginRight="8dp"
+        android:src="@mipmap/ic_fav_false"
+        app:fab_colorNormal="#DA4336"
+        app:fab_colorPressed="#E75043"
+        app:fab_colorRipple="#99FFFFFF"
+        app:fab_showShadow="true"
+        app:fab_shadowColor="#66000000"
+        app:fab_shadowRadius="5dp"
+        app:fab_shadowXOffset="2dp"
+        app:fab_shadowYOffset="4dp"
+        app:fab_size="normal"
+        app:fab_showAnimation="@anim/fab_scale_up"
+        app:fab_hideAnimation="@anim/fab_scale_down"
+        app:fab_label=""/>
+  <!--  <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab_fav"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -95,7 +117,7 @@
         app:backgroundTint="@color/blue_grey900"
 
         android:layout_margin="@dimen/fab_margin"
-        app:srcCompat="@mipmap/ic_fav_false" />
+        app:srcCompat="@mipmap/ic_fav_false" /> -->
 
 
 

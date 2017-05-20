@@ -33,7 +33,7 @@ dependencies {
     // Mandatory
     // Mandatory
 
-
+    compile 'com.github.clans:fab:1.6.4'
     compile 'com.appnext.sdk:appnext-sdk:2.+'
     compile 'com.google.android.gms:play-services-basement:10.2.0'
     compile 'com.google.android.gms:play-services-location:10.2.0'

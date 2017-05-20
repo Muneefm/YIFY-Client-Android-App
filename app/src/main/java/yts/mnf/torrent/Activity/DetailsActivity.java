@@ -74,6 +74,7 @@ import yts.mnf.torrent.Models.Torrent;
 import yts.mnf.torrent.R;
 
 import yts.mnf.torrent.Tools.Config;
+import yts.mnf.torrent.Tools.FabView;
 import yts.mnf.torrent.Tools.PreferensHandler;
 import yts.mnf.torrent.Tools.Url;
 
@@ -207,7 +208,7 @@ public class DetailsActivity extends AppCompatActivity {
     //ten_download
 
     @BindView(R.id.fab_fav)
-    FloatingActionButton fabFav;
+    com.github.clans.fab.FloatingActionButton fabFav;
 
 
    /* @BindView(R.id.tab_layout)
@@ -220,6 +221,8 @@ public class DetailsActivity extends AppCompatActivity {
     String movieName;
     static String TAG = "DetailsActivity";
     PreferensHandler pref;
+    boolean fabKey = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -277,7 +280,7 @@ public class DetailsActivity extends AppCompatActivity {
         Typeface faceDesc=Typeface.createFromAsset(getAssets(), "fonts/Abel-Regular.ttf");
         tvDesc.setTypeface(faceDesc);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        final FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 
 
 
@@ -336,11 +339,17 @@ public class DetailsActivity extends AppCompatActivity {
 
                 }
             });
-
             fabFav.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-
+                //Log.e("TAG_fab","getBack = "+fabFav.get()+"drawable = "+getDrawable(R.mipmap.ic_fav_true));
+                    if(fabKey == true){
+                        fabFav.setImageDrawable(getResources().getDrawable(R.mipmap.ic_fav_false));
+                        fabKey = false;
+                    }else{
+                        fabFav.setImageDrawable(getResources().getDrawable(R.mipmap.ic_fav_true));
+                        fabKey = true;
+                    }
 
 
                 }
