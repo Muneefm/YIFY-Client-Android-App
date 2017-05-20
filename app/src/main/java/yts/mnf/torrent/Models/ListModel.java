@@ -3,11 +3,10 @@ package yts.mnf.torrent.Models;
 
 
 public class ListModel {
-
-    private String status;
-    private String statusMessage;
-    private Data data;
-    private Meta meta;
+    public  String status;
+    public  String statusMessage;
+    public  Data data;
+    public  Meta meta;
 
     public String getStatus() {
         return status;

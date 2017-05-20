@@ -12,11 +12,16 @@ import io.realm.annotations.PrimaryKey;
 public class WishlistModel extends RealmObject {
     @PrimaryKey
     private int id;
+    private String movieId;
     private String movie;
     private Date date;
 
     public void setMovie(String movie){
         this.movie = movie;
+    }
+
+    public void setMovieId(String movieId){
+        this.movieId = movieId;
     }
 
 }

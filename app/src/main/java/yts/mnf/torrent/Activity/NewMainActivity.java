@@ -32,7 +32,6 @@ import com.startapp.android.publish.adsCommon.StartAppAd;
 import yts.mnf.torrent.AppController;
 import yts.mnf.torrent.Fragment.PopcornFragment;
 import yts.mnf.torrent.Fragment.YifyMovieFragment;
-import yts.mnf.torrent.MainActivity;
 import yts.mnf.torrent.R;
 import yts.mnf.torrent.Tools.PreferensHandler;
 

@@ -72,6 +72,7 @@ import yts.mnf.torrent.Models.ListModel;
 import yts.mnf.torrent.Models.Movie;
 import yts.mnf.torrent.Models.Torrent;
 import yts.mnf.torrent.R;
+
 import yts.mnf.torrent.Tools.Config;
 import yts.mnf.torrent.Tools.PreferensHandler;
 import yts.mnf.torrent.Tools.Url;
@@ -205,6 +206,9 @@ public class DetailsActivity extends AppCompatActivity {
     Button downloadTorrent;
     //ten_download
 
+    @BindView(R.id.fab_fav)
+    FloatingActionButton fabFav;
+
 
    /* @BindView(R.id.tab_layout)
     SmartTabLayout tabLayout;
@@ -257,6 +261,8 @@ public class DetailsActivity extends AppCompatActivity {
 
 
 
+
+
         Typeface face=Typeface.createFromAsset(getAssets(), "fonts/FjallaOne-Regular.ttf");
         tvMovie.setTypeface(face);
 
@@ -272,6 +278,8 @@ public class DetailsActivity extends AppCompatActivity {
         tvDesc.setTypeface(faceDesc);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+
+
 
         if(pref.getThemeDark()){
             setDarkModeColor();
@@ -325,6 +333,15 @@ public class DetailsActivity extends AppCompatActivity {
 
                     Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("vnd.youtube://" + movieModel.getYtTrailerCode()));
                     startActivity(intent);
+
+                }
+            });
+
+            fabFav.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+
 
                 }
             });
@@ -503,6 +520,11 @@ public class DetailsActivity extends AppCompatActivity {
         }
 
 
+
+
+    }
+
+    public void setFavorites(boolean value){
 
 
     }

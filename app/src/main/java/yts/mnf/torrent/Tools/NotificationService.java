@@ -13,7 +13,7 @@ import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
 import yts.mnf.torrent.Activity.NewMainActivity;
-import yts.mnf.torrent.MainActivity;
+
 import yts.mnf.torrent.R;
 
 /**

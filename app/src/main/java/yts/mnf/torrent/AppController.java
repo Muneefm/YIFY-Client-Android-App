@@ -143,10 +143,8 @@ public class AppController extends Application {
         logFirebase("startBrowser = "+url);
         if (!url.startsWith("http://") && !url.startsWith("https://"))
             url = "https://" + url;
-
         Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
         c.startActivity(browserIntent);
-
     }
 
     public static synchronized AppController getInstance() {

@@ -19,6 +19,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
 }
 
 dependencies {
@@ -31,7 +32,6 @@ dependencies {
 
     // Mandatory
     // Mandatory
-
 
 
     compile 'com.appnext.sdk:appnext-sdk:2.+'

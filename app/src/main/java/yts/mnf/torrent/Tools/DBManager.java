@@ -27,6 +27,12 @@ public class DBManager {
         return wishModel;
     }
 
+    public boolean checkIdExist(String id){
+           if(Realm.getDefaultInstance().where(WishlistModel.class).equalTo("movieId",id).findFirst()!=null){
+               return true;
+           }
+        return false;
+    }
 
 
 }
