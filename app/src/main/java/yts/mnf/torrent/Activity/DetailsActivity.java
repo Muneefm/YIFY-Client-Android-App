@@ -74,6 +74,7 @@ import yts.mnf.torrent.Models.Torrent;
 import yts.mnf.torrent.R;
 
 import yts.mnf.torrent.Tools.Config;
+import yts.mnf.torrent.Tools.DBManager;
 import yts.mnf.torrent.Tools.FabView;
 import yts.mnf.torrent.Tools.PreferensHandler;
 import yts.mnf.torrent.Tools.Url;
@@ -210,7 +211,7 @@ public class DetailsActivity extends AppCompatActivity {
     @BindView(R.id.fab_fav)
     com.github.clans.fab.FloatingActionButton fabFav;
 
-
+    String jsonString;
    /* @BindView(R.id.tab_layout)
     SmartTabLayout tabLayout;
 
@@ -247,9 +248,9 @@ public class DetailsActivity extends AppCompatActivity {
         }
         if(getIntent().hasExtra("movie_json")) {
             Log.e(TAG,"activity has extra ");
-            String target = getIntent().getStringExtra("movie_json");
-            Log.e(TAG,"activity has extra json =  "+target);
-            movieModel = new Gson().fromJson(target, Movie.class);
+             jsonString = getIntent().getStringExtra("movie_json");
+            Log.e(TAG,"activity has extra json =  "+jsonString);
+            movieModel = new Gson().fromJson(jsonString, Movie.class);
         }else{
             Log.e(TAG,"activity has no extra ");
 
@@ -289,6 +290,7 @@ public class DetailsActivity extends AppCompatActivity {
         }
 
         if(movieModel!=null){
+            setUpWishlistFab();
             tvMovie.setText(movieModel.getTitle());
             if(movieModel.getTitleEnglish()!=null) {
                 movieName = movieModel.getTitleEnglish();
@@ -339,21 +341,8 @@ public class DetailsActivity extends AppCompatActivity {
 
                 }
             });
-            fabFav.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                //Log.e("TAG_fab","getBack = "+fabFav.get()+"drawable = "+getDrawable(R.mipmap.ic_fav_true));
-                    if(fabKey == true){
-                        fabFav.setImageDrawable(getResources().getDrawable(R.mipmap.ic_fav_false));
-                        fabKey = false;
-                    }else{
-                        fabFav.setImageDrawable(getResources().getDrawable(R.mipmap.ic_fav_true));
-                        fabKey = true;
-                    }
 
 
-                }
-            });
 
 
             mModels = new ArrayList<>();
@@ -530,6 +519,31 @@ public class DetailsActivity extends AppCompatActivity {
 
 
 
+
+    }
+    private void setUpWishlistFab(){
+        Log.e(TAG,"setUpWishlistFab  movie id - "+movieModel.getId().toString());
+        if(new DBManager().checkIdExist(movieModel.getId().toString())){
+            fabFav.setImageDrawable(getResources().getDrawable(R.mipmap.ic_fav_true));
+        }else{
+            fabFav.setImageDrawable(getResources().getDrawable(R.mipmap.ic_fav_false));
+        }
+        fabFav.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //Log.e("TAG_fab","getBack = "+fabFav.get()+"drawable = "+getDrawable(R.mipmap.ic_fav_true));
+                if(fabKey == true){
+                    new DBManager().deleteItemFromWishlist(movieModel.getId().toString());
+                    fabFav.setImageDrawable(getResources().getDrawable(R.mipmap.ic_fav_false));
+                    fabKey = false;
+                }else{
+                    if(new DBManager().addWishlist(jsonString,movieModel.getId().toString())) {
+                        fabFav.setImageDrawable(getResources().getDrawable(R.mipmap.ic_fav_true));
+                        fabKey = true;
+                    }
+                }
+            }
+        });
 
     }
 

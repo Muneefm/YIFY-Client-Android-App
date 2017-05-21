@@ -13,8 +13,12 @@ import yts.mnf.torrent.Models.DBModel.WishlistModel;
 public class DBManager {
     private static String TAG = "DBManager";
 
-    public void addWishlist(String json){
-        new WishlistModel().setMovie(json);
+    public boolean addWishlist(String json,String movieId){
+        Log.e("TAG","wishlist add call movie id = "+movieId+" \n json string = "+json);
+        WishlistModel wModel = new WishlistModel();
+        wModel.setMovie(json);
+        wModel.setMovieId(movieId);
+        return true;
     }
     public RealmResults<WishlistModel> getAllWishlist(){
         RealmResults<WishlistModel> wishModel =   Realm.getDefaultInstance().where(WishlistModel.class).findAll();
@@ -30,8 +34,23 @@ public class DBManager {
     public boolean checkIdExist(String id){
            if(Realm.getDefaultInstance().where(WishlistModel.class).equalTo("movieId",id).findFirst()!=null){
                return true;
+           }else {
+               return false;
            }
-        return false;
+    }
+    public void deleteItemFromWishlist(String movieId){
+        Realm realm = Realm.getDefaultInstance();
+        final RealmResults<WishlistModel> results = realm.where(WishlistModel.class).equalTo("id",movieId).findAll();
+        realm.executeTransaction(new Realm.Transaction() {
+            @Override
+            public void execute(Realm realm) {
+               Log.e(TAG,"delete item method call result[0] = "+results.get(0));
+                results.deleteAllFromRealm();
+            }
+        });
+
+
+
     }
 
 
