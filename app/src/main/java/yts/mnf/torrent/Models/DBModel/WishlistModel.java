@@ -1,6 +1,7 @@
 package yts.mnf.torrent.Models.DBModel;
 
 import java.util.Date;
+import java.util.UUID;
 
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
@@ -11,7 +12,7 @@ import io.realm.annotations.PrimaryKey;
 
 public class WishlistModel extends RealmObject {
     @PrimaryKey
-    private int id;
+    private String id;
     private String movieId;
     private String movie;
     private Date date;
@@ -24,4 +25,7 @@ public class WishlistModel extends RealmObject {
         this.movieId = movieId;
     }
 
+    public void setDate(){
+        this.date = new Date();
+    }
 }

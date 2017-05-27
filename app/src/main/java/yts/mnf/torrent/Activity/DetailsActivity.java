@@ -524,6 +524,7 @@ public class DetailsActivity extends AppCompatActivity {
     private void setUpWishlistFab(){
         Log.e(TAG,"setUpWishlistFab  movie id - "+movieModel.getId().toString());
         if(new DBManager().checkIdExist(movieModel.getId().toString())){
+            fabKey = true;
             fabFav.setImageDrawable(getResources().getDrawable(R.mipmap.ic_fav_true));
         }else{
             fabFav.setImageDrawable(getResources().getDrawable(R.mipmap.ic_fav_false));
@@ -537,11 +538,12 @@ public class DetailsActivity extends AppCompatActivity {
                     fabFav.setImageDrawable(getResources().getDrawable(R.mipmap.ic_fav_false));
                     fabKey = false;
                 }else{
-                    if(new DBManager().addWishlist(jsonString,movieModel.getId().toString())) {
+                        new DBManager().addWishlist(jsonString,movieModel.getId().toString());
                         fabFav.setImageDrawable(getResources().getDrawable(R.mipmap.ic_fav_true));
                         fabKey = true;
-                    }
+
                 }
+                new DBManager().getAllWishlist();
             }
         });
 
