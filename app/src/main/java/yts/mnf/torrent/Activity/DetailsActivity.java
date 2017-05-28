@@ -12,7 +12,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.Fragment;
@@ -53,6 +52,7 @@ import com.appnext.core.callbacks.OnAdError;
 import com.appnext.core.callbacks.OnAdLoaded;
 import com.google.gson.Gson;
 import com.robertlevonyan.views.chip.Chip;
+import com.tapadoo.alerter.Alerter;
 
 import org.json.JSONObject;
 
@@ -79,7 +79,8 @@ import yts.mnf.torrent.Tools.FabView;
 import yts.mnf.torrent.Tools.PreferensHandler;
 import yts.mnf.torrent.Tools.Url;
 
-public class DetailsActivity extends AppCompatActivity {
+
+public class DetailsActivity extends BaseActivty {
 
     Chip chip;
     private SuggestionsAdapter adapter;
@@ -223,6 +224,7 @@ public class DetailsActivity extends AppCompatActivity {
     static String TAG = "DetailsActivity";
     PreferensHandler pref;
     boolean fabKey = false;
+    boolean isSnack = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -257,7 +259,6 @@ public class DetailsActivity extends AppCompatActivity {
         }
 
 //adDetailPage
-
 
 
 
@@ -390,7 +391,8 @@ public class DetailsActivity extends AppCompatActivity {
                                             Log.e("TAG","720p magneturl = "+mUrl);
                                             copyText(mUrl);
                                             if(c!=null) {
-                                                Toast.makeText(c, "Magnetic url Copied", Toast.LENGTH_LONG).show();
+                                                //Toast.makeText(c, "Magnetic url Copied", Toast.LENGTH_LONG).show();
+                                                showAlert("Copied","Magnetic url Copied",null,R.color.teal500);
                                             }
                                         } catch (UnsupportedEncodingException e) {
                                             e.printStackTrace();
@@ -426,7 +428,9 @@ public class DetailsActivity extends AppCompatActivity {
                                             Log.e("TAG","720p magneturl = "+mUrl);
                                             copyText(mUrl);
                                             if(c!=null) {
-                                                Toast.makeText(c, "Magnetic url Copied", Toast.LENGTH_LONG).show();
+                                                //Toast.makeText(c, "Magnetic url Copied", Toast.LENGTH_LONG).show();
+                                                showAlert("Copied","Magnetic url Copied",null,R.color.teal500);
+
                                             }
                                         } catch (UnsupportedEncodingException e) {
                                             e.printStackTrace();
@@ -461,8 +465,7 @@ public class DetailsActivity extends AppCompatActivity {
                                             Log.e("TAG","720p magneturl = "+mUrl);
                                             copyText(mUrl);
                                             if(c!=null) {
-                                                Toast.makeText(c, "Magnetic url Copied", Toast.LENGTH_LONG).show();
-                                            }
+                                                showAlert("Copied","Magnetic url Copied",null,R.color.teal500);                                            }
                                         } catch (UnsupportedEncodingException e) {
                                             e.printStackTrace();
                                             Log.e("TAG","try catch error");
@@ -521,6 +524,9 @@ public class DetailsActivity extends AppCompatActivity {
 
 
     }
+
+
+
     private void setUpWishlistFab(){
         Log.e(TAG,"setUpWishlistFab  movie id - "+movieModel.getId().toString());
         if(new DBManager().checkIdExist(movieModel.getId().toString())){
@@ -537,10 +543,18 @@ public class DetailsActivity extends AppCompatActivity {
                     new DBManager().deleteItemFromWishlist(movieModel.getId().toString());
                     fabFav.setImageDrawable(getResources().getDrawable(R.mipmap.ic_fav_false));
                     fabKey = false;
+                    showAlert("Removed", "Movie removed from Wishlist",null,R.color.blue_grey800);
+
                 }else{
                         new DBManager().addWishlist(jsonString,movieModel.getId().toString());
                         fabFav.setImageDrawable(getResources().getDrawable(R.mipmap.ic_fav_true));
                         fabKey = true;
+                    showAlert("Added", "Added movie to Wishlist", new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Log.e("TAG","added click listener ");
+                        }
+                    },R.color.blue_grey800);
 
                 }
                 new DBManager().getAllWishlist();
@@ -549,10 +563,6 @@ public class DetailsActivity extends AppCompatActivity {
 
     }
 
-    public void setFavorites(boolean value){
-
-
-    }
 
 
 
@@ -771,7 +781,7 @@ public class DetailsActivity extends AppCompatActivity {
                     // functionality that depends on this permission.
 
                     Log.e("tag","permission not granted   ");
-                    showSnackBar("Permission needed for writing to storage");
+                    //showSnackBar("Permission needed for writing to storage");
                 }
                 return;
             }
@@ -781,10 +791,10 @@ public class DetailsActivity extends AppCompatActivity {
         }
     }
 
-    private void showSnackBar(String msg) {
+   /* private void showSnackBar(String msg) {
         if(tvMovie!=null)
         Snackbar.make(tvMovie,""+msg,Snackbar.LENGTH_LONG).show();
-    }
+    }*/
 
     private final void focusOnView(){
         scrollView.post(new Runnable() {

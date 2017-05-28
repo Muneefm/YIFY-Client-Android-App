@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/YIFY.iml" filepath="$PROJECT_DIR$/YIFY.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/lgsnackbar/lgsnackbar.iml" filepath="$PROJECT_DIR$/lgsnackbar/lgsnackbar.iml" />
     </modules>
   </component>
 </project>
