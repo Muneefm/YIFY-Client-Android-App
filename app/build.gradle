@@ -32,7 +32,6 @@ dependencies {
     // Mandatory
     // Mandatory
     compile 'com.tapadoo.android:alerter:1.0.8'
-
     compile 'com.github.coyarzun89:fabtransitionactivity:0.2.0'
     compile 'com.github.clans:fab:1.6.4'
     compile 'com.appnext.sdk:appnext-sdk:2.+'

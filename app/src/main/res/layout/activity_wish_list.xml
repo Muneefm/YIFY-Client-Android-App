@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="yts.mnf.torrent.Activity.WishListActivity">
+
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_view_w"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="0dp"
+        android:layout_centerHorizontal="true"
+        android:columnWidth="@dimen/column_width"
+        android:clipToPadding="false"
+        android:scrollbars="vertical" />
+
+</android.support.constraint.ConstraintLayout>

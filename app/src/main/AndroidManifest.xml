@@ -128,7 +128,8 @@
         <activity
             android:name=".Activity.StreamActivity"
             android:label="@string/title_activity_stream"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme" />
+        <activity android:name=".Activity.WishListActivity"></activity>
     </application>
 
 </manifest>
