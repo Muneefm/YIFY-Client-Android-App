@@ -37,7 +37,6 @@ public class DBManager {
         }else{
             Log.e("TAG", "wishlist add Duplicate entry  movie id = " + movieId + " \n json string = " + json);
             return false;
-
         }
     }
     public RealmResults<WishlistModel> getAllWishlist(){

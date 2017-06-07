@@ -1,40 +1,44 @@
 package yts.mnf.torrent.Activity;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.View;
 
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import io.realm.RealmResults;
 import yts.mnf.torrent.Adapter.WishlistAdapter;
-import yts.mnf.torrent.GridSpacingItemDecoration;
 import yts.mnf.torrent.Models.DBModel.DBmodelRoot;
 import yts.mnf.torrent.Models.DBModel.WishlistModel;
 import yts.mnf.torrent.Models.Movie;
 import yts.mnf.torrent.R;
-import yts.mnf.torrent.Tools.Config;
 import yts.mnf.torrent.Tools.DBManager;
 
-public class WishListActivity extends AppCompatActivity {
-
+public class WishListActivityTwo extends AppCompatActivity {
     @BindView(R.id.recycler_view_w)
     RecyclerView recyclerView;
-    List<Movie> moviesModel;
-    DBmodelRoot modelData;
 
+    DBmodelRoot modelData;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_wish_list);
+        setContentView(R.layout.activity_wish_list_two);
         ButterKnife.bind(this);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         //recyclerView.addItemDecoration(new MarginDecoration(this));
@@ -60,11 +64,12 @@ public class WishListActivity extends AppCompatActivity {
         Log.e("TAG","string json after  = "+json);
         modelData = new Gson().fromJson(jsonString, DBmodelRoot.class);
         if(modelData != null){
-            Log.e("TAG","json obj  = "+modelData.getData());
+            Log.e("TAG","json obj  = "+modelData.getData().size());
         }
 
 
-        moviesModel = new ArrayList<>();
+        Collections.reverse(modelData.getData());
         recyclerView.setAdapter(new WishlistAdapter(getApplicationContext(),modelData.getData()));
     }
+
 }

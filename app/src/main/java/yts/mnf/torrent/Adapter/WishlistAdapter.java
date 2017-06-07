@@ -2,10 +2,12 @@ package yts.mnf.torrent.Adapter;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.Typeface;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.graphics.Palette;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -71,6 +73,8 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHo
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         Movie item = mModels.get(position);
+        Typeface face=Typeface.createFromAsset(mContext.getAssets(), "fonts/FjallaOne-Regular.ttf");
+        holder.movieTitle.setTypeface(face);
         holder.movieTitle.setText(item.getTitle());
         holder.tvRating.setText(item.getRating().toString());
         if (item.getMediumCoverImage() != null) { // simulate an optional url from the data item
@@ -90,8 +94,9 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHo
                     .into(new SimpleTarget<Bitmap>(com.bumptech.glide.request.target.Target.SIZE_ORIGINAL, com.bumptech.glide.request.target.Target.SIZE_ORIGINAL) {
                         @Override
                         public void onResourceReady(Bitmap resource, GlideAnimation glideAnimation) {
+                            Log.e("WishlistAdapter","onResourceReady ");
                             //holder.moviePoster.setImageBitmap(resource); // Possibly runOnUiThread()
-                            if(holder.relativeLayout!=null){
+                            if(holder.viewColor!=null){
                                 Palette.from(resource).generate(new Palette.PaletteAsyncListener() {
                                     public void onGenerated(Palette p) {
                                         // Use generated instance

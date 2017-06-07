@@ -152,6 +152,10 @@ Context c;
             Intent about = new Intent(NewMainActivity.this, AboutAcitivty.class);
             startActivity(about);
             return true;
+        }else if(id == R.id.action_wishlist){
+            Intent wishListact = new Intent(NewMainActivity.this, WishListActivityTwo.class);
+            startActivity(wishListact);
+            return true;
         }
 
         return super.onOptionsItemSelected(item);

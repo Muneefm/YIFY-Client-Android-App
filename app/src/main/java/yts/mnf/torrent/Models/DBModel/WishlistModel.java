@@ -28,4 +28,17 @@ public class WishlistModel extends RealmObject {
     public void setDate(){
         this.date = new Date();
     }
+
+
+    public String getMovie(){
+        return movie;
+    }
+
+    public String getMovieId(){
+        return movieId;
+    }
+
+    public Date getDate(){
+        return date;
+    }
 }

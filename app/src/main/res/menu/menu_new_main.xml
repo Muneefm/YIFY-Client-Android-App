@@ -23,4 +23,9 @@
         android:orderInCategory="100"
         android:title="About"
         app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/action_wishlist"
+        android:orderInCategory="100"
+        android:title="Wishlist"
+        app:showAsAction="ifRoom" />
 </menu>

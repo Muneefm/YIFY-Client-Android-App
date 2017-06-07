@@ -129,7 +129,11 @@
             android:name=".Activity.StreamActivity"
             android:label="@string/title_activity_stream"
             android:theme="@style/AppTheme" />
-        <activity android:name=".Activity.WishListActivity"></activity>
+        <activity android:name=".Activity.WishListActivity" />
+        <activity
+            android:name=".Activity.WishListActivityTwo"
+            android:label="@string/title_activity_wish_list_two"
+            android:theme="@style/AppTheme"></activity>
     </application>
 
 </manifest>
