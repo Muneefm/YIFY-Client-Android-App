@@ -1,5 +1,6 @@
 package yts.mnf.torrent.Activity;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -29,12 +30,14 @@ import yts.mnf.torrent.Tools.DBManager;
 public class WishListActivityTwo extends AppCompatActivity {
     @BindView(R.id.recycler_view_w)
     RecyclerView recyclerView;
-
+    Context c;
     DBmodelRoot modelData;
+    WishlistAdapter adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wish_list_two);
+         c = this;
         ButterKnife.bind(this);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -43,6 +46,12 @@ public class WishListActivityTwo extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         //recyclerView.addItemDecoration(new MarginDecoration(this));
         recyclerView.setHasFixedSize(true);
+
+        adapter =  new WishlistAdapter(c,getMovieData());
+        recyclerView.setAdapter(adapter);
+    }
+
+    private List<Movie> getMovieData(){
         String jsonString=null;
 
         for (WishlistModel result: new DBManager().getAllWishlist() ) {
@@ -69,7 +78,18 @@ public class WishListActivityTwo extends AppCompatActivity {
 
 
         Collections.reverse(modelData.getData());
-        recyclerView.setAdapter(new WishlistAdapter(getApplicationContext(),modelData.getData()));
+        return modelData.getData();
+
     }
 
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if(recyclerView.getAdapter()!=null){
+            Log.e("TAG","recycle view has adapter");
+            adapter.resetData(getMovieData());
+
+        }
+    }
 }

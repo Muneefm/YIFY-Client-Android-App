@@ -132,6 +132,7 @@
         <activity android:name=".Activity.WishListActivity" />
         <activity
             android:name=".Activity.WishListActivityTwo"
+            android:parentActivityName=".Activity.NewMainActivity"
             android:label="@string/title_activity_wish_list_two"
             android:theme="@style/AppTheme"></activity>
     </application>

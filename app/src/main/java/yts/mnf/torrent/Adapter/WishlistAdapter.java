@@ -1,9 +1,13 @@
 package yts.mnf.torrent.Adapter;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Typeface;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.util.Pair;
 import android.support.v7.graphics.Palette;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -19,9 +23,12 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
+import com.google.gson.Gson;
 
 import java.util.List;
 
+import yts.mnf.torrent.Activity.DetailsActivity;
+import yts.mnf.torrent.AppController;
 import yts.mnf.torrent.Models.Movie;
 import yts.mnf.torrent.R;
 
@@ -37,10 +44,12 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHo
     private List<Movie> mModels;
 
     public WishlistAdapter(Context mContext, List<Movie> models) {
-
         this.mContext = mContext;
         this.mModels = models;
-
+    }
+    public void resetData(List<Movie> models){
+        this.mModels = models;
+        notifyDataSetChanged();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -54,7 +63,7 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHo
             movieTitle = (TextView) view.findViewById(R.id.m_title);
             moviePoster = (ImageView) view.findViewById(R.id.m_poster);
             relativeLayout = (RelativeLayout) view.findViewById(R.id.name_relative);
-            cv = (CardView) view.findViewById(R.id.card_view);
+            cv = (CardView) view.findViewById(R.id.cv_wish);
             movieYear = (TextView) view.findViewById(R.id.movie_year);
             tvRating = (TextView) view.findViewById(R.id.m_rate);
             viewColor =  view.findViewById(R.id.m_color);
@@ -72,11 +81,16 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
-        Movie item = mModels.get(position);
-        Typeface face=Typeface.createFromAsset(mContext.getAssets(), "fonts/FjallaOne-Regular.ttf");
-        holder.movieTitle.setTypeface(face);
+        final Movie item = mModels.get(position);
+        Typeface face = Typeface.createFromAsset(mContext.getAssets(), "fonts/FjallaOne-Regular.ttf");
+        Typeface faceTwo = Typeface.createFromAsset(mContext.getAssets(), "fonts/Righteous-Regular.ttf");
+        Typeface faceThree = Typeface.createFromAsset(mContext.getAssets(), "fonts/QuattrocentoSans-Regular.ttf");
+        Typeface faceFour = Typeface.createFromAsset(mContext.getAssets(), "fonts/Montserrat-Medium.ttf");
+
+        holder.movieTitle.setTypeface(faceFour);
         holder.movieTitle.setText(item.getTitle());
         holder.tvRating.setText(item.getRating().toString());
+        holder.tvRating.setTypeface(faceThree);
         if (item.getMediumCoverImage() != null) { // simulate an optional url from the data item
             holder.moviePoster.setVisibility(View.VISIBLE);
 
@@ -113,6 +127,24 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHo
             Glide.clear(holder.moviePoster);
             holder.moviePoster.setVisibility(View.GONE);
         }
+        holder.cv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Gson gS = new Gson();
+                String movieJson = gS.toJson(item);
+                Intent detailAct = new Intent(mContext, DetailsActivity.class);
+                detailAct.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                Pair<View, String> p1 = Pair.create((View)holder.moviePoster, "poster");
+                Pair<View, String> p2 = Pair.create((View)holder.movieTitle, "title");
+                Pair<View, String> p3 = Pair.create((View)holder.tvRating, "rating");
+
+
+                detailAct.putExtra("movie_json", movieJson);
+                ActivityOptionsCompat options = ActivityOptionsCompat.
+                        makeSceneTransitionAnimation((Activity) mContext, p1,p2,p3);
+                mContext.startActivity(detailAct,options.toBundle());
+            }
+        });
     }
 
     @Override
