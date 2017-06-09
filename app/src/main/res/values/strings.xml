@@ -77,6 +77,7 @@
         <item>Title</item>
         <item>Rating</item>
     </string-array>
+    <string name="download_torrent_client_prompt"><![CDATA[Your phone does not have an torrent client to download this torrent movie, You need to install bitTorrent or uTorrent to download the movie.]]></string>
 
     <string name="app_name">YIFY Movies </string>
 

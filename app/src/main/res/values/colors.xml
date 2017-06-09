@@ -119,6 +119,7 @@
         <item>@color/yellow_700</item>
     </integer-array>
 
+    <color name="material_red_400">#EF5350</color>
 
     <color name="transparentBlack">#42000000</color>
     <color name="ColorPrimary">#F44336</color>

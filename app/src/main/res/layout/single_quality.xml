@@ -108,6 +108,18 @@
                         app:floating_title_color="@android:color/white"
                         />
 
+                    <ru.dimorinny.floatingtextbutton.FloatingTextButton
+                        android:id="@+id/btn_download"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:layout_gravity="center"
+                        app:floating_background_color="@color/blue_grey700"
+                        app:floating_icon="@mipmap/download"
+                        app:floating_title="Download"
+                        app:floating_title_color="@android:color/white"
+                        />
+
                  <!--   <ru.dimorinny.floatingtextbutton.FloatingTextButton
                         android:id="@+id/btn_torrent"
                         android:layout_width="wrap_content"

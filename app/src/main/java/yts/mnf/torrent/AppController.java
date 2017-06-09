@@ -5,11 +5,16 @@ import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.afollestad.materialdialogs.DialogAction;
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
@@ -22,6 +27,8 @@ import com.google.firebase.analytics.FirebaseAnalytics;
 import com.startapp.android.publish.adsCommon.AutoInterstitialPreferences;
 import com.startapp.android.publish.adsCommon.StartAppAd;
 import com.startapp.android.publish.adsCommon.StartAppSDK;
+
+import java.util.List;
 
 import io.realm.Realm;
 import yts.mnf.torrent.Models.DBModel.WishlistModel;
@@ -145,6 +152,41 @@ public class AppController extends Application {
             url = "https://" + url;
         Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
         c.startActivity(browserIntent);
+    }
+    public void openMagneturi(String url, final Context c){
+        Log.e("TAG","openMagneturi magnet");
+
+        if(url.startsWith("magnet:")) {
+            Log.e("TAG","url starts with magnet");
+            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+            PackageManager manager = c.getPackageManager();
+            List<ResolveInfo> infos = manager.queryIntentActivities(browserIntent, 0);
+            if (infos.size() > 0) {
+                c.startActivity(browserIntent);
+                Log.e("TAG","yes act to handle");
+
+            } else {
+                Log.e("TAG","No act to handle");
+                new MaterialDialog.Builder(c)
+                        .title("Install Torrent Downloader")
+                        .content(R.string.download_torrent_client_prompt)
+                        .positiveText("Download").onPositive(new MaterialDialog.SingleButtonCallback() {
+                    @Override
+                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                        startBrowser("https://play.google.com/store/apps/details?id=com.utorrent.client",c);
+                    }
+                }).iconRes(R.mipmap.ic_launcher)
+                        .positiveColor(c.getResources().getColor(R.color.white))
+                        .contentColor(c.getResources().getColor(R.color.white))
+                        .backgroundColor(c.getResources().getColor(R.color.blue_grey800))
+                        .titleColorRes(R.color.material_red_400)
+                        .btnSelector(R.drawable.md_btn_selector_custom, DialogAction.POSITIVE)
+                        .show();
+            }
+        }else{
+            Log.e("TAG","url does not starts with magnet");
+
+        }
     }
 
     public static synchronized AppController getInstance() {

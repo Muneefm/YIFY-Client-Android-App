@@ -256,7 +256,6 @@ public class DetailsActivity extends BaseActivty {
             movieModel = new Gson().fromJson(jsonString, Movie.class);
         }else{
             Log.e(TAG,"activity has no extra ");
-
         }
 
 //adDetailPage
@@ -377,8 +376,16 @@ public class DetailsActivity extends BaseActivty {
                                     @Override
                                     public void onClick(View v) {
                                        // if(checkPermission()) {
-                                        new AppController().startBrowser(model.getUrl(),c);
-                                        pref.increaseClick();
+                                     //   new AppController().startBrowser(model.getUrl(),c);
+                                        try {
+                                            String mUrl = generateMagneticUrl(model.getHash(),movieName);
+                                            Log.e("TAG","720p magnet url = "+mUrl);
+                                            new AppController().openMagneturi(mUrl,c);
+                                            pref.increaseClick();
+                                        } catch (UnsupportedEncodingException e) {
+                                            e.printStackTrace();
+                                        }
+
                                        // }else{
                                         //    reqPermission();
                                        // }
@@ -391,10 +398,8 @@ public class DetailsActivity extends BaseActivty {
                                             String mUrl = generateMagneticUrl(model.getHash(),movieName);
                                             Log.e("TAG","720p magneturl = "+mUrl);
                                             copyText(mUrl);
-                                            if(c!=null) {
-                                                //Toast.makeText(c, "Magnetic url Copied", Toast.LENGTH_LONG).show();
-                                                showAlert("Copied","Magnetic url Copied",null,R.color.teal500);
-                                            }
+                                                showAlert("Copied","Magnetic url opened",null,R.color.teal500);
+
                                         } catch (UnsupportedEncodingException e) {
                                             e.printStackTrace();
                                             Log.e("TAG","try catch error");
@@ -413,8 +418,15 @@ public class DetailsActivity extends BaseActivty {
                                     @Override
                                     public void onClick(View v) {
                                        // if(checkPermission()) {
-                                        new AppController().startBrowser(model.getUrl(),c);
-                                        pref.increaseClick();
+                                        try {
+                                            String mUrl = generateMagneticUrl(model.getHash(),movieName);
+                                            Log.e("TAG","720p magnet url = "+mUrl);
+                                            new AppController().openMagneturi(mUrl,c);
+                                            pref.increaseClick();
+                                        } catch (UnsupportedEncodingException e) {
+                                            e.printStackTrace();
+                                        }
+
                                         //  }else{
                                          //   reqPermission();
                                        // }
@@ -428,11 +440,10 @@ public class DetailsActivity extends BaseActivty {
                                             String mUrl = generateMagneticUrl(model.getHash(),movieName);
                                             Log.e("TAG","720p magneturl = "+mUrl);
                                             copyText(mUrl);
-                                            if(c!=null) {
                                                 //Toast.makeText(c, "Magnetic url Copied", Toast.LENGTH_LONG).show();
                                                 showAlert("Copied","Magnetic url Copied",null,R.color.teal500);
 
-                                            }
+
                                         } catch (UnsupportedEncodingException e) {
                                             e.printStackTrace();
                                             Log.e("TAG","try catch error");
@@ -451,8 +462,15 @@ public class DetailsActivity extends BaseActivty {
                                     @Override
                                     public void onClick(View v) {
                                         // if(checkPermission()) {
-                                        new AppController().startBrowser(model.getUrl(),c);
-                                        pref.increaseClick();
+                                        try {
+                                            String mUrl = generateMagneticUrl(model.getHash(),movieName);
+                                            Log.e("TAG","720p magnet url = "+mUrl);
+                                            new AppController().openMagneturi(mUrl,c);
+                                            pref.increaseClick();
+                                        } catch (UnsupportedEncodingException e) {
+                                            e.printStackTrace();
+                                        }
+
                                         //  }else{
                                         //   reqPermission();
                                         // }
@@ -466,7 +484,8 @@ public class DetailsActivity extends BaseActivty {
                                             Log.e("TAG","720p magneturl = "+mUrl);
                                             copyText(mUrl);
                                             if(c!=null) {
-                                                showAlert("Copied","Magnetic url Copied",null,R.color.teal500);                                            }
+                                                showAlert("Copied","Magnetic url Copied",null,R.color.teal500);
+                                            }
                                         } catch (UnsupportedEncodingException e) {
                                             e.printStackTrace();
                                             Log.e("TAG","try catch error");

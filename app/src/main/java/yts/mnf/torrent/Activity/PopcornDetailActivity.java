@@ -472,6 +472,7 @@ List<String> titles = new ArrayList<>();
         TextView seed  = (TextView) v.findViewById(R.id.tv_seed);
         TextView leech  = (TextView) v.findViewById(R.id.tv_leech);
         FloatingTextButton cpyBtn  = (FloatingTextButton) v.findViewById(R.id.btn_copy);
+        FloatingTextButton downBtn  = (FloatingTextButton) v.findViewById(R.id.btn_download);
 
         headQua.setText(head);
         if(model!=null){
@@ -485,7 +486,16 @@ List<String> titles = new ArrayList<>();
                     copyText(model.getUrl());
                 }
             });
+            downBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                        //String mUrl = generateMagneticUrl(model.getUrl(),movieName);
+                        Log.e("popcornhf","popcorn 720p magnet url = "+model.getUrl());
+                        new AppController().openMagneturi(model.getUrl(),c);
+                        pref.increaseClick();
 
+                }
+            });
         }
 
 
