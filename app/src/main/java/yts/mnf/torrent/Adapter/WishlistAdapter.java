@@ -29,6 +29,8 @@ import java.util.List;
 
 import yts.mnf.torrent.Activity.DetailsActivity;
 import yts.mnf.torrent.AppController;
+import yts.mnf.torrent.Models.DBModel.WishListMovieModel;
+import yts.mnf.torrent.Models.DBModel.WishlistModel;
 import yts.mnf.torrent.Models.Movie;
 import yts.mnf.torrent.R;
 
@@ -41,13 +43,13 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHo
 
     private Context mContext;
 
-    private List<Movie> mModels;
+    private List<WishListMovieModel> mModels;
 
-    public WishlistAdapter(Context mContext, List<Movie> models) {
+    public WishlistAdapter(Context mContext, List<WishListMovieModel> models) {
         this.mContext = mContext;
         this.mModels = models;
     }
-    public void resetData(List<Movie> models){
+    public void resetData(List<WishListMovieModel> models){
         this.mModels = models;
         notifyDataSetChanged();
     }
@@ -81,26 +83,27 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
-        final Movie item = mModels.get(position);
+        final WishListMovieModel item = mModels.get(position);
         Typeface face = Typeface.createFromAsset(mContext.getAssets(), "fonts/FjallaOne-Regular.ttf");
         Typeface faceTwo = Typeface.createFromAsset(mContext.getAssets(), "fonts/Righteous-Regular.ttf");
         Typeface faceThree = Typeface.createFromAsset(mContext.getAssets(), "fonts/QuattrocentoSans-Regular.ttf");
         Typeface faceFour = Typeface.createFromAsset(mContext.getAssets(), "fonts/Montserrat-Medium.ttf");
+        Typeface faceRate=Typeface.createFromAsset(mContext.getAssets(), "fonts/Righteous-Regular.ttf");
 
         holder.movieTitle.setTypeface(faceFour);
         holder.movieTitle.setText(item.getTitle());
         holder.tvRating.setText(item.getRating().toString());
-        holder.tvRating.setTypeface(faceThree);
-        if (item.getMediumCoverImage() != null) { // simulate an optional url from the data item
+        holder.tvRating.setTypeface(faceRate);
+        if (item.getImage_url() != null) { // simulate an optional url from the data item
             holder.moviePoster.setVisibility(View.VISIBLE);
 
             Glide.with(mContext)
-                    .load(item.getMediumCoverImage())
+                    .load(item.getImage_url())
                     .diskCacheStrategy(DiskCacheStrategy.ALL)
                     .into(holder.moviePoster);
             Glide
                     .with(mContext)
-                    .load(item.getMediumCoverImage())
+                    .load(item.getImage_url())
                     .asBitmap()
                     .diskCacheStrategy(DiskCacheStrategy.ALL)
                     // .signature(new StringSignature(String.valueOf(System.currentTimeMillis())))

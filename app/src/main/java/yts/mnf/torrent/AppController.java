@@ -164,29 +164,54 @@ public class AppController extends Application {
             if (infos.size() > 0) {
                 c.startActivity(browserIntent);
                 Log.e("TAG","yes act to handle");
-
             } else {
                 Log.e("TAG","No act to handle");
-                new MaterialDialog.Builder(c)
-                        .title("Install Torrent Downloader")
-                        .content(R.string.download_torrent_client_prompt)
-                        .positiveText("Download").onPositive(new MaterialDialog.SingleButtonCallback() {
-                    @Override
-                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-                        startBrowser("https://play.google.com/store/apps/details?id=com.utorrent.client",c);
-                    }
-                }).iconRes(R.mipmap.ic_launcher)
-                        .positiveColor(c.getResources().getColor(R.color.white))
-                        .contentColor(c.getResources().getColor(R.color.white))
-                        .backgroundColor(c.getResources().getColor(R.color.blue_grey800))
-                        .titleColorRes(R.color.material_red_400)
-                        .btnSelector(R.drawable.md_btn_selector_custom, DialogAction.POSITIVE)
-                        .show();
+                if(new PreferensHandler(c).getThemeDark())
+                    openDialogueDark(c);
+                else
+                    openDialogueWhite(c);
+
             }
         }else{
             Log.e("TAG","url does not starts with magnet");
 
         }
+    }
+
+
+    public void openDialogueWhite(final Context c){
+        new MaterialDialog.Builder(c)
+                .title("Install Torrent Downloader")
+                .content(R.string.download_torrent_client_prompt)
+                .positiveText("Download").onPositive(new MaterialDialog.SingleButtonCallback() {
+            @Override
+            public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                startBrowser("https://play.google.com/store/apps/details?id=com.utorrent.client",c);
+            }
+        }).iconRes(R.mipmap.ic_launcher)
+                .positiveColor(c.getResources().getColor(R.color.white))
+                .contentColor(c.getResources().getColor(R.color.blue_grey800))
+                .backgroundColor(c.getResources().getColor(R.color.white))
+                .titleColorRes(R.color.black)
+                .btnSelector(R.drawable.md_btn_selector_custom, DialogAction.POSITIVE)
+                .show();
+    }
+    public void openDialogueDark(final Context c){
+        new MaterialDialog.Builder(c)
+                .title("Install Torrent Downloader")
+                .content(R.string.download_torrent_client_prompt)
+                .positiveText("Download").onPositive(new MaterialDialog.SingleButtonCallback() {
+            @Override
+            public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                startBrowser("https://play.google.com/store/apps/details?id=com.utorrent.client",c);
+            }
+        }).iconRes(R.mipmap.ic_launcher)
+                .positiveColor(c.getResources().getColor(R.color.white))
+                .contentColor(c.getResources().getColor(R.color.white))
+                .backgroundColor(c.getResources().getColor(R.color.blue_grey800))
+                .titleColorRes(R.color.material_red_400)
+                .btnSelector(R.drawable.md_btn_selector_custom, DialogAction.POSITIVE)
+                .show();
     }
 
     public static synchronized AppController getInstance() {

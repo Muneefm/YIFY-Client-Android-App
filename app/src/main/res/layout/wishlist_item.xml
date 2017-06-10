@@ -61,7 +61,7 @@
                         android:id="@+id/m_rate"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/grey700"
+                        android:textColor="@color/colorAccent"
                         android:textSize="18dp"
                         android:gravity="center"
                         android:lines="1"
@@ -75,6 +75,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
+                    android:textColor="@color/blue_grey900"
                     android:text="Available in:"
                     />
                 <LinearLayout
@@ -108,7 +109,7 @@
                 android:layout_height="wrap_content"
                 android:text="Added on 12-12-2017"
                 android:paddingBottom="5dp"
-                android:textColor="@color/grey600"
+                android:textColor="@color/blue_grey900"
                 android:layout_marginBottom="10dp"
                 android:layout_alignParentBottom="true"
                 android:layout_marginLeft="136dp"

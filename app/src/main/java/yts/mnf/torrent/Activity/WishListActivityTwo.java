@@ -22,6 +22,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import yts.mnf.torrent.Adapter.WishlistAdapter;
 import yts.mnf.torrent.Models.DBModel.DBmodelRoot;
+import yts.mnf.torrent.Models.DBModel.WishListMovieModel;
 import yts.mnf.torrent.Models.DBModel.WishlistModel;
 import yts.mnf.torrent.Models.Movie;
 import yts.mnf.torrent.R;
@@ -48,13 +49,18 @@ public class WishListActivityTwo extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
 
         adapter =  new WishlistAdapter(c,getMovieData());
-        recyclerView.setAdapter(adapter);
+       recyclerView.setAdapter(adapter);
     }
 
-    private List<Movie> getMovieData(){
+    private List<WishListMovieModel> getMovieData(){
         String jsonString=null;
 
-        for (WishlistModel result: new DBManager().getAllWishlist() ) {
+        List<WishListMovieModel> model = new DBManager().getAllWishlist();
+        Collections.reverse(model);
+
+        return model;
+
+       /* for (WishlistModel result: new DBManager().getAllWishlist() ) {
             Log.e("TAG","id  = "+result.getMovieId());
             if(jsonString==null){
                 jsonString = result.getMovie();
@@ -79,7 +85,7 @@ public class WishListActivityTwo extends AppCompatActivity {
 
         Collections.reverse(modelData.getData());
         return modelData.getData();
-
+*/
     }
 
 

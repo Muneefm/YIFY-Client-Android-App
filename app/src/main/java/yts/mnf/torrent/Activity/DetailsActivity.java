@@ -549,7 +549,7 @@ public class DetailsActivity extends BaseActivty {
 
     private void setUpWishlistFab(){
         Log.e(TAG,"setUpWishlistFab  movie id - "+movieModel.getId().toString());
-        if(new DBManager().checkIdExist(movieModel.getId().toString())){
+        if(new DBManager().checkIdExist(movieModel.getId().toString(),"yify")){
             fabKey = true;
             fabFav.setImageDrawable(getResources().getDrawable(R.mipmap.ic_fav_true));
         }else{
@@ -560,13 +560,14 @@ public class DetailsActivity extends BaseActivty {
             public void onClick(View view) {
                 //Log.e("TAG_fab","getBack = "+fabFav.get()+"drawable = "+getDrawable(R.mipmap.ic_fav_true));
                 if(fabKey == true){
-                    new DBManager().deleteItemFromWishlist(movieModel.getId().toString());
+                    new DBManager().deleteItemFromWishlist(movieModel.getId().toString(),"yify");
                     fabFav.setImageDrawable(getResources().getDrawable(R.mipmap.ic_fav_false));
                     fabKey = false;
                     showAlert("Removed", "Movie removed from Wishlist",null,R.color.blue_grey800);
 
                 }else{
-                        new DBManager().addWishlist(jsonString,movieModel.getId().toString());
+                        //new DBManager().addWishlist(jsonString,movieModel.getId().toString());
+                    new DBManager().addDataYify(movieModel);
                         fabFav.setImageDrawable(getResources().getDrawable(R.mipmap.ic_fav_true));
                         fabKey = true;
                     showAlert("Added", "Added movie to Wishlist", new View.OnClickListener() {
@@ -575,7 +576,6 @@ public class DetailsActivity extends BaseActivty {
                             Log.e("TAG","added click listener ");
                         }
                     },R.color.blue_grey800);
-
                 }
                 new DBManager().getAllWishlist();
             }

@@ -36,7 +36,7 @@ public class WishListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_wish_list);
         ButterKnife.bind(this);
 
-        recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+      /*  recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         //recyclerView.addItemDecoration(new MarginDecoration(this));
         recyclerView.setHasFixedSize(true);
         String jsonString=null;
@@ -65,6 +65,6 @@ public class WishListActivity extends AppCompatActivity {
 
 
         moviesModel = new ArrayList<>();
-        recyclerView.setAdapter(new WishlistAdapter(getApplicationContext(),modelData.getData()));
+        recyclerView.setAdapter(new WishlistAdapter(getApplicationContext(),modelData.getData()));*/
     }
 }
