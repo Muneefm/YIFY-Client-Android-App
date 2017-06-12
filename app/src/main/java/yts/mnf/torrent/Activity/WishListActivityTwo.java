@@ -56,7 +56,7 @@ public class WishListActivityTwo extends AppCompatActivity {
         String jsonString=null;
 
         List<WishListMovieModel> model = new DBManager().getAllWishlist();
-        Collections.reverse(model);
+       // Collections.reverse(model);
 
         return model;
 

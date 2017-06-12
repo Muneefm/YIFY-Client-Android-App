@@ -22,6 +22,7 @@ public class WishListMovieModel extends RealmObject {
     private String quality_three;
     private Date added_on;
     private String image_url;
+    private String json_string;
 
 
     public String getProvider() {
@@ -98,5 +99,13 @@ public class WishListMovieModel extends RealmObject {
 
     public void setQuality_three(String quality_three) {
         this.quality_three = quality_three;
+    }
+
+    public String getJson_string() {
+        return json_string;
+    }
+
+    public void setJson_string(String json_string) {
+        this.json_string = json_string;
     }
 }

@@ -38,6 +38,7 @@
                     android:layout_width="wrap_content"
                     android:layout_marginTop="20dp"
                     android:layout_height="wrap_content"
+                    android:lines="1"
                     android:text="Space between us"
                     android:textSize="20dp"
 
@@ -85,15 +86,29 @@
                     android:layout_height="wrap_content">
 
                     <TextView
+                        android:id="@+id/avail_720p"
+                        android:visibility="gone"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="720p"
                         />
                     <TextView
+                        android:id="@+id/avail_1080p"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:visibility="gone"
+
                         android:layout_marginLeft="20dp"
                         android:text="1080p"
+                        />
+                    <TextView
+                        android:id="@+id/avail_3d"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone"
+
+                        android:layout_marginLeft="20dp"
+                        android:text="3D"
                         />
 
                 </LinearLayout>
@@ -109,6 +124,7 @@
                 android:layout_height="wrap_content"
                 android:text="Added on 12-12-2017"
                 android:paddingBottom="5dp"
+                android:visibility="gone"
                 android:textColor="@color/blue_grey900"
                 android:layout_marginBottom="10dp"
                 android:layout_alignParentBottom="true"

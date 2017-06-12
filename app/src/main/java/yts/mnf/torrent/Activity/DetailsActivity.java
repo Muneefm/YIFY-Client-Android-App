@@ -234,7 +234,6 @@ public class DetailsActivity extends BaseActivty {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             getWindow().setEnterTransition(new Slide());
             getWindow().setExitTransition(new Slide());
-
         }
 // set an exit transition
         setContentView(R.layout.activity_details);
@@ -297,7 +296,6 @@ public class DetailsActivity extends BaseActivty {
                 movieName = movieModel.getTitleEnglish();
             }else{
                 movieName = movieModel.getTitle();
-
             }
 
             Log.e("TAG","detail large cover url = "+movieModel.getLargeCoverImage());
@@ -563,7 +561,7 @@ public class DetailsActivity extends BaseActivty {
                     new DBManager().deleteItemFromWishlist(movieModel.getId().toString(),"yify");
                     fabFav.setImageDrawable(getResources().getDrawable(R.mipmap.ic_fav_false));
                     fabKey = false;
-                    showAlert("Removed", "Movie removed from Wishlist",null,R.color.blue_grey800);
+                    showAlert("Removed", "Movie removed from Wishlist",null,R.color.cyan500);
 
                 }else{
                         //new DBManager().addWishlist(jsonString,movieModel.getId().toString());
@@ -574,8 +572,10 @@ public class DetailsActivity extends BaseActivty {
                         @Override
                         public void onClick(View v) {
                             Log.e("TAG","added click listener ");
+                            Intent wishListact = new Intent(DetailsActivity.this, WishListActivityTwo.class);
+                            startActivity(wishListact);
                         }
-                    },R.color.blue_grey800);
+                    },R.color.cyan500);
                 }
                 new DBManager().getAllWishlist();
             }
@@ -651,8 +651,15 @@ public class DetailsActivity extends BaseActivty {
                     @Override
                     public void onSelection(MaterialDialog dialog, View view, int which, CharSequence text) {
                         //Toast.makeText(DetailsActivity.this, which + ": " + text + ", ID = " , Toast.LENGTH_SHORT).show();
-                        new AppController().startBrowser(torrents.get(which).getUrl(),c);
+                      //  new AppController().startBrowser(torrents.get(which).getUrl(),c);
                         Log.e("TAG","onSelction download which = "+which);
+                        try {
+                            String url = generateMagneticUrl(torrents.get(which).getHash(),movieName);
+                            new AppController().openMagneturi(url,c);
+
+                        } catch (UnsupportedEncodingException e) {
+                            e.printStackTrace();
+                        }
 
                     }
                 })

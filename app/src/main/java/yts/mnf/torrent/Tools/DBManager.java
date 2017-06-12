@@ -2,6 +2,8 @@ package yts.mnf.torrent.Tools;
 
 import android.util.Log;
 
+import com.google.gson.Gson;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -62,11 +64,15 @@ public class DBManager {
             for(int i=0;i<movieModel.getTorrents().size();i++){
                 switch (i){
                     case 0:qua1 = movieModel.getTorrents().get(i).getQuality();break;
-                    case 1:qua1 = movieModel.getTorrents().get(i).getQuality();break;
-                    case 2:qua1 = movieModel.getTorrents().get(i).getQuality();break;
-
+                    case 1:qua2 = movieModel.getTorrents().get(i).getQuality();break;
+                    case 2:qua3 = movieModel.getTorrents().get(i).getQuality();break;
                 }
+
+                Log.e("TAG",""+movieModel.getTorrents().get(i).getQuality());
+
             }
+            Gson gS = new Gson();
+            String movieJson = gS.toJson(movieModel);
 
             String uuid = UUID.randomUUID().toString();
             WishListMovieModel wModel = realm.createObject(WishListMovieModel.class, uuid);
@@ -79,6 +85,7 @@ public class DBManager {
             wModel.setQuality_two(qua2);
             wModel.setQuality_three(qua3);
             wModel.setImage_url(movieModel.getMediumCoverImage());
+            wModel.setJson_string(movieJson);
             realm.commitTransaction();
             return true;
         }else{
@@ -94,6 +101,7 @@ public class DBManager {
 
             realm.beginTransaction();
 
+
             List<String> qualitiesList = new ArrayList<>();
             if(movieModel.getTorrents().getEn().get720p()!=null){
                 qua1 = "720p";
@@ -102,17 +110,21 @@ public class DBManager {
                 qua2 = "1080p";
             }
 
-
+            Gson gS = new Gson();
+            String movieJsonPop = gS.toJson(movieModel);
                 String uuid = UUID.randomUUID().toString();
             WishListMovieModel wModel = realm.createObject(WishListMovieModel.class, uuid);
             wModel.setAdded_on(new Date());
             wModel.setMovie_id(movieModel.getId().toString());
             wModel.setProvider("pop");
-            wModel.setRating(movieModel.getRating().toString());
+            wModel.setRating(String.valueOf(movieModel.getRating().getPercentage()));
             wModel.setTitle(movieModel.getTitle());
             wModel.setQuality_one(qua1);
             wModel.setQuality_two(qua2);
             wModel.setQuality_three(qua3);
+            wModel.setImage_url(movieModel.getImages().getBanner());
+            wModel.setJson_string(movieJsonPop);
+
             realm.commitTransaction();
             return true;
         }else{

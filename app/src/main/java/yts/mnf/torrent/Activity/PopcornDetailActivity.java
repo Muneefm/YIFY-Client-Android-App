@@ -58,10 +58,11 @@ import yts.mnf.torrent.Models.Popcorn._720p;
 import yts.mnf.torrent.Models.Torrent;
 import yts.mnf.torrent.R;
 import yts.mnf.torrent.Tools.Config;
+import yts.mnf.torrent.Tools.DBManager;
 import yts.mnf.torrent.Tools.PreferensHandler;
 import yts.mnf.torrent.Tools.Url;
 
-public class PopcornDetailActivity extends AppCompatActivity {
+public class PopcornDetailActivity extends BaseActivty {
 
     Chip chip;
     private SuggestionsAdapter adapter;
@@ -190,6 +191,8 @@ public class PopcornDetailActivity extends AppCompatActivity {
     Button downloadTorrent;
     //ten_download
 
+    @BindView(R.id.fab_fav)
+    com.github.clans.fab.FloatingActionButton fabFav;
 
    /* @BindView(R.id.tab_layout)
     SmartTabLayout tabLayout;
@@ -202,6 +205,7 @@ public class PopcornDetailActivity extends AppCompatActivity {
     static String TAG = "PopcornDetailActivity";
 
     PreferensHandler pref;
+    boolean fabKey = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -262,6 +266,8 @@ public class PopcornDetailActivity extends AppCompatActivity {
         }
 
         if(movieModel!=null){
+            setUpWishlistFab();
+
             tvMovie.setText(movieModel.getTitle());
             if(movieModel.getTitle()!=null) {
                 movieName = movieModel.getTitle();
@@ -404,12 +410,16 @@ public class PopcornDetailActivity extends AppCompatActivity {
                   //  showDialogue(movieModel.getTorrents().getEn());
                     pref.increaseClick();
                     if(movieModel.getTorrents().getEn().get1080p()!=null) {
-                        copyText(movieModel.getTorrents().getEn().get1080p().getUrl());
-                        Toast.makeText(c,"Copied 1080p  magnetic url",Toast.LENGTH_LONG).show();
+                        new AppController().openMagneturi(movieModel.getTorrents().getEn().get1080p().getUrl(),c);
+
+                        // copyText(movieModel.getTorrents().getEn().get1080p().getUrl());
+                        //Toast.makeText(c,"Copied 1080p  magnetic url",Toast.LENGTH_LONG).show();
                     }
                     else if(movieModel.getTorrents().getEn().get720p()!=null) {
-                        copyText(movieModel.getTorrents().getEn().get720p().getUrl());
-                        Toast.makeText(c,"Copied 720p  magnetic url",Toast.LENGTH_LONG).show();
+                        new AppController().openMagneturi(movieModel.getTorrents().getEn().get1080p().getUrl(),c);
+
+                        // copyText(movieModel.getTorrents().getEn().get720p().getUrl());
+                       // Toast.makeText(c,"Copied 720p  magnetic url",Toast.LENGTH_LONG).show();
                     }
                 }
             });
@@ -417,6 +427,53 @@ public class PopcornDetailActivity extends AppCompatActivity {
 
         }
     }
+
+
+
+    private void setUpWishlistFab(){
+        Log.e(TAG,"setUpWishlistFab  movie id - "+movieModel.getId().toString());
+        if(new DBManager().checkIdExist(movieModel.getId().toString(),"pop")){
+            fabKey = true;
+            fabFav.setImageDrawable(getResources().getDrawable(R.mipmap.ic_fav_true));
+        }else{
+            fabFav.setImageDrawable(getResources().getDrawable(R.mipmap.ic_fav_false));
+        }
+        fabFav.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //Log.e("TAG_fab","getBack = "+fabFav.get()+"drawable = "+getDrawable(R.mipmap.ic_fav_true));
+                if(fabKey == true){
+                    new DBManager().deleteItemFromWishlist(movieModel.getId().toString(),"pop");
+                    fabFav.setImageDrawable(getResources().getDrawable(R.mipmap.ic_fav_false));
+                    fabKey = false;
+                    showAlert("Removed", "Movie removed from Wishlist",null,R.color.teal500);
+
+                }else{
+                    //new DBManager().addWishlist(jsonString,movieModel.getId().toString());
+                    new DBManager().addDataPopcorn(movieModel);
+                    fabFav.setImageDrawable(getResources().getDrawable(R.mipmap.ic_fav_true));
+                    fabKey = true;
+                    showAlert("Added", "Added movie to Wishlist", new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Log.e("TAG","added click listener ");
+                            Intent wishListact = new Intent(PopcornDetailActivity.this, WishListActivityTwo.class);
+                            startActivity(wishListact);
+                        }
+                    },R.color.teal500);
+                }
+                new DBManager().getAllWishlist();
+            }
+        });
+
+    }
+
+
+
+
+
+
+
 
     public void showDialogue(final En torrents){
 List<String> titles = new ArrayList<>();

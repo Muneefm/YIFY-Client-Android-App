@@ -28,6 +28,7 @@ import com.google.gson.Gson;
 import java.util.List;
 
 import yts.mnf.torrent.Activity.DetailsActivity;
+import yts.mnf.torrent.Activity.PopcornDetailActivity;
 import yts.mnf.torrent.AppController;
 import yts.mnf.torrent.Models.DBModel.WishListMovieModel;
 import yts.mnf.torrent.Models.DBModel.WishlistModel;
@@ -55,7 +56,7 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHo
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        public TextView movieTitle, movieYear,tvRating;
+        public TextView movieTitle, movieYear,tvRating,avail720,avail1080,avail3D;
         public ImageView moviePoster, overflow;
         public RelativeLayout relativeLayout;
         public CardView cv;
@@ -69,6 +70,9 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHo
             movieYear = (TextView) view.findViewById(R.id.movie_year);
             tvRating = (TextView) view.findViewById(R.id.m_rate);
             viewColor =  view.findViewById(R.id.m_color);
+            avail3D = (TextView) view.findViewById(R.id.avail_3d);
+            avail720 = (TextView) view.findViewById(R.id.avail_720p);
+            avail1080 = (TextView) view.findViewById(R.id.avail_1080p);
            }
     }
 
@@ -83,7 +87,20 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
+        position = (getItemCount()-1)-position;
         final WishListMovieModel item = mModels.get(position);
+        if(!item.getQuality_one().equals("")){
+            holder.avail720.setVisibility(View.VISIBLE);
+            holder.avail720.setText(item.getQuality_one());
+        }
+        if(!item.getQuality_two().equals("")){
+            holder.avail1080.setVisibility(View.VISIBLE);
+            holder.avail1080.setText(item.getQuality_two());
+        }
+        if(!item.getQuality_three().equals("")){
+            holder.avail3D.setVisibility(View.VISIBLE);
+            holder.avail3D.setText(item.getQuality_three());
+        }
         Typeface face = Typeface.createFromAsset(mContext.getAssets(), "fonts/FjallaOne-Regular.ttf");
         Typeface faceTwo = Typeface.createFromAsset(mContext.getAssets(), "fonts/Righteous-Regular.ttf");
         Typeface faceThree = Typeface.createFromAsset(mContext.getAssets(), "fonts/QuattrocentoSans-Regular.ttf");
@@ -133,16 +150,19 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHo
         holder.cv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Gson gS = new Gson();
-                String movieJson = gS.toJson(item);
-                Intent detailAct = new Intent(mContext, DetailsActivity.class);
+                Intent detailAct;
+                if(item.getProvider().equals("yify")) {
+                     detailAct = new Intent(mContext, DetailsActivity.class);
+                }else{
+                    detailAct = new Intent(mContext, PopcornDetailActivity.class);
+                }
                 detailAct.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 Pair<View, String> p1 = Pair.create((View)holder.moviePoster, "poster");
                 Pair<View, String> p2 = Pair.create((View)holder.movieTitle, "title");
                 Pair<View, String> p3 = Pair.create((View)holder.tvRating, "rating");
 
 
-                detailAct.putExtra("movie_json", movieJson);
+                detailAct.putExtra("movie_json",  item.getJson_string());
                 ActivityOptionsCompat options = ActivityOptionsCompat.
                         makeSceneTransitionAnimation((Activity) mContext, p1,p2,p3);
                 mContext.startActivity(detailAct,options.toBundle());
