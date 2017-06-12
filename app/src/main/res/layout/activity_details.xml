@@ -37,7 +37,6 @@
                 android:scaleType="centerCrop"
                 attribute:curvature="100dp"
                 app:layout_collapseMode="pin"
-
                 />
             <RelativeLayout
                 android:layout_width="match_parent"

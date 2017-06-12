@@ -28,9 +28,10 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     compile files('libs/gson-2.8.0.jar')
-    compile files('libs/StartAppInApp-3.5.7.jar')
+ //   compile files('libs/StartAppInApp-3.5.7.jar')
     // Mandatory
     // Mandatory
+
     compile 'com.tapadoo.android:alerter:1.0.8'
     compile 'com.github.coyarzun89:fabtransitionactivity:0.2.0'
     compile 'com.github.clans:fab:1.6.4'

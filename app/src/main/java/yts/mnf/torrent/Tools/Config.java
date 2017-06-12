@@ -9,6 +9,7 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.squareup.picasso.Picasso;
 
 /**
  * Created by muneef on 21/01/17.
@@ -28,10 +29,12 @@ public class Config {
         Log.e(TAG,"loadImage = "+url);
         final Context c = imageView.getContext();
 
-        Glide.with(imageView.getContext())
+       Glide.with(imageView.getContext())
                 .load(url)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(imageView);
+
+     //   Picasso.with(imageView.getContext()).load(url).into(imageView);
 
 
 

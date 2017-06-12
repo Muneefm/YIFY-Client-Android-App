@@ -58,9 +58,9 @@ public class AppController extends Application {
         pref = new PreferensHandler(mInstance);
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
       //  MobileAds.initialize(getApplicationContext(), "ca-app-pub-7269223551241818~5494231080");
-        StartAppSDK.init(this, "203903010", true);
-        StartAppAd.disableSplash();
-        StartAppAd.disableAutoInterstitial();
+      //  StartAppSDK.init(this, "203903010", true);
+     //   StartAppAd.disableSplash();
+      //  StartAppAd.disableAutoInterstitial();
 
         Realm.init(getInstance());
 
@@ -69,7 +69,7 @@ public class AppController extends Application {
         registerActivityLifecycleCallbacks(new ActivityLifecycleCallbacks() {
             @Override
             public void onActivityCreated(Activity activity, Bundle savedInstanceState) {
-                activity.setRequestedOrientation(
+               activity.setRequestedOrientation(
                         ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
                 Log.e("AppController","activity name = "+activity.getLocalClassName());
@@ -98,12 +98,16 @@ public class AppController extends Application {
                                 switch (error){
                                     case AdsError.NO_ADS:
                                         Log.e("appnext", "no ads");
+                                        interstitial_Ad.destroy();
                                         break;
                                     case AdsError.CONNECTION_ERROR:
                                         Log.e("appnext", "connection problem");
+                                        interstitial_Ad.destroy();
                                         break;
                                     default:
                                         Log.e("appnext", "other error");
+                                        interstitial_Ad.destroy();
+                                        break;
                                 }
                             }
                         });

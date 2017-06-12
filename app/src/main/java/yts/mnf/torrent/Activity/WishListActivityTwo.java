@@ -1,6 +1,7 @@
 package yts.mnf.torrent.Activity;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -10,6 +11,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 
 import com.google.gson.Gson;
 
@@ -34,6 +36,9 @@ public class WishListActivityTwo extends AppCompatActivity {
     Context c;
     DBmodelRoot modelData;
     WishlistAdapter adapter;
+
+    @BindView(R.id.empty_wish_txt)
+    TextView emptyWishText;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,6 +48,9 @@ public class WishListActivityTwo extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        Typeface faceDesc=Typeface.createFromAsset(getAssets(), "fonts/Abel-Regular.ttf");
+            emptyWishText.setTypeface(faceDesc);
+
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         //recyclerView.addItemDecoration(new MarginDecoration(this));
@@ -95,6 +103,11 @@ public class WishListActivityTwo extends AppCompatActivity {
         if(recyclerView.getAdapter()!=null){
             Log.e("TAG","recycle view has adapter");
             adapter.resetData(getMovieData());
+            if(getMovieData().size()==0){
+                emptyWishText.setVisibility(View.VISIBLE);
+            }else{
+                emptyWishText.setVisibility(View.GONE);
+            }
 
         }
     }

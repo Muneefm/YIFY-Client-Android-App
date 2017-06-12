@@ -270,7 +270,8 @@
 
     <string name="appnext_placement_id">773e0e10-1717-4ead-8560-dc08ca47feb2</string>
     <string name="title_activity_stream">StreamActivity</string>
-    <string name="title_activity_wish_list_two">I Wish</string>
+    <string name="title_activity_wish_list_two">My Bucket list</string>
+    <string name="wishlist_is_empty">Wishlist is empty !</string>
 
 
 </resources>

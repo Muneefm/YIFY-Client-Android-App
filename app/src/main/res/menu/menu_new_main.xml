@@ -26,6 +26,7 @@
     <item
         android:id="@+id/action_wishlist"
         android:orderInCategory="100"
+        android:icon="@drawable/ic_wish_menu"
         android:title="Wishlist"
-        app:showAsAction="ifRoom" />
+        app:showAsAction="always" />
 </menu>

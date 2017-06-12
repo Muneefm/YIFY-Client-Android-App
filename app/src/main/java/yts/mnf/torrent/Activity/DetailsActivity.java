@@ -320,14 +320,14 @@ public class DetailsActivity extends BaseActivty {
             posterMain.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent detailAct = new Intent(DetailsActivity.this, ImageViewActivity.class);
+                /*    Intent detailAct = new Intent(DetailsActivity.this, ImageViewActivity.class);
                     Pair<View, String> p1 = Pair.create((View)posterMain, "image");
                    // Pair<View, String> p2 = Pair.create((View)holder.movieTitle, "title");
 
                     detailAct.putExtra("img_url", movieModel.getLargeCoverImage());
                     ActivityOptionsCompat options = ActivityOptionsCompat.
                             makeSceneTransitionAnimation(DetailsActivity.this, p1);
-                    startActivity(detailAct,options.toBundle());
+                    startActivity(detailAct,options.toBundle());*/
 
                 }
             });
