@@ -24,9 +24,6 @@ import com.appnext.ads.interstitial.InterstitialConfig;
 import com.appnext.core.callbacks.OnAdError;
 import com.appnext.core.callbacks.OnAdLoaded;
 import com.google.firebase.analytics.FirebaseAnalytics;
-import com.startapp.android.publish.adsCommon.AutoInterstitialPreferences;
-import com.startapp.android.publish.adsCommon.StartAppAd;
-import com.startapp.android.publish.adsCommon.StartAppSDK;
 
 import java.util.List;
 
@@ -63,8 +60,6 @@ public class AppController extends Application {
       //  StartAppAd.disableAutoInterstitial();
 
         Realm.init(getInstance());
-
-
 
         registerActivityLifecycleCallbacks(new ActivityLifecycleCallbacks() {
             @Override

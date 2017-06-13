@@ -25,10 +25,6 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.TextView;
 
-
-import com.startapp.android.publish.adsCommon.AutoInterstitialPreferences;
-import com.startapp.android.publish.adsCommon.StartAppAd;
-
 import yts.mnf.torrent.AppController;
 import yts.mnf.torrent.Fragment.PopcornFragment;
 import yts.mnf.torrent.Fragment.YifyMovieFragment;
@@ -64,10 +60,7 @@ Context c;
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        StartAppAd.setAutoInterstitialPreferences(
-                new AutoInterstitialPreferences()
-                        .setSecondsBetweenAds(60)
-        );
+
 
         //Intent stream = new Intent(NewMainActivity.this,StreamActivity.class);
        // startActivity(stream);

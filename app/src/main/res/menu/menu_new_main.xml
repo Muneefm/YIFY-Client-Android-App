@@ -4,6 +4,21 @@
     tools:context="yts.mnf.torrent.Activity.NewMainActivity">
 
 
+    <item
+        android:id="@+id/action_wishlist"
+        android:orderInCategory="100"
+        android:icon="@drawable/ic_wish_menu"
+        android:title="Wishlist"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/action_search"
+        android:orderInCategory="100"
+        android:title="Search"
+        android:icon="@drawable/ic_search_white"
+        app:showAsAction="always" />
+
+
 
     <item
         android:id="@+id/action_settings"
@@ -12,21 +27,8 @@
         android:icon="@drawable/ic_settings"
         app:showAsAction="always" />
     <item
-        android:id="@+id/action_search"
-        android:orderInCategory="100"
-        android:title="Search"
-        android:icon="@drawable/ic_search_white"
-        app:showAsAction="always" />
-
-    <item
         android:id="@+id/action_about"
         android:orderInCategory="100"
         android:title="About"
         app:showAsAction="ifRoom" />
-    <item
-        android:id="@+id/action_wishlist"
-        android:orderInCategory="100"
-        android:icon="@drawable/ic_wish_menu"
-        android:title="Wishlist"
-        app:showAsAction="always" />
 </menu>
