@@ -100,26 +100,7 @@
             android:name=".Activity.NewSettingsAct"
             android:label="Settings"
             android:theme="@style/AppThemeSettings" />
-        <activity
-            android:name="com.startapp.android.publish.ads.list3d.List3DActivity"
-            android:theme="@android:style/Theme" />
-        <activity
-            android:name="com.startapp.android.publish.adsCommon.activities.OverlayActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:theme="@android:style/Theme.Translucent" />
-        <activity
-            android:name="com.startapp.android.publish.adsCommon.activities.FullScreenActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:theme="@android:style/Theme" />
 
-        <service android:name="com.startapp.android.publish.common.metaData.PeriodicMetaDataService" />
-        <service android:name="com.startapp.android.publish.common.metaData.InfoEventService" />
-
-        <receiver android:name="com.startapp.android.publish.common.metaData.BootCompleteListener">
-            <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED" />
-            </intent-filter>
-        </receiver>
 
         <activity
             android:name=".Activity.AboutAcitivty"

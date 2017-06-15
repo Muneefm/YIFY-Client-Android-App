@@ -215,7 +215,6 @@ public class YifyMovieFragment extends Fragment {
 
     public void startLoading(){
         containerError.setVisibility(View.INVISIBLE);
-
         progressBar.setVisibility(View.VISIBLE);
         ((CircularProgressDrawable)progressBar.getIndeterminateDrawable()).start();
     }

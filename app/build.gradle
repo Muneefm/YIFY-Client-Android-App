@@ -8,8 +8,8 @@ android {
         applicationId "yts.mnf.torrent"
         minSdkVersion 16
         targetSdkVersion 25
-        versionCode 9
-        versionName "1.9"
+        versionCode 10
+        versionName "1.10"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
     }
