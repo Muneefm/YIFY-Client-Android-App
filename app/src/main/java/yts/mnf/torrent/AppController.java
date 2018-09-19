@@ -12,13 +12,17 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.analytics.FirebaseAnalytics;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -97,7 +101,19 @@ public class AppController extends Application {
         HttpsURLConnection.setDefaultSSLSocketFactory(new NoSSLv3Factory());*/
 
         Realm.init(getInstance());
-
+        /*FirebaseMessaging.getInstance().subscribeToTopic("master")
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        String msg = "success";
+                        if (!task.isSuccessful()) {
+                            msg = "Fail";
+                        }
+                        Log.d(TAG, msg);
+                        Toast.makeText(AppController.this, msg, Toast.LENGTH_SHORT).show();
+                    }
+                });
+*/
         registerActivityLifecycleCallbacks(new ActivityLifecycleCallbacks() {
             @Override
             public void onActivityCreated(Activity activity, Bundle savedInstanceState) {
