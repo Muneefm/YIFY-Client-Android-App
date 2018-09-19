@@ -27,7 +27,7 @@ public class BaseActivty extends AppCompatActivity {
         Alerter alertObj = Alerter.create(this)
                 .setTitle(title)
                 .setText(message)
-                .setBackgroundColor(color);
+                .setBackgroundColorRes(color);
 
         if(listner!=null)
             alertObj

@@ -18,18 +18,35 @@ import com.afollestad.materialdialogs.MaterialDialog;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
-import com.appnext.ads.AdsError;
-import com.appnext.ads.interstitial.Interstitial;
-import com.appnext.ads.interstitial.InterstitialConfig;
-import com.appnext.core.callbacks.OnAdError;
-import com.appnext.core.callbacks.OnAdLoaded;
 import com.google.firebase.analytics.FirebaseAnalytics;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.security.KeyManagementException;
+import java.security.KeyStore;
+import java.security.KeyStoreException;
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
+import java.security.cert.Certificate;
+import java.security.cert.CertificateException;
+import java.security.cert.CertificateFactory;
 import java.util.List;
 
+import javax.net.ssl.HostnameVerifier;
+import javax.net.ssl.HttpsURLConnection;
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.SSLSession;
+import javax.net.ssl.SSLSocketFactory;
+import javax.net.ssl.TrustManager;
+import javax.net.ssl.TrustManagerFactory;
+import javax.net.ssl.X509TrustManager;
+import javax.security.cert.X509Certificate;
+
 import io.realm.Realm;
-import yts.mnf.torrent.Models.DBModel.WishlistModel;
-import yts.mnf.torrent.Tools.Config;
+import yts.mnf.torrent.Tools.NoSSLv3Factory;
+import yts.mnf.torrent.Tools.NullHostNameVerifier;
+import yts.mnf.torrent.Tools.NullX509TrustManager;
 import yts.mnf.torrent.Tools.PreferensHandler;
 
 /**
@@ -58,6 +75,26 @@ public class AppController extends Application {
       //  StartAppSDK.init(this, "203903010", true);
      //   StartAppAd.disableSplash();
       //  StartAppAd.disableAutoInterstitial();
+       /* HttpsURLConnection.setDefaultHostnameVerifier(new NullHostNameVerifier());
+        SSLContext context = null;
+        try {
+            context = SSLContext.getInstance("TLSv1");
+        } catch (NoSuchAlgorithmException e) {
+            Log.e("ssl","ssl catch 2 "+e.getLocalizedMessage());
+
+            e.printStackTrace();
+        }
+        try {
+            context.init(null, new X509TrustManager[]{new NullX509TrustManager()}, new SecureRandom());
+        } catch (KeyManagementException e) {
+            Log.e("ssl","ssl catch 1 "+e.getLocalizedMessage());
+
+            e.printStackTrace();
+
+
+        }
+        HttpsURLConnection.setDefaultSSLSocketFactory(context.getSocketFactory());
+        HttpsURLConnection.setDefaultSSLSocketFactory(new NoSSLv3Factory());*/
 
         Realm.init(getInstance());
 
@@ -69,7 +106,7 @@ public class AppController extends Application {
 
                 Log.e("AppController","activity name = "+activity.getLocalClassName());
 
-                if(activity.getLocalClassName().equals("Activity.DetailsActivity")||activity.getLocalClassName().equals("Activity.PopcornDetailActivity")){
+             /*   if(activity.getLocalClassName().equals("Activity.DetailsActivity")||activity.getLocalClassName().equals("Activity.PopcornDetailActivity")){
 
                     Log.e("AppController","inside if activity name = "+activity.getLocalClassName());
 
@@ -107,7 +144,7 @@ public class AppController extends Application {
                             }
                         });
                     }
-                }
+                }*/
 
             }
 
@@ -242,8 +279,6 @@ public class AppController extends Application {
             mRequestQueue.cancelAll(tag);
         }
     }
-
-
 
 
 

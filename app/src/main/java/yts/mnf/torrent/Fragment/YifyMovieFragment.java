@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -201,6 +202,7 @@ public class YifyMovieFragment extends Fragment {
                 }
         );
 
+
         return v;
     }
 
@@ -226,6 +228,8 @@ public class YifyMovieFragment extends Fragment {
 
 
     public void makeNetwoekRequest(String url, final boolean swipeRefresh){
+        Log.e("yyyy", "network request url "+ url);
+
         // RequestQueue queue = Volley.newRequestQueue(this);
         if(!swipeRefresh)
             startLoading();
@@ -237,6 +241,8 @@ public class YifyMovieFragment extends Fragment {
                     @Override
                     public void onResponse(JSONObject response) {
                         Log.e("TAG", response.toString());
+                        Log.e("yyyy", "network request response "+ response);
+
                         stopLoading();
                         containerError.setVisibility(View.INVISIBLE);
                         recyclerView.setVisibility(View.VISIBLE);
@@ -270,6 +276,8 @@ public class YifyMovieFragment extends Fragment {
             @Override
             public void onErrorResponse(VolleyError error) {
                 VolleyLog.d("TAG", "Error: " + error.getMessage());
+                Log.e("yyyy", "network request Error "+error);
+
                 // hide the progress dialog
                 loading = true;
                 stopLoading();
@@ -281,6 +289,9 @@ public class YifyMovieFragment extends Fragment {
 
             }
         });
+        jsonObjReq.setRetryPolicy(new DefaultRetryPolicy(60000,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         AppController.getInstance().addToRequestQueue(jsonObjReq,"movie_list");
         AppController.getInstance().getRequestQueue().getCache().invalidate(url, true);
         AppController.getInstance().getRequestQueue().getCache().clear();

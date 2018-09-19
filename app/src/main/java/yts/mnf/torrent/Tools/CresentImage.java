@@ -140,8 +140,8 @@ public class CresentImage  extends android.support.v7.widget.AppCompatImageView 
             }
         }
 
-        if (styledAttributes.hasValue(R.styleable.CrescentoImageView_tintMode)) {
-            if (styledAttributes.getInt(R.styleable.CrescentoImageView_tintMode, 0) == TintMode.AUTOMATIC) {
+        if (styledAttributes.hasValue(R.styleable.CrescentoImageView_tintModeCrescento)) {
+            if (styledAttributes.getInt(R.styleable.CrescentoImageView_tintModeCrescento, 0) == TintMode.AUTOMATIC) {
                 tintMode = TintMode.AUTOMATIC;
             } else {
                 tintMode = TintMode.MANUAL;

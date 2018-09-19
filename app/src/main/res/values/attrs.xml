@@ -26,7 +26,7 @@
         <flag name="outward" value="0"/>
         <flag name="inward" value="1"/>
     </attr>
-    <attr name="tintMode" format="integer">
+    <attr name="tintModeCrescento" format="integer">
         <flag name="automatic" value="0"/>
         <flag name="manual" value="1"/>
     </attr>

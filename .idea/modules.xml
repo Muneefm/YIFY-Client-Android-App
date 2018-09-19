@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/YIFY.iml" filepath="$PROJECT_DIR$/YIFY.iml" />
+      <module fileurl="file://$PROJECT_DIR$/YIFYapp.iml" filepath="$PROJECT_DIR$/YIFYapp.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/lgsnackbar/lgsnackbar.iml" filepath="$PROJECT_DIR$/lgsnackbar/lgsnackbar.iml" />
     </modules>

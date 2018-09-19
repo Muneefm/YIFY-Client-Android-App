@@ -46,10 +46,6 @@ import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
-import com.appnext.ads.AdsError;
-import com.appnext.ads.interstitial.Interstitial;
-import com.appnext.core.callbacks.OnAdError;
-import com.appnext.core.callbacks.OnAdLoaded;
 import com.google.gson.Gson;
 import com.robertlevonyan.views.chip.Chip;
 import com.tapadoo.alerter.Alerter;

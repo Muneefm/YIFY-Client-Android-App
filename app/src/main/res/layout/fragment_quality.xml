@@ -135,7 +135,7 @@
                     android:layout_marginTop="15dp"
                     android:layout_gravity="center"
                     app:floating_background_color="@color/blue_grey700"
-                    app:floating_icon="@mipmap/magnet"
+                    app:floating_left_icon="@mipmap/magnet"
                     app:floating_title="Copy"
                     app:floating_title_color="@android:color/white"
                     />
@@ -147,7 +147,7 @@
                     android:layout_gravity="center"
                     android:layout_marginTop="10dp"
                     app:floating_background_color="@color/blue_grey700"
-                    app:floating_icon="@mipmap/download"
+                    app:floating_left_icon="@mipmap/download"
                     app:floating_title="Torrent"
                     app:floating_title_color="@android:color/white" />
 
@@ -266,7 +266,7 @@
                     android:layout_marginTop="15dp"
                     android:layout_gravity="center"
                     app:floating_background_color="@color/blue_grey700"
-                    app:floating_icon="@mipmap/magnet"
+                    app:floating_left_icon="@mipmap/magnet"
                     app:floating_title="Copy"
                     app:floating_title_color="@android:color/white"
                     />
@@ -278,7 +278,7 @@
                     android:layout_marginTop="10dp"
                     android:layout_gravity="center"
                     app:floating_background_color="@color/blue_grey700"
-                    app:floating_icon="@mipmap/download"
+                    app:floating_left_icon="@mipmap/download"
                     app:floating_title="Torrent"
                     app:floating_title_color="@android:color/white"
                     />
@@ -387,7 +387,7 @@
                     android:layout_marginTop="15dp"
                     android:layout_gravity="center"
                     app:floating_background_color="@color/blue_grey700"
-                    app:floating_icon="@mipmap/magnet"
+                    app:floating_left_icon="@mipmap/magnet"
                     app:floating_title="Copy"
                     app:floating_title_color="@android:color/white"
                     />
@@ -399,7 +399,7 @@
                     android:layout_marginTop="10dp"
                     android:layout_gravity="center"
                     app:floating_background_color="@color/blue_grey700"
-                    app:floating_icon="@mipmap/download"
+                    app:floating_left_icon="@mipmap/download"
                     app:floating_title="Torrent"
                     app:floating_title_color="@android:color/white"
                     />

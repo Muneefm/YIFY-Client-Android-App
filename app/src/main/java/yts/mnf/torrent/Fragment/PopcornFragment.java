@@ -229,7 +229,7 @@ public class PopcornFragment extends Fragment {
 
     public void makeNetwoekRequest(String url, final boolean swipeRefresh){
         // RequestQueue queue = Volley.newRequestQueue(this);
-        Log.e("PopcornFragment","url request = "+url);
+        Log.e("yyyy","url request = "+url);
         if(!swipeRefresh)
             startLoading();
 
@@ -269,7 +269,7 @@ public class PopcornFragment extends Fragment {
             @Override
             public void onErrorResponse(VolleyError error) {
                 VolleyLog.d("TAG", "Error: " + error.getMessage());
-                Log.e("TAG"," Volley Error: " + error.getMessage());
+                Log.e("yyyy"," Volley Error: " + error.getMessage());
                 // hide the progress dialog
                 loading = true;
                 stopLoading();
